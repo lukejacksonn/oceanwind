@@ -1,10 +1,11 @@
 import { css } from './otion.js';
 import config from './config.js';
+import dictionary from './dictionary.js';
 
 window.css = css;
 
-const spacings = (x) => {
-  if (x === 'a') return 'auto';
+const spacings = ([x]) => {
+  if (x === 'auto') return 'auto';
   if (x === 'px') return '1px';
   if (x === 'full') return '100%';
   if (/\d\/\d/.test(x)) return `${(x.split('/')[0] / x.split('/')[1]) * 100}%`;
@@ -28,20 +29,24 @@ const spaces = {
   y: 'top',
 };
 
-const xjoin = (a, b) => (b ? `${a}-${b}` : a);
-
-const applySpacingInDirection = (t) => (i, d) =>
-  [config.edge[d] || '']
-    .flat()
-    .reduce((a, b) => ({ ...a, [xjoin(t, b)]: spacings(i) }), {});
-
 const after = (x) => ({ selectors: { '&::after': x } });
 
-const T = (kf, vf = (v) => v.join('')) => (...v) => ({
-  [typeof kf === 'function' ? kf(v) : kf]: vf(v),
+const T = (k, vf = (v) => v.join('')) => (...v) => ({
+  [k]: vf(v),
 });
 
+const A = (k) => (...v) => ({ [k]: flexes(v.join('-')) });
+
 const join = (seperator) => (args) => args.join(seperator);
+
+const flexes = (x) =>
+  x
+    .replace('no-wrap', 'nowrap')
+    .replace('col', 'column')
+    .replace('between', 'space-between')
+    .replace('around', 'space-around')
+    .replace('start', 'flex-start')
+    .replace('end', 'flex-end');
 
 const directive = {
   /* Layout */
@@ -52,55 +57,99 @@ const directive = {
       {}
     ),
   }),
+
   box: T('box-sizing', (arg) => `${arg}-box`),
-  d: T('display', join('-')),
-  fl: T('float'),
-  cl: (t) =>
-    t === 'fix'
-      ? after({ content: '', display: 'table', clear: 'both' })
-      : { clear: t },
-  obf: (...t) => ({ 'object-fit': t.join('-') }),
-  obp: (...t) => ({ 'object-position': config.edge[t].join(' ') }),
-  ov: (t) => ({ overflow: t }),
-  ovx: (t) => ({ 'overflow-x': t }),
-  ovy: (t) => ({ 'overflow-y': t }),
-  wos: (t) => ({ '-webkit-overflow-scrolling': t }),
-  pos: (t) => ({ position: t }),
-  top: (t) => ({ top: t }),
-  right: (t) => ({ right: t }),
-  bottom: (t) => ({ bottom: t }),
-  left: (t) => ({ left: t }),
-  v: (t) => ({ visibility: t }),
+  display: T('display', join('-')),
+
+  float: T('float'),
+  clearfix: () => after({ content: '', display: 'table', clear: 'both' }),
+  clear: T('clear'),
+
+  object: (...args) =>
+    ['contain', 'cover', 'fill', 'none', 'scale'].includes(args[0])
+      ? T('object-fit', join('-'))(...args)
+      : { 'object-position': (config.edge[args] || args).join(' ') },
+
+  overflow: (...args) =>
+    ['x', 'y'].includes(args[0])
+      ? T(`overflow-${args[0]}`)(...args.slice(1))
+      : T('overflow')(...args),
+
+  scrolling: T('-webkit-overflow-scrolling'),
+
+  ...['static', 'fixed', 'absolute', 'relative', 'sticky'].reduce(
+    (a, position) => ({ ...a, [position]: () => ({ position }) }),
+    {}
+  ),
+
+  inset: (...args) =>
+    ['x', 'y'].includes(args[0])
+      ? config.edge[args[0]].reduce(
+          (a, edge) => ({ ...a, [edge]: args[1] }),
+          {}
+        )
+      : { top: args[0], right: args[0], bottom: args[0], left: args[0] },
+
+  top: T('top'),
+  right: T('right'),
+  bottom: T('bottom'),
+  left: T('left'),
+
+  invisible: () => ({ visibility: 'hidden' }),
+  visible: () => ({ visibility: 'visible' }),
+
   z: (i) => ({ 'z-index': config.index[i] }),
 
   /* Flexbox */
 
-  fd: (...d) => ({ 'flex-direction': d.join('-') }),
-  fwr: (...d) => ({ 'flex-wrap': d.join('-') }),
-  ai: (...t) => ({ 'align-items': t.join('-') }),
-  jc: (...t) => ({ 'justify-content': t.join('-') }),
-  f: (t) => ({ flex: config.flex[t] }),
-  fg: (t) => ({ 'flex-grow': t ? 1 : 0 }),
-  fs: (t) => ({ 'flex-shrink': t ? 1 : 0 }),
-  or: (i) => ({ order: i }),
+  flex: (...args) =>
+    args.includes('wrap')
+      ? { 'flex-wrap': flexes(args.join('-')) }
+      : args.includes('col') || args.includes('row')
+      ? { 'flex-direction': flexes(args.join('-')) }
+      : args.includes('grow') || args.includes('shrink')
+      ? { [`flex-${args[0]}`]: args[1] || '1' }
+      : { flex: config.flex[args[0]] },
+
+  items: A('align-items'),
+  content: A('align-content'),
+  self: A('align-self'),
+  justify: A('justify-content'),
+
+  order: (i) => ({ order: i }),
 
   /* Grid */
 
   /* Spacing */
 
-  m: applySpacingInDirection('margin'),
-  p: applySpacingInDirection('padding'),
-  s: (i, d) => ({
+  m: T('margin', (...arg) => spacings(arg.join(''))),
+  p: T('padding', (...arg) => spacings(arg.join(''))),
+  ...'mt,mr,mb,ml,mx,my,pt,pl,pr,pb,pl,px,py'.split(',').reduce(
+    (a, d) => ({
+      ...a,
+      [d]: (...s) =>
+        config.edge[d[1]].reduce(
+          (b, edge) => ({
+            ...b,
+            [`${d[0] === 'm' ? 'margin' : 'padding'}-${edge}`]: spacings(s),
+          }),
+          {}
+        ),
+    }),
+    {}
+  ),
+
+  space: (d, ...args) => ({
     selectors: {
       '& > * + *': {
-        [`margin-${spaces[d]}`]: spacings(i),
+        [`margin-${d === 'x' ? 'left' : 'top'}`]: spacings(args),
       },
     },
   }),
 
   /* Sizing */
 
-  w: (i) => ({ width: i === 'screen' ? '100vw' : spacings(i) }),
+  w: (...i) => ({ width: i === 'screen' ? '100vw' : spacings(i) }),
   mnw: (i) => ({ 'min-width': i === 'full' ? '100%' : 0 }),
   mxw: (i) => ({ 'max-width': spacings(i) }),
 
@@ -263,6 +312,7 @@ function mergeDeep(...objects) {
 }
 
 const windy = (classes) => {
+  if (!classes) return {};
   console.log(classes);
 
   return classes.split(' ').reduce((a, x) => {
@@ -293,11 +343,11 @@ import htm from 'https://unpkg.com/htm?module';
 const html = htm.bind(h);
 const ob = (x) => css(windy(x));
 
-const main = ob('');
+const main = ob('mt-56 space-y-2 w-1/2 sm:bg-red-500');
 const h1 = ob('');
 const btn = ob('');
 const img = ob('');
-const ul = ob('fl-left d-inline-flex');
+const ul = ob('');
 
 render(
   html`
@@ -309,7 +359,7 @@ render(
         src="https://source.unsplash.com/WLUHO9A_xik/1600x900"
       />
       <ul className=${ul}>
-        <li className=${ob('f-auto')}>1</li>
+        <li>1</li>
         <li>2</li>
         <li>3</li>
       </ul>
