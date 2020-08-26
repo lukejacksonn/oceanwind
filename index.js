@@ -31,11 +31,12 @@ const ow = (classes) => {
   if (!classes[0]) return '';
   classes = classes[0].replace(/\s\s+/g, ' ');
   const rules = classes.split(' ').reduce((a, x) => {
-    let mod;
+    let mod = [];
     if (x.includes(':')) {
-      mod = x.split(':')[0];
-      x = x.split(':')[1];
+      mod = x.split(':').slice(0, -1);
+      x = x.split(':').pop();
     }
+
     let rule = translate(theme)(x);
     if (a.transform != undefined && rule.transform != undefined) {
       rule = {
@@ -43,8 +44,12 @@ const ow = (classes) => {
         transform: [a.transform, rule.transform].join(' '),
       };
     }
-    if (theme.screen[mod]) rule = mediaQuery(mod)(rule);
-    if (mod === 'hover') rule = { ':hover': rule };
+
+    mod.reverse().forEach((m) => {
+      if (theme.screen[m]) rule = mediaQuery(m)(rule);
+      else rule = { [`:${m}`]: rule };
+    });
+
     return mergeDeep(a, rule);
   }, {});
 

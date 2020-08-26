@@ -27,7 +27,21 @@ const style = {
     border-current
     border-8
     border-solid`,
-  tag: ow`inline-block bg-purple-300 hover:bg-purple-200 border-1 border-solid border-purple-400 hover:border-purple-300 rounded-full px-2 py-1 text-sm font-semibold text-purple-700 mr-2 cursor-pointer`,
+  tag: ow`
+    inline-block
+    bg-purple-300
+    sm:hover:bg-purple-200
+    hover:border-purple-300
+    border-1
+    border-solid
+    border-purple-400
+    rounded-full
+    px-2
+    py-1
+    text-sm
+    font-semibold
+    text-purple-700
+    mr-2 cursor-pointer`,
 };
 
 render(
@@ -41,11 +55,14 @@ render(
         />
         <div className=${ow`px-8 py-6`}>
           <div className=${ow`font-bold text-2xl mb-4`}>The Coldest Sunset</div>
-          <p className=${ow`text-gray-700 text-base leading-6`}>
+          <p className=${ow`text-gray-700 text-base leading-6 mb-4`}>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Voluptatibus quia, nulla! Maiores et perferendis eaque,
             exercitationem praesentium nihil.
           </p>
+          <input
+            className=${ow`w-full py-4 px-4 bg-gray-500 lg:focus:bg-gray-100`}
+          />
         </div>
         <div
           className=${ow`px-6 py-4 bg-purple-200 border-t-2 border-gray-300 border-solid`}
