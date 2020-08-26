@@ -857,6 +857,15 @@ export default (theme) => (str) => {
         case 'cursor':
           out[i[0]] = `${i[1]}-${i[2]}`;
           break;
+        case 'space':
+          out['selectors'] = {
+            '& > * + *': {
+              [`margin-${i[1] === 'x' ? 'left' : 'top'}`]: `${n ? '-' : ''}${
+                theme.unit[i[2]]
+              }`,
+            },
+          };
+          break;
       }
       break;
     case 4:

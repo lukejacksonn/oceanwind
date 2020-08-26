@@ -1269,7 +1269,6 @@ let grammar = [
     ['margin-left', '-$2'],
   ],
 
-  // TODO
   // .space-x-0 > * + *	margin-left: 0;
   // .space-x-1 > * + *	margin-left: 0.25rem;
   // .space-x-2 > * + *	margin-left: 0.5rem;

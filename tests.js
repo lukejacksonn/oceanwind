@@ -505,6 +505,27 @@ const cases = {
       },
     },
   },
+
+  'space-x-0': {
+    selectors: {
+      '& > * + *': { 'margin-left': theme.unit['0'] },
+    },
+  },
+  '-space-x-0': {
+    selectors: {
+      '& > * + *': { 'margin-left': '-' + theme.unit['0'] },
+    },
+  },
+  'space-y-0': {
+    selectors: {
+      '& > * + *': { 'margin-top': theme.unit['0'] },
+    },
+  },
+  '-space-y-0': {
+    selectors: {
+      '& > * + *': { 'margin-top': '-' + theme.unit['0'] },
+    },
+  },
 };
 
 const test = Object.entries(cases).reduce(
