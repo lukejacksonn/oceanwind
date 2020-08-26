@@ -1647,7 +1647,6 @@ let grammar = [
     ['list-style-type', '$1'],
   ],
 
-  // TODO
   // .placeholder-transparent::placeholder	color: transparent;	Aa
   // .placeholder-current::placeholder	color: currentColor;	Aa
   // .placeholder-black::placeholder	color: #000;	Aa

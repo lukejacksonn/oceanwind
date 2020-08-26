@@ -566,10 +566,16 @@ export default (theme) => (str) => {
         case 'select':
           out['user-select'] = i[1];
           break;
+        case 'placeholder':
+          out[`::${i[0]}`] = { color: theme.colors[i[1]] };
+          break;
       }
       break;
     case 3:
       switch (i[0]) {
+        case 'placeholder':
+          out[`::${i[0]}`] = { color: theme.colors[i[1]][i[2]] };
+          break;
         case 'table':
           out['display'] = `${i[0]}-${i[1]}-${i[2]}`;
           break;

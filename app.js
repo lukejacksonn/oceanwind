@@ -62,7 +62,8 @@ render(
             exercitationem praesentium nihil.
           </p>
           <input
-            className=${ow`w-full py-4 px-4 bg-gray-500 lg:focus:bg-gray-100`}
+            className=${ow`w-full py-4 px-4 bg-gray-500 sm:focus:bg-gray-100 sm:focus:placeholder-red-500`}
+            placeholder="Enter a value"
           />
         </div>
         <div

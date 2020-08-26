@@ -526,6 +526,13 @@ const cases = {
       '& > * + *': { 'margin-top': '-' + theme.unit['0'] },
     },
   },
+
+  'placeholder-transparent': {
+    '::placeholder': { color: theme.colors['transparent'] },
+  },
+  'placeholder-red-500': {
+    '::placeholder': { color: theme.colors['red']['500'] },
+  },
 };
 
 const test = Object.entries(cases).reduce(
