@@ -2149,7 +2149,6 @@ let grammar = [
   // .bg-opacity-75	--bg-opacity: 0.75;
   // .bg-opacity-100	--bg-opacity: 1;
 
-  // TODO
   // .rounded	border-radius: 0.25rem;
 
   // .rounded-none	border-radius: 0;
@@ -2469,7 +2468,6 @@ let grammar = [
   // .border-opacity-75	--border-opacity: 0.75;
   // .border-opacity-100	--border-opacity: 1;
 
-  // TODO
   // .divide-x-0 > * + *	border-left-width: 0;
   // .divide-x-2 > * + *	border-left-width: 2px;
   // .divide-x-4 > * + *	border-left-width: 4px;
@@ -2483,7 +2481,6 @@ let grammar = [
   // .divide-x-reverse > * + *	--divide-x-reverse: 1
   // .divide-y-reverse > * + *	--divide-y-reverse: 1
 
-  // TODO
   // .divide-transparent > * + *	border-color: transparent;
   // .divide-current > * + *	border-color: currentColor;
   // .divide-black > * + *	border-color: #000;

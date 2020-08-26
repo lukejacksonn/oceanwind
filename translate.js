@@ -569,10 +569,52 @@ export default (theme) => (str) => {
         case 'placeholder':
           out[`::${i[0]}`] = { color: theme.colors[i[1]] };
           break;
+        case 'divide':
+          switch (i[1]) {
+            case 'x':
+            case 'y':
+              out['selectors'] = {
+                '& > * + *': {
+                  [`border-${i[1] === 'x' ? 'left' : 'top'}-width`]: theme
+                    .border[''],
+                },
+              };
+              break;
+            default:
+              out['selectors'] = {
+                '& > * + *': (x = theme.colors[i[1]])
+                  ? {
+                      [`border-color`]: theme.colors[i[1]],
+                    }
+                  : { 'border-style': i[1] },
+              };
+              break;
+          }
+          break;
       }
       break;
     case 3:
       switch (i[0]) {
+        case 'divide':
+          switch (i[1]) {
+            case 'x':
+            case 'y':
+              out['selectors'] = {
+                '& > * + *': {
+                  [`border-${i[1] === 'x' ? 'left' : 'top'}-width`]: theme
+                    .border[i[2]],
+                },
+              };
+              break;
+            default:
+              out['selectors'] = {
+                '& > * + *': {
+                  [`border-color`]: theme.colors[i[1]][i[2]],
+                },
+              };
+              break;
+          }
+          break;
         case 'placeholder':
           out[`::${i[0]}`] = { color: theme.colors[i[1]][i[2]] };
           break;

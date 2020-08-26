@@ -533,6 +533,24 @@ const cases = {
   'placeholder-red-500': {
     '::placeholder': { color: theme.colors['red']['500'] },
   },
+
+  'divide-x': { selectors: { '& > * + *': { 'border-left-width': '1px' } } },
+  'divide-x-0': { selectors: { '& > * + *': { 'border-left-width': '0' } } },
+
+  'divide-y': { selectors: { '& > * + *': { 'border-top-width': '1px' } } },
+  'divide-y-0': { selectors: { '& > * + *': { 'border-top-width': '0' } } },
+
+  'divide-solid': {
+    selectors: { '& > * + *': { 'border-style': 'solid' } },
+  },
+
+  'divide-transparent': {
+    selectors: { '& > * + *': { 'border-color': theme.colors['transparent'] } },
+  },
+
+  'divide-red-500': {
+    selectors: { '& > * + *': { 'border-color': theme.colors['red']['500'] } },
+  },
 };
 
 const test = Object.entries(cases).reduce(

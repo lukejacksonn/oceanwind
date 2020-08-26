@@ -54,7 +54,9 @@ render(
           src="https://source.unsplash.com/WLUHO9A_xik/1600x900"
           alt="Sunset in the mountains"
         />
-        <div className=${ow`px-8 py-6 space-y-2`}>
+        <div
+          className=${ow`px-8 py-6 space-y-2 divide-y divide-dashed divide-red-500`}
+        >
           <div className=${ow`font-bold text-2xl mb-4`}>The Coldest Sunset</div>
           <p className=${ow`text-gray-700 text-base leading-6 mb-4`}>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
