@@ -17,6 +17,7 @@ const style = {
     flex
     items-center
     justify-center
+    clearfix
   `,
   card: ow`
     bg-white

@@ -495,6 +495,16 @@ const cases = {
   'grid-flow-col-dense': { 'grid-auto-flow': 'column dense' },
 
   'max-w-screen-xs': { 'max-width': theme.screen['xs'] },
+
+  clearfix: {
+    selectors: {
+      '&::after': {
+        content: '""',
+        display: 'table',
+        clear: 'both',
+      },
+    },
+  },
 };
 
 const test = Object.entries(cases).reduce(

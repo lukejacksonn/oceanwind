@@ -29,7 +29,7 @@ function mergeDeep(...objects) {
 
 const ow = (classes) => {
   if (!classes[0]) return '';
-  classes = classes[0].replace(/\s\s+/g, ' ');
+  classes = classes[0].replace(/\s\s+/g, ' ').trim();
   const rules = classes.split(' ').reduce((a, x) => {
     let mod = [];
     if (x.includes(':')) {
@@ -53,7 +53,7 @@ const ow = (classes) => {
     return mergeDeep(a, rule);
   }, {});
 
-  console.log({ [classes.trim()]: rules });
+  console.log({ [classes]: rules });
   return css(rules);
 };
 

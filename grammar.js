@@ -51,7 +51,6 @@ let grammar = [
     ['float', '$2'],
   ],
 
-  // TODO
   // .clearfix	&::after {
   //   content: "";
   //   display: table;
