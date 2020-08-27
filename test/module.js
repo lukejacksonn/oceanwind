@@ -1,5 +1,5 @@
-import translate from './translate.js';
-import theme from './theme.js';
+import translate from '../core/translate.js';
+import theme from '../core/theme.js';
 
 const cases = {
   hidden: { display: 'none' },

@@ -1,7 +1,7 @@
 import { render, h } from 'https://unpkg.com/preact?module';
 import htm from 'https://unpkg.com/htm?module';
 
-import ow from './index.js';
+import ow from '../index.js';
 
 const html = htm.bind(h);
 

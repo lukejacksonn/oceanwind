@@ -1,7 +1,7 @@
-import translate from './translate.js';
-import theme from './theme.js';
+import translate from './core/translate.js';
+import theme from './core/theme.js';
 
-import { css } from './otion.js';
+import { css } from './util/otion.js';
 
 const mediaQuery = (b) => (rules) => ({
   '@media': {

@@ -1,4 +1,4 @@
-import capsize from './capsize.js';
+import capsize from '../util/capsize.js';
 
 export default (theme) => (str) => {
   let x;
