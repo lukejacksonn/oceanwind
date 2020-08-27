@@ -1,0 +1,18 @@
+{
+  "name": "oceanwind",
+  "version": "0.1.0",
+  "description": "interpret tailwind like syntax and compile css at runtime",
+  "module": "index.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "servor --browse --reload --editor",
+    "build": "esbuild --bundle index.js --outfile=index.min.js --format=esm --minify"
+  },
+  "keywords": [],
+  "author": "Luke Jackson (@lukejacksonn)",
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "0.6.28",
+    "servor": "4.0.2"
+  }
+}
