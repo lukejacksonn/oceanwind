@@ -1,10 +1,19 @@
 export default {
   font: {
     sans:
-      'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+      '"Lato", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
     serif: 'Georgia, Cambria, "Times New Roman", Times, serif',
     mono:
       'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+  },
+
+  fontMetrics: {
+    capHeight: 1433,
+    ascent: 1974,
+    descent: -426,
+    lineGap: 0,
+    unitsPerEm: 2000,
+    xHeight: 1013,
   },
 
   unit: {
@@ -108,6 +117,7 @@ export default {
     md: '0.375rem',
     lg: '0.5rem',
     xl: '1rem',
+    '2xl': '2rem',
     full: '9999px',
   },
 
@@ -118,6 +128,7 @@ export default {
     '2': '2px',
     '4': '4px',
     '8': '8px',
+    '16': '16px',
   },
 
   shadow: {

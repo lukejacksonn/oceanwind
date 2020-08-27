@@ -1,3 +1,5 @@
+import capsize from './capsize.js';
+
 export default (theme) => (str) => {
   let n, x;
 
@@ -7,7 +9,7 @@ export default (theme) => (str) => {
   }
 
   let i = str.split('-');
-  const out = {};
+  let out = {};
 
   switch (i.length) {
     case 1:
@@ -595,6 +597,13 @@ export default (theme) => (str) => {
       break;
     case 3:
       switch (i[0]) {
+        case 'cap':
+          out = capsize({
+            capHeight: +i[1],
+            lineGap: +i[2],
+            fontMetrics: theme.fontMetrics,
+          });
+          break;
         case 'divide':
           switch (i[1]) {
             case 'x':

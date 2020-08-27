@@ -53,7 +53,7 @@ const ow = (classes) => {
     return mergeDeep(a, rule);
   }, {});
 
-  console.log({ [classes]: rules });
+  // console.log({ [classes]: rules });
   return css(rules);
 };
 
