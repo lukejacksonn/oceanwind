@@ -64,15 +64,13 @@ export default (theme) => (str) => {
           out[i[0]] = 'both';
           break;
         case 'rounded':
-          (x = theme.rounded['']) && (out['border-radius'] = x);
+          out['border-radius'] = theme.rounded[''];
           break;
         case 'clearfix':
-          out['selectors'] = {
-            '&::after': {
-              content: '""',
-              display: 'table',
-              clear: 'both',
-            },
+          out['::after'] = {
+            content: '""',
+            display: 'table',
+            clear: 'both',
           };
           break;
       }

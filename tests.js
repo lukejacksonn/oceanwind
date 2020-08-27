@@ -497,12 +497,10 @@ const cases = {
   'max-w-screen-xs': { 'max-width': theme.screen['xs'] },
 
   clearfix: {
-    selectors: {
-      '&::after': {
-        content: '""',
-        display: 'table',
-        clear: 'both',
-      },
+    '::after': {
+      content: '""',
+      display: 'table',
+      clear: 'both',
     },
   },
 
