@@ -1,10 +1,11 @@
 import capsize from './capsize.js';
 
 export default (theme) => (str) => {
-  let n, x;
+  let x;
+  let n = '';
 
-  if (str.startsWith('-')) {
-    n = true;
+  if (str[0] === '-') {
+    n = '-';
     str = str.slice(1);
   }
 
@@ -80,18 +81,10 @@ export default (theme) => (str) => {
     case 2:
       switch (i[0]) {
         case 'normal':
-          switch (i[1]) {
-            case 'case':
-              out['text-transform'] = 'none';
-              break;
-          }
+          i[1] === 'case' && (out['text-transform'] = 'none');
           break;
         case 'flow':
-          switch (i[1]) {
-            case 'root':
-              out['display'] = 'flow-root';
-              break;
-          }
+          i[1] === 'root' && (out['display'] = 'flow-root');
           break;
         case 'inline':
           switch (i[1]) {
@@ -452,13 +445,15 @@ export default (theme) => (str) => {
           break;
         case 'sr':
           'only' === i[1] &&
-            ((out['width'] = '1px'),
-            (out['height'] = '1px'),
-            (out['padding'] = '0'),
-            (out['margin'] = '-1px'),
-            (out['overflow'] = 'hidden'),
-            (out['clip'] = 'rect(0,0,0,0)'),
-            (out['border-width'] = '0'));
+            (out = {
+              width: '1px',
+              height: '1px',
+              padding: '0',
+              margin: '-1px',
+              overflow: 'hidden',
+              clip: 'rect(0,0,0,0)',
+              'border-width': '0',
+            });
           break;
         case 'box':
           out['box-sizing'] = `${i[1]}-box`;
@@ -501,32 +496,29 @@ export default (theme) => (str) => {
           (x = theme.unit[i[1]]) && (out['padding-left'] = x);
           break;
         case 'm':
-          (x = theme.unit[i[1]]) && (out['margin'] = `${n ? '-' : ''}${x}`);
+          (x = theme.unit[i[1]]) && (out['margin'] = `${n}${x}`);
           break;
         case 'my':
           (x = theme.unit[i[1]]) &&
-            ((out['margin-top'] = `${n ? '-' : ''}${x}`),
-            (out['margin-bottom'] = `${n ? '-' : ''}${x}`));
+            ((out['margin-top'] = `${n}${x}`),
+            (out['margin-bottom'] = `${n}${x}`));
           break;
         case 'mx':
           (x = theme.unit[i[1]]) &&
-            ((out['margin-left'] = `${n ? '-' : ''}${x}`),
-            (out['margin-right'] = `${n ? '-' : ''}${x}`));
+            ((out['margin-left'] = `${n}${x}`),
+            (out['margin-right'] = `${n}${x}`));
           break;
         case 'mt':
-          (x = theme.unit[i[1]]) && (out['margin-top'] = `${n ? '-' : ''}${x}`);
+          (x = theme.unit[i[1]]) && (out['margin-top'] = `${n}${x}`);
           break;
         case 'mr':
-          (x = theme.unit[i[1]]) &&
-            (out['margin-right'] = `${n ? '-' : ''}${x}`);
+          (x = theme.unit[i[1]]) && (out['margin-right'] = `${n}${x}`);
           break;
         case 'mb':
-          (x = theme.unit[i[1]]) &&
-            (out['margin-bottom'] = `${n ? '-' : ''}${x}`);
+          (x = theme.unit[i[1]]) && (out['margin-bottom'] = `${n}${x}`);
           break;
         case 'ml':
-          (x = theme.unit[i[1]]) &&
-            (out['margin-left'] = `${n ? '-' : ''}${x}`);
+          (x = theme.unit[i[1]]) && (out['margin-left'] = `${n}${x}`);
           break;
         case 'font':
           if ((x = theme.font[i[1]])) out['font-family'] = x;
@@ -887,15 +879,11 @@ export default (theme) => (str) => {
           break;
         case 'translate':
           (x = theme.unit[i[2]]) &&
-            (out['transform'] = `${i[0]}${i[1].toUpperCase()}(${
-              n ? '-' : ''
-            }${x})`);
+            (out['transform'] = `${i[0]}${i[1].toUpperCase()}(${n}${x})`);
           break;
         case 'skew':
           (x = theme.skew[i[2]]) &&
-            (out['transform'] = `${i[0]}${i[1].toUpperCase()}(${
-              n ? '-' : ''
-            }${x})`);
+            (out['transform'] = `${i[0]}${i[1].toUpperCase()}(${n}${x})`);
           break;
         case 'pointer':
           'events' === i[1] && (out[`${i[0]}-${i[1]}`] = i[2]);
@@ -917,7 +905,7 @@ export default (theme) => (str) => {
         case 'space':
           out['selectors'] = {
             '& > * + *': {
-              [`margin-${i[1] === 'x' ? 'left' : 'top'}`]: `${n ? '-' : ''}${
+              [`margin-${i[1] === 'x' ? 'left' : 'top'}`]: `${n}${
                 theme.unit[i[2]]
               }`,
             },
