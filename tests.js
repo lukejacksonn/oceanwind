@@ -330,6 +330,9 @@ const cases = {
   'object-scale-down': { 'object-fit': 'scale-down' },
   'object-left-bottom': { 'object-position': 'left bottom' },
 
+  'inset-0': { top: '0', right: '0', bottom: '0', left: '0' },
+  'inset-auto': { top: 'auto', right: 'auto', bottom: 'auto', left: 'auto' },
+
   'inset-x-0': { left: '0', right: '0' },
   'inset-x-auto': { left: 'auto', right: 'auto' },
 
