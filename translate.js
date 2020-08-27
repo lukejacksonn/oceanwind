@@ -52,9 +52,11 @@ export default (theme) => (str) => {
           out['text-transform'] = i[0];
           break;
         case 'truncate':
-          out['overflow'] = 'hidden';
-          out['text-overflow'] = 'ellipsis';
-          out['white-space'] = 'nowrap';
+          out = {
+            overflow: 'hidden',
+            'text-overflow': 'ellipsis',
+            'white-space': 'nowrap',
+          };
           break;
         case 'transition':
           out[`${i[0]}-property`] =
