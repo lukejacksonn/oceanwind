@@ -3,58 +3,61 @@ import theme from './core/theme.js';
 
 import { css } from './util/otion.js';
 
-const mediaQuery = (b) => (rules) => ({
+const mediaQuery = (size) => (rules) => ({
   '@media': {
-    [`(min-width: ${theme.screen[b]})`]: rules,
+    [`(min-width: ${theme.screen[size]})`]: rules,
   },
 });
 
-function mergeDeep(...objects) {
+function merge(...objects) {
   const isObject = (obj) => obj && typeof obj === 'object';
   return objects.reduce((prev, obj) => {
     Object.keys(obj).forEach((key) => {
       const pVal = prev[key];
       const oVal = obj[key];
-      if (Array.isArray(pVal) && Array.isArray(oVal)) {
-        prev[key] = pVal.concat(...oVal);
-      } else if (isObject(pVal) && isObject(oVal)) {
-        prev[key] = mergeDeep(pVal, oVal);
+      if (isObject(pVal) && isObject(oVal)) {
+        prev[key] = merge(pVal, oVal);
       } else {
-        prev[key] = oVal;
+        // Transform fules need special concatenation
+        prev[key] = key === 'transform' && pVal ? [oVal, pVal].join(' ') : oVal;
       }
     });
     return prev;
   }, {});
 }
 
-const ow = (classes) => {
-  if (!classes[0]) return '';
-  classes = classes[0].replace(/\s\s+/g, ' ').trim();
-  const rules = classes.split(' ').reduce((a, x) => {
-    let mod = [];
-    if (x.includes(':')) {
-      mod = x.split(':').slice(0, -1);
-      x = x.split(':').pop();
-    }
-
-    let rule = translate(theme)(x);
-    if (a.transform != undefined && rule.transform != undefined) {
-      rule = {
-        ...rule,
-        transform: [a.transform, rule.transform].join(' '),
-      };
-    }
-
-    mod.reverse().forEach((m) => {
-      if (theme.screen[m]) rule = mediaQuery(m)(rule);
-      else rule = { [`:${m}`]: rule };
+export default ([rules]) => {
+  // Keep track of processed rules
+  const seen = {};
+  // Go through each rule in the array and translate to css
+  const styles = rules
+    .replace(/\s\s+/g, ' ')
+    .trim()
+    .split(' ')
+    .map((rule) => {
+      // Warn about any duplicate rule declarations
+      if (seen[rule]) console.warn(`Duplicate delclaration of ${rule}`);
+      // Mark rule as seen
+      seen[rule] = true;
+      // Split the rule into parts
+      rule = rule.split(':');
+      // Seperate out directive from variants
+      let directive = rule.pop();
+      let variants = rule;
+      // Lookup translation for directive
+      let translation = translate(theme)(directive);
+      // Warn if there was no translation for the given directive
+      if (!Object.keys(translation)[0])
+        console.warn(`No translation for ${directive}`);
+      // Apply variants to the translation
+      variants.reverse().forEach((variant) => {
+        if (theme.screen[variant])
+          translation = mediaQuery(variant)(translation);
+        else translation = { [`:${variant}`]: translation };
+      });
+      // Return translation with variants applied
+      return translation;
     });
-
-    return mergeDeep(a, rule);
-  }, {});
-
-  // console.log({ [classes]: rules });
-  return css(rules);
+  // Return class names for styles
+  return css(merge(...styles));
 };
-
-export default ow;

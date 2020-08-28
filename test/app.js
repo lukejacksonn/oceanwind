@@ -1,7 +1,7 @@
 import { render, h } from 'https://unpkg.com/preact?module';
 import htm from 'https://unpkg.com/htm?module';
 
-import ow from '../index.js';
+import ow from '../index.min.js';
 
 const html = htm.bind(h);
 
@@ -27,13 +27,17 @@ const style = {
     shadow-2xl
     border-current
     border-16
-    border-solid`,
+    border-solid
+    -rotate-3
+    sm:rotate-0
+    md:rotate-3
+    md:scale-95
+  `,
   tag: ow`
     inline-block
-    bg-grey-300
+    bg-gray-200
     hover:bg-gray-100
     hover:text-gray-800
-    hover:border-gray-500
     hover:shadow-lg
     border-1
     border-solid
@@ -71,7 +75,7 @@ const app =html`
       </div>
       <form className=${ow`flex flex-row space-x-4`}>
         <input
-          className=${ow`w-full py-3 px-4 bg-gray-100 border-1 border-grey-600 rounded sm:focus:bg-gray-100 sm:focus:placeholder-current`}
+          className=${ow`w-full py-3 px-4 bg-gray-100 border-1 border-gray-300 rounded sm:focus:bg-gray-100 sm:focus:placeholder-current`}
           placeholder="Enter a value"
         />
         <button className=${ow`px-6 rounded bg-current font-bold`}>
