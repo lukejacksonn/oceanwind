@@ -1,4 +1,5 @@
 import capsize from '../util/capsize.js';
+import dfont from '../util/dfont.js';
 
 export default (theme) => (str) => {
   let x;
@@ -593,7 +594,7 @@ export default (theme) => (str) => {
           out = capsize({
             capHeight: +i[1],
             lineGap: +i[2],
-            fontMetrics: theme.fontMetrics,
+            fontMetrics: theme.fontMetrics[dfont(theme.font.sans)],
           });
           break;
         case 'divide':
