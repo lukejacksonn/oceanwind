@@ -2,17 +2,19 @@
 
 > compiles tailwind like shorthand syntax into css at runtime
 
-This library takes inspiration from Tailwind and utilizes Otion to provide means of efficiently generating atomic styles from shorthand syntax and appending them to the DOM at runtime.
+This library takes inspiration from [Tailwind](https://github.com/tailwindlabs/tailwindcss) and utilizes [Otion](https://github.com/kripod/otion) to provide means of efficiently generating atomic styles from shorthand syntax and appending them to the DOM at runtime.
 
 The aim here was to create an interpretter and compiler that:
 
 - Supports all existing Tailwind shorthand syntax outlined [here](https://tailwindcss.com/docs)
-- Generates only the styles required by given Tailwind class names
+- Generates only the styles required for given class names
 - Is smaller than the average purged css file output from the Tailwind compiler
 - Has desirable perf characteristics at runtime (requires no build step or bundling)
 - Warns developers when unrecognized or duplicate shorthands are used
 
-The library currently weighs 7.8KB gzipped and 7.2KB compressed using brotli and supports the vast majority of Tailwind directives and variants. It also extends the API slightly in some cases; one example of this is an experimental shorthand `cap-<fontSize>-<lineGap>` which aims to replicate the behaviour exhibited by the library [capsize](https://github.com/seek-oss/capsize) on text elements.
+The library currently weighs 7.8KB gzipped (7.2KB compressed using brotli) and supports the vast majority of Tailwind directives and variants.
+
+It also extends the API slightly in some cases; one example of this is an experimental shorthand `cap-<fontSize>-<lineGap>` which aims to replicate the behaviour exhibited by the library [capsize](https://github.com/seek-oss/capsize) on text elements.
 
 Full documentation of any syntax that extends the Tailwind API will come soon.
 
