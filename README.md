@@ -12,7 +12,9 @@ The aim here was to create an interpretter and compiler that:
 - Has desirable perf characteristics at runtime (requires no build step or bundling)
 - Warns developers when unrecognized or duplicate shorthands are used
 
-The library currently weighs 7.8KB gzipped and 7.2KB compressed using brotli.
+The library currently weighs 7.8KB gzipped and 7.2KB compressed using brotli and supports the vast majority of Tailwind directives and variants. It also extends the API slightly in some cases; one example of this is an experimental shorthand `cap-<fontSize>-<lineGap>` which aims to replicate the behaviour exhibited by the library [capsize](https://github.com/seek-oss/capsize) on text elements.
+
+Full documentation of any syntax that extends the Tailwind API will come soon.
 
 ## Usage
 
@@ -32,8 +34,8 @@ The example above will result in the following:
 
 In addition to importing oceanwind to generate class names for given shorthand. It is reccomended to import two static css files which help normalize styles across browsers. These are:
 
-- The Tailwind reset available [here](https://unpkg.com/tailwindcss@1.7.5/dist/base.min.css)
-- The Tailwind prose helper available [here](https://unpkg.com/@tailwindcss/typography@0.2.0/dist/typography.min.css)
+- The Tailwind reset [available here](https://unpkg.com/tailwindcss@1.7.5/dist/base.min.css)
+- The Tailwind prose helper [available here](https://unpkg.com/@tailwindcss/typography@0.2.0/dist/typography.min.css)
 
 ## Example
 
