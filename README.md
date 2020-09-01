@@ -12,7 +12,7 @@ The aim here was to create an interpretter and compiler that:
 - Has desirable perf characteristics at runtime (requires no build step or bundling)
 - Warns developers when unrecognized or duplicate shorthands are used
 
-The library currently weighs 7.8KB gzipped and compressed.
+The library currently weighs 7.8KB gzipped and 7.2KB compressed using brotli.
 
 ## Usage
 
@@ -55,6 +55,8 @@ render(
   document.body
 );
 ```
+
+Here is a [live demo](https://unpkg.com/oceanwind/index.html).
 
 ## Acknowledgements
 
