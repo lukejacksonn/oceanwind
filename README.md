@@ -16,7 +16,9 @@ The library currently weighs 7.8KB gzipped (7.2KB compressed using brotli) and s
 
 It also extends the API slightly in some cases; one example of this is an experimental shorthand `cap-<fontSize>-<lineGap>` which aims to replicate the behaviour exhibited by the library [capsize](https://github.com/seek-oss/capsize) on text elements.
 
-Full documentation of any syntax that extends the Tailwind API will come soon.
+Full documentation of any syntax that extends the Tailwind API will come soon. If you find any directives or variants missing or not behaving correctly then please create an issue or pull request!
+
+> ⚡️ Check out the [live and interactive demo](https://esm.codes/#Ly8gT2NlYW53aW5kIGRlbW8gYnkgQGx1a2VqYWNrc29ubgovLyAtLS0tLS0tLS0tLS0tLS0tCiAgICAKaW1wb3J0IHsgcmVuZGVyLCBoIH0gZnJvbSAnaHR0cHM6Ly91bnBrZy5jb20vcHJlYWN0P21vZHVsZSc7CmltcG9ydCBodG0gZnJvbSAnaHR0cHM6Ly91bnBrZy5jb20vaHRtP21vZHVsZSc7CmltcG9ydCBvdyBmcm9tICdodHRwczovL3VucGtnLmNvbS9vY2VhbndpbmQnOwoKY29uc3QgaHRtbCA9IGh0bS5iaW5kKGgpOwoKcmVuZGVyKAogIGh0bWxgCiAgICA8ZGl2IGNsYXNzTmFtZT0ke293YAogICAgICBoLWZ1bGwKICAgICAgYmctcHVycGxlLTUwMAogICAgICByb3RhdGUtMwogICAgICBmbGV4CiAgICAgIGl0ZW1zLWNlbnRlcgogICAgICBqdXN0aWZ5LWNlbnRlcgogICAgYH0+CiAgICAgIDxoMSBjbGFzc05hbWU9JHtvd2AKICAgICAgICB0ZXh0LXdoaXRlCiAgICAgICAgZm9udC1ib2xkCiAgICAgICAgZm9udC1zYW5zCiAgICAgIGB9PkhlbGxvIFdvcmxkPC9oMT4KICAgIDwvZGl2PgogIGAsCiAgZG9jdW1lbnQuYm9keQopOw==)
 
 ## Usage
 
@@ -27,7 +29,7 @@ import ow from 'https://unpkg.com/oceanwind';
 document.body.className = ow`h-full bg-purple-500 rotate-3 scale-95`;
 ```
 
-The example above will result in the following:
+The code above will result in the following happening:
 
 1. Shorthand syntax will be translated into CSS (e.g. `h-full => { height: 100vh }`).
 2. All resultant CSS will be merged into a single CSS-in-JS object
@@ -59,8 +61,6 @@ render(
   document.body
 );
 ```
-
-Here is a [live demo](https://unpkg.com/oceanwind/index.html).
 
 ## Acknowledgements
 
