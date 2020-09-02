@@ -31,7 +31,6 @@ const style = {
     -rotate-3
     sm:rotate-0
     md:rotate-3
-    md:scale-95
   `,
   tag: ow`
     inline-block

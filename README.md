@@ -4,6 +4,14 @@
 
 This library takes inspiration from [Tailwind](https://github.com/tailwindlabs/tailwindcss) and utilizes [Otion](https://github.com/kripod/otion) to provide means of efficiently generating atomic styles from shorthand syntax and appending them to the DOM at runtime.
 
+<hr>
+
+<img width="100%" src="https://user-images.githubusercontent.com/1457604/91981751-32310b00-ed21-11ea-8a89-f30f1437f9a2.gif">
+
+> ⚡️ Check out the [live and interactive demo](https://esm.codes/#Ly8gT2NlYW53aW5kIGRlbW8gYnkgQGx1a2VqYWNrc29ubgovLyAtLS0tLS0tLS0tLS0tLS0tCiAgICAKaW1wb3J0IHsgcmVuZGVyLCBoIH0gZnJvbSAnaHR0cHM6Ly91bnBrZy5jb20vcHJlYWN0P21vZHVsZSc7CmltcG9ydCBodG0gZnJvbSAnaHR0cHM6Ly91bnBrZy5jb20vaHRtP21vZHVsZSc7CmltcG9ydCBvdyBmcm9tICdodHRwczovL3VucGtnLmNvbS9vY2VhbndpbmQnOwoKY29uc3QgaHRtbCA9IGh0bS5iaW5kKGgpOwoKcmVuZGVyKAogIGh0bWxgCiAgICA8ZGl2IGNsYXNzTmFtZT0ke293YAogICAgICBoLWZ1bGwKICAgICAgYmctcHVycGxlLTUwMAogICAgICByb3RhdGUtMwogICAgICBmbGV4CiAgICAgIGl0ZW1zLWNlbnRlcgogICAgICBqdXN0aWZ5LWNlbnRlcgogICAgYH0+CiAgICAgIDxoMSBjbGFzc05hbWU9JHtvd2AKICAgICAgICB0ZXh0LXdoaXRlCiAgICAgICAgZm9udC1ib2xkCiAgICAgICAgZm9udC1zYW5zCiAgICAgIGB9PkhlbGxvIFdvcmxkPC9oMT4KICAgIDwvZGl2PgogIGAsCiAgZG9jdW1lbnQuYm9keQopOw==)
+
+<br>
+
 The aim here was to create an interpretter and compiler that:
 
 - Supports all existing Tailwind shorthand syntax outlined [here](https://tailwindcss.com/docs)
@@ -17,8 +25,6 @@ The library currently weighs 7.8KB gzipped (7.2KB compressed using brotli) and s
 It also extends the API slightly in some cases; one example of this is an experimental shorthand `cap-<fontSize>-<lineGap>` which aims to replicate the behaviour exhibited by the library [capsize](https://github.com/seek-oss/capsize) on text elements.
 
 Full documentation of any syntax that extends the Tailwind API will come soon. If you find any directives or variants missing or not behaving correctly then please create an issue or pull request!
-
-> ⚡️ Check out the [live and interactive demo](https://esm.codes/#Ly8gT2NlYW53aW5kIGRlbW8gYnkgQGx1a2VqYWNrc29ubgovLyAtLS0tLS0tLS0tLS0tLS0tCiAgICAKaW1wb3J0IHsgcmVuZGVyLCBoIH0gZnJvbSAnaHR0cHM6Ly91bnBrZy5jb20vcHJlYWN0P21vZHVsZSc7CmltcG9ydCBodG0gZnJvbSAnaHR0cHM6Ly91bnBrZy5jb20vaHRtP21vZHVsZSc7CmltcG9ydCBvdyBmcm9tICdodHRwczovL3VucGtnLmNvbS9vY2VhbndpbmQnOwoKY29uc3QgaHRtbCA9IGh0bS5iaW5kKGgpOwoKcmVuZGVyKAogIGh0bWxgCiAgICA8ZGl2IGNsYXNzTmFtZT0ke293YAogICAgICBoLWZ1bGwKICAgICAgYmctcHVycGxlLTUwMAogICAgICByb3RhdGUtMwogICAgICBmbGV4CiAgICAgIGl0ZW1zLWNlbnRlcgogICAgICBqdXN0aWZ5LWNlbnRlcgogICAgYH0+CiAgICAgIDxoMSBjbGFzc05hbWU9JHtvd2AKICAgICAgICB0ZXh0LXdoaXRlCiAgICAgICAgZm9udC1ib2xkCiAgICAgICAgZm9udC1zYW5zCiAgICAgIGB9PkhlbGxvIFdvcmxkPC9oMT4KICAgIDwvZGl2PgogIGAsCiAgZG9jdW1lbnQuYm9keQopOw==)
 
 ## Usage
 
