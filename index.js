@@ -3,6 +3,8 @@ import theme from './core/theme.js';
 
 import { css } from './util/otion.js';
 
+export { setup } from './util/otion.js';
+
 const mediaQuery = (size) => (rules) => ({
   '@media': {
     [`(min-width: ${theme.screen[size]})`]: rules,
