@@ -1,30 +1,7 @@
 import translate from './core/translate.js';
 import theme from './core/theme.js';
-
+import merge from './util/merge.js';
 import { css } from './util/otion.js';
-
-const mediaQuery = (size) => (rules) => ({
-  '@media': {
-    [`(min-width: ${theme.screen[size]})`]: rules,
-  },
-});
-
-function merge(...objects) {
-  const isObject = (obj) => obj && typeof obj === 'object';
-  return objects.reduce((prev, obj) => {
-    Object.keys(obj).forEach((key) => {
-      const pVal = prev[key];
-      const oVal = obj[key];
-      if (isObject(pVal) && isObject(oVal)) {
-        prev[key] = merge(pVal, oVal);
-      } else {
-        // Transform fules need special concatenation
-        prev[key] = key === 'transform' && pVal ? [oVal, pVal].join(' ') : oVal;
-      }
-    });
-    return prev;
-  }, {});
-}
 
 export default ([rules]) => {
   // Keep track of processed rules
@@ -51,8 +28,9 @@ export default ([rules]) => {
         console.warn(`No translation for ${directive}`);
       // Apply variants to the translation
       variants.reverse().forEach((variant) => {
-        if (theme.screen[variant])
-          translation = mediaQuery(variant)(translation);
+        let size = theme.screen[variant];
+        if (size)
+          translation = { '@media': { [`(min-width: ${size})`]: translation } };
         else translation = { [`:${variant}`]: translation };
       });
       // Return translation with variants applied
