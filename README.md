@@ -93,4 +93,4 @@ render(
 
 ## Acknowledgements
 
-I'd like to thank both [Adam Waltham](https://github.com/adamwathan) and [Kristóf Poduszló](https://github.com/kripod) for their amazing work with Tailwind and Otion respectively, which made making this library somewhat a breeze. Also [Phil Pluckthun](https://github.com/kitten) who helped me deduce the initial grammar.
+I'd like to thank both [Adam Wathan](https://github.com/adamwathan) and [Kristóf Poduszló](https://github.com/kripod) for their amazing work with Tailwind and Otion respectively, which made making this library somewhat a breeze. Also [Phil Pluckthun](https://github.com/kitten) who helped me deduce the initial grammar.
