@@ -1,9 +1,9 @@
 import translate from './core/translate.js';
-import theme from './core/theme.js';
+import defaultTheme from './core/theme.js';
 import merge from './util/merge.js';
 import { css } from './util/otion.js';
 
-export default ([rules]) => {
+export const process = (theme) => ([rules]) => {
   // Keep track of processed rules
   const seen = {};
   // Go through each rule in the array and translate to css
@@ -37,5 +37,14 @@ export default ([rules]) => {
       return translation;
     });
   // Return class names for styles
-  return css(merge(...styles));
+  return merge(...styles);
 };
+
+// If passed a theme then return process primed with merged themes
+export const themed = (input) => {
+  const theme = merge(defaultTheme, input);
+  return (input) => css(process(theme)(input));
+};
+
+// If passed a tagged template then process with the default theme
+export default (input) => css(process(defaultTheme)(input));

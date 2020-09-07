@@ -47,12 +47,33 @@ In addition to importing oceanwind to generate class names for given shorthand. 
 - The Tailwind reset [available here](https://unpkg.com/tailwindcss@1.7.5/dist/base.min.css)
 - The Tailwind prose helper [available here](https://unpkg.com/@tailwindcss/typography@0.2.0/dist/typography.min.css)
 
+### Extending the default theme
+
+Importing and invoking oceanwind directly will cause it to refer to the [default theme](https://github.com/lukejacksonn/oceanwind/blob/master/core/theme.js) for directives that require themed values (like `bg-red-500` for example). If you would like to customize the theme then used the `themed` export instead of the default export.
+
+```js
+import { themed } from 'https://unpkg.com/oceanwind';
+
+const ow = themed({
+  colors: {
+    red: {
+      500: 'hotpink',
+    },
+  },
+});
+
+ow`bg-red-500`; // will result in a hotpink background-color
+```
+
+Any custom theme provided to the `themed` function will be deep merged with the default theme.
+
 ## Example
 
 Most of the time developers will be using a front end framework to render DOM elements. Oceanwind is framework agnostic but here is an example of how you might use it with preact and no build step.
 
 ```js
 import { render, h } from 'https://unpkg.com/preact?module';
+
 import htm from 'https://unpkg.com/htm?module';
 import ow from 'https://unpkg.com/oceanwind';
 
