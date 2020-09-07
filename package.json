@@ -1,12 +1,13 @@
 {
   "name": "oceanwind",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "compiles tailwind like shorthand syntax into css at runtime",
   "module": "index.js",
   "main": "index.js",
   "scripts": {
     "start": "servor --browse --reload --editor",
-    "build": "esbuild --bundle index.js --outfile=index.min.js --format=esm --minify"
+    "build": "esbuild --bundle index.js --outfile=index.min.js --format=esm --minify",
+    "prepublish": "npm run build"
   },
   "keywords": [],
   "author": "Luke Jackson (@lukejacksonn)",

@@ -1,9 +1,17 @@
 import { render, h } from 'https://unpkg.com/preact?module';
 import htm from 'https://unpkg.com/htm?module';
 
-import ow from '../index.js';
+import { themed } from '../index.js';
 
 const html = htm.bind(h);
+
+const ow = themed({
+  colors: {
+    purple: {
+      800: 'hotpink',
+    },
+  },
+});
 
 const style = {
   main: ow`

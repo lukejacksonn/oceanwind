@@ -1,5 +1,5 @@
-import translate from '../core/translate.js';
 import theme from '../core/theme.js';
+import { process } from '../index.js';
 
 const cases = {
   hidden: { display: 'none' },
@@ -560,8 +560,8 @@ const test = Object.entries(cases).reduce(
     [i]: {
       input: i,
       expected: o,
-      actual: translate(theme)(i),
-      passed: JSON.stringify(translate(theme)(i)) === JSON.stringify(o),
+      actual: process(theme)([i]),
+      passed: JSON.stringify(process(theme)([i])) === JSON.stringify(o),
     },
   }),
   {}
@@ -570,4 +570,18 @@ const test = Object.entries(cases).reduce(
 console.log({
   failed: Object.values(test).filter((x) => !x.passed),
   passed: Object.values(test).filter((x) => x.passed),
+});
+
+const themed = process({
+  colors: {
+    red: {
+      500: 'hotpink',
+    },
+  },
+});
+
+console.log({
+  themed:
+    JSON.stringify(themed`bg-red-500`) ===
+    JSON.stringify({ 'background-color': 'hotpink' }),
 });
