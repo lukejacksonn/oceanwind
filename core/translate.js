@@ -20,6 +20,7 @@ export default (theme) => (str) => {
           out['display'] = 'none';
           break;
         case 'inline':
+        case 'block':
         case 'flex':
         case 'grid':
         case 'table':
