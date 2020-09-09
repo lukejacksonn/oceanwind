@@ -9,6 +9,16 @@ const cases = {
   table: { display: 'table' },
   block: { display: 'block' },
 
+  'top-0': { top: '0' },
+  'right-0': { right: '0' },
+  'bottom-0': { bottom: '0' },
+  'left-0': { left: '0' },
+
+  'top-auto': { top: 'auto' },
+  'right-auto': { right: 'auto' },
+  'bottom-auto': { bottom: 'auto' },
+  'left-auto': { left: 'auto' },
+
   'flow-root': { display: 'flow-root' },
   'inline-block': { display: 'inline-block' },
   'inline-flex': { display: 'inline-flex' },

@@ -587,6 +587,12 @@ export default (theme) => (str) => {
               break;
           }
           break;
+        case 'top':
+        case 'right':
+        case 'bottom':
+        case 'left':
+          out[i[0]] = i[1];
+          break;
       }
       break;
     case 3:
