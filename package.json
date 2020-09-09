@@ -7,7 +7,7 @@
   "scripts": {
     "start": "servor --browse --reload --editor",
     "build": "esbuild --bundle index.js --outfile=index.min.js --format=esm --minify",
-    "prepublish": "npm run build && git add . && git commit -m 'Ran build for deploy'"
+    "prepublish": "npm run build"
   },
   "keywords": [],
   "author": "Luke Jackson (@lukejacksonn)",
