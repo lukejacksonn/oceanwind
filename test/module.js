@@ -7,6 +7,7 @@ const cases = {
   flex: { display: 'flex' },
   grid: { display: 'grid' },
   table: { display: 'table' },
+  block: { display: 'block' },
 
   'flow-root': { display: 'flow-root' },
   'inline-block': { display: 'inline-block' },
