@@ -1,9 +1,9 @@
-import { css } from "otion";
 import translate from "./core/translate.mjs";
 import defaultTheme from "./core/theme.mjs";
 import merge from "./util/merge.mjs";
+import { css } from "./util/otion.mjs";
 
-export { setup, hydrate } from "otion";
+export { setup, hydrate } from "./util/otion.mjs";
 
 export const process = (theme) => ([rules]) => {
   // Keep track of processed rules
