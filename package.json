@@ -6,7 +6,7 @@
   "main": "index.mjs",
   "scripts": {
     "start": "servor --browse --reload --editor",
-    "build": "esbuild --bundle index.js --outfile=index.min.js --format=esm --minify",
+    "build": "esbuild --bundle index.mjs --outfile=index.min.js --format=esm --minify",
     "prepublish": "npm run build",
     "test": "node --experimental-modules test/ssr.test.mjs"
   },
