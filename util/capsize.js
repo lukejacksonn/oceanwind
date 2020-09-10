@@ -44,24 +44,24 @@ function createCss({ lineHeight, fontSize, fontMetrics }) {
 
   return {
     fontSize: `${roundTo(fontSize, PRECISION)}px`,
-    lineHeight: lineHeight ? `${roundTo(lineHeight, PRECISION)}px` : 'normal',
+    lineHeight: lineHeight ? `${roundTo(lineHeight, PRECISION)}px` : "normal",
     padding: `${preventCollapse}px 0`,
-    '::before': {
+    "::before": {
       content: "''",
       marginTop: `${roundTo(
         leadingTrim(ascentScale - capHeightScale + lineGapScale / 2) * -1,
         PRECISION
       )}em`,
-      display: 'block',
+      display: "block",
       height: 0,
     },
-    '::after': {
+    "::after": {
       content: "''",
       marginBottom: `${roundTo(
         leadingTrim(descentScale + lineGapScale / 2) * -1,
         PRECISION
       )}em`,
-      display: 'block',
+      display: "block",
       height: 0,
     },
   };

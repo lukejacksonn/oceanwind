@@ -1,14 +1,14 @@
-import { render, h } from 'https://unpkg.com/preact?module';
-import htm from 'https://unpkg.com/htm?module';
+import { render, h } from "https://unpkg.com/preact?module";
+import htm from "https://unpkg.com/htm?module";
 
-import { themed } from '../index.js';
+import { themed } from "../index.js";
 
 const html = htm.bind(h);
 
 const ow = themed({
   colors: {
     purple: {
-      800: 'hotpink',
+      800: "hotpink",
     },
   },
 });
@@ -59,7 +59,7 @@ const style = {
 };
 
 // prettier-ignore
-const app =html`
+const app = html`
 <main className=${style.main}>
   <div className=${style.card}>
     <img
@@ -82,7 +82,8 @@ const app =html`
       </div>
       <form className=${ow`flex flex-row space-x-4`}>
         <input
-          className=${ow`w-full py-3 px-4 bg-gray-100 border-1 border-gray-300 rounded sm:focus:bg-gray-100 sm:focus:placeholder-current`}
+          className=${ow
+  `w-full py-3 px-4 bg-gray-100 border-1 border-gray-300 rounded sm:focus:bg-gray-100 sm:focus:placeholder-current`}
           placeholder="Enter a value"
         />
         <button className=${ow`px-6 rounded bg-current font-bold`}>
@@ -91,7 +92,8 @@ const app =html`
       </form>
     </div>
     <div
-      className=${ow`px-6 py-4 bg-gray-100 border-t-1 border-gray-300 border-solid space-x-2`}
+      className=${ow
+  `px-6 py-4 bg-gray-100 border-t-1 border-gray-300 border-solid space-x-2`}
     >
       <div className=${style.tag}>
         <span>#photography</span>
@@ -106,7 +108,8 @@ const app =html`
   </div>
 </main>
 <main className=${ow`mx-auto px-10 py-10 sm:py-16 md:py-24 lg:py-32 xl:py-48`}>
-  <article className="prose prose-sm sm:prose lg:prose-lg xl:prose-2xl ${ow`mx-auto`}">
+  <article className="prose prose-sm sm:prose lg:prose-lg xl:prose-2xl ${ow
+  `mx-auto`}">
     <p class="lead">
       Until now, trying to style an article, document, or blog post with
       Tailwind has been a tedious task that required a keen eye for
@@ -165,7 +168,7 @@ const app =html`
 </code></pre>
     <p>
       For more information about how to use the plugin and the features it
-      includes,${' '}
+      includes,${" "}
       <a
         href="https://github.com/tailwindcss/typography/blob/master/README.md"
         >read the documentation</a
@@ -414,7 +417,7 @@ plugins: [],
     <p>And finally a sentence to close off this section.</p>
     <h2>There are other elements we need to style</h2>
     <p>
-      I almost forgot to mention links, like${' '}
+      I almost forgot to mention links, like${" "}
       <a href="https://tailwindcss.com"
         >this link to the Tailwind CSS website</a
       >. We almost made them blue but that's so yesterday, so we went with
@@ -519,14 +522,14 @@ plugins: [],
 
 render(app, document.body);
 
-const reset = document.createElement('link');
-reset.rel = 'stylesheet';
-reset.href = 'https://unpkg.com/tailwindcss@1.7.5/dist/base.min.css';
+const reset = document.createElement("link");
+reset.rel = "stylesheet";
+reset.href = "https://unpkg.com/tailwindcss@1.7.5/dist/base.min.css";
 
-const prose = document.createElement('link');
-prose.rel = 'stylesheet';
+const prose = document.createElement("link");
+prose.rel = "stylesheet";
 prose.href =
-  'https://unpkg.com/@tailwindcss/typography@0.2.0/dist/typography.min.css';
+  "https://unpkg.com/@tailwindcss/typography@0.2.0/dist/typography.min.css";
 
 document.head.appendChild(prose);
 document.head.appendChild(reset);
