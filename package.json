@@ -18,12 +18,18 @@
     "@babel/preset-env": "^7.11.5",
     "babel-jest": "^26.3.0",
     "esbuild": "0.6.28",
+    "htm": "^3.0.4",
     "jest": "^26.4.2",
+    "preact": "^10.4.8",
+    "preact-render-to-string": "^5.1.10",
     "servor": "4.0.2"
   },
   "jest": {
     "transform": {
       "^.+\\.[t|j]sx?$": "babel-jest"
     }
+  },
+  "dependencies": {
+    "otion": "^0.6.1"
   }
 }
