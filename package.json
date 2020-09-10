@@ -7,13 +7,15 @@
   "scripts": {
     "start": "servor --browse --reload --editor",
     "build": "esbuild --bundle index.js --outfile=index.min.js --format=esm --minify",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "test": "jest"
   },
   "keywords": [],
   "author": "Luke Jackson (@lukejacksonn)",
   "license": "MIT",
   "devDependencies": {
     "esbuild": "0.6.28",
+    "jest": "^26.4.2",
     "servor": "4.0.2"
   }
 }
