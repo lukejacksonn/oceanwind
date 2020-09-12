@@ -22,7 +22,9 @@
     "servor": "4.0.2",
     "tape": "^5.0.1"
   },
-  "prettier": {},
+  "prettier": {
+    "singleQuote": true
+  },
   "dependencies": {
     "otion": "^0.6.1"
   }

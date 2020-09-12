@@ -1,14 +1,14 @@
-import { render, h } from "https://unpkg.com/preact?module";
-import htm from "https://unpkg.com/htm?module";
+import { render, h } from 'https://unpkg.com/preact?module';
+import htm from 'https://unpkg.com/htm?module';
 
-import { themed } from "../index.js";
+import { themed } from '../index.js';
 
 const html = htm.bind(h);
 
 const ow = themed({
   colors: {
     purple: {
-      800: "hotpink",
+      800: 'hotpink',
     },
   },
 });
@@ -522,14 +522,14 @@ plugins: [],
 
 render(app, document.body);
 
-const reset = document.createElement("link");
-reset.rel = "stylesheet";
-reset.href = "https://unpkg.com/tailwindcss@1.7.5/dist/base.min.css";
+const reset = document.createElement('link');
+reset.rel = 'stylesheet';
+reset.href = 'https://unpkg.com/tailwindcss@1.7.5/dist/base.min.css';
 
-const prose = document.createElement("link");
-prose.rel = "stylesheet";
+const prose = document.createElement('link');
+prose.rel = 'stylesheet';
 prose.href =
-  "https://unpkg.com/@tailwindcss/typography@0.2.0/dist/typography.min.css";
+  'https://unpkg.com/@tailwindcss/typography@0.2.0/dist/typography.min.css';
 
 document.head.appendChild(prose);
 document.head.appendChild(reset);

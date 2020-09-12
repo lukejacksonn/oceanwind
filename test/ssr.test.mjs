@@ -1,13 +1,13 @@
-import assert from "assert";
-import { h } from "preact";
-import render from "preact-render-to-string";
-import htm from "htm";
+import assert from 'assert';
+import { h } from 'preact';
+import render from 'preact-render-to-string';
+import htm from 'htm';
 import {
   filterOutUnusedRules,
   getStyleTag,
   VirtualInjector,
-} from "otion/server";
-import { setup, themed } from "../index.mjs";
+} from 'otion/server';
+import { setup, themed } from '../index.mjs';
 
 function testSsr() {
   // https://www.npmjs.com/package/otion#server-side-rendering
@@ -24,7 +24,7 @@ function testSsr() {
   const appHtml = render(app);
   const styleTag = getStyleTag(filterOutUnusedRules(injector, appHtml));
 
-  console.log("Generated a style tag", styleTag);
+  console.log('Generated a style tag', styleTag);
 
   assert(styleTag);
 }

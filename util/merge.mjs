@@ -1,4 +1,4 @@
-const isObject = (obj) => obj && typeof obj === "object";
+const isObject = (obj) => obj && typeof obj === 'object';
 const merge = (...objects) => {
   return objects.reduce((prev, obj) => {
     Object.keys(obj).forEach((key) => {
@@ -8,7 +8,7 @@ const merge = (...objects) => {
         prev[key] = merge(pVal, oVal);
       } else {
         // Transform fules need special concatenation
-        prev[key] = key === "transform" && pVal ? [oVal, pVal].join(" ") : oVal;
+        prev[key] = key === 'transform' && pVal ? [oVal, pVal].join(' ') : oVal;
       }
     });
     return prev;

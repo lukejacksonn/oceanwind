@@ -1,21 +1,21 @@
-const BASE_FONTS = ["sans-serif", "serif", "monospace"];
+const BASE_FONTS = ['sans-serif', 'serif', 'monospace'];
 
 const removeQuotes = (name) => {
   const matches = String(name).match(/^["']?(.+?)["']?$/i);
-  return Array.isArray(matches) ? matches[1] : "";
+  return Array.isArray(matches) ? matches[1] : '';
 };
 
 export default (family) => {
   const opts = {
-    text: "abcdefghijklmnopqrstuvwxyz0123456789",
+    text: 'abcdefghijklmnopqrstuvwxyz0123456789',
     fontSize: 72,
-    baseFont: "sans-serif",
+    baseFont: 'sans-serif',
   };
 
-  const fontFamily = family || "serif";
-  const fonts = fontFamily.split(",");
-  const canvas = window.document.createElement("canvas");
-  const context = canvas.getContext("2d");
+  const fontFamily = family || 'serif';
+  const fonts = fontFamily.split(',');
+  const canvas = window.document.createElement('canvas');
+  const context = canvas.getContext('2d');
 
   return fonts
     .map((font) => {

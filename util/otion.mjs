@@ -35,14 +35,14 @@ var t = /^(br|hy|us|wr|text-si|scroll-snap-t)/,
   r = /^(ap|br|hy|us|wr|mas|colu|clip-|box-de|font-k|text-e|font-fe|shape-i|text-or|text-si|border-e|margin-e|margin-s|padding-e|padding-s|border-sta|background-cl|scroll-snap-t|text-decoration-)/,
   s = /^(pos|background-cl)/,
   o = {};
-const c = "undefined" != typeof window,
+const c = 'undefined' != typeof window,
   i = false; // "production" !== process.env.NODE_ENV;
 function a() {
-  let e = document.getElementById("__otion");
+  let e = document.getElementById('__otion');
   return (
     e ||
-    ((e = document.createElement("style")),
-    (e.id = "__otion"),
+    ((e = document.createElement('style')),
+    (e.id = '__otion'),
     document.head.appendChild(e))
   );
 }
@@ -74,41 +74,41 @@ function u({ nonce: e, target: t = a() }) {
 }
 const f = { insert: () => 0 };
 function d(e) {
-  return e.trim().replace(/\s+/g, " ");
+  return e.trim().replace(/\s+/g, ' ');
 }
 const p = /^(-|f[lo].*?[^se]$|g.{6,}[^ps]$|z|o[pr]|(-w.{6})?li.*?(t|mp)$|an|(bo|s).{5}im|sca|m.{7}[ds]|ta|c.*?[st]$|wido|ini)/,
   h = /^(?:(border-(?!w|c|sty)|[tlbr].{2,4}m?$|c.{7}$)|([fl].{5}l|g.{8}$|pl))/,
   m = new Map([
-    ["nk", 1],
-    ["sited", 2],
-    ["pty", 3],
-    ["cus-w", 4],
-    ["ver", 5],
-    ["cus", 6],
-    ["cus-v", 7],
-    ["tive", 8],
-    ["sable", 9],
+    ['nk', 1],
+    ['sited', 2],
+    ['pty', 3],
+    ['cus-w', 4],
+    ['ver', 5],
+    ['cus', 6],
+    ['cus-v', 7],
+    ['tive', 8],
+    ['sable', 9],
   ]);
 function g(e, t, n) {
   let r = 0;
-  if (!("-" === e[1])) {
-    const t = "-" === e[0] ? e.slice(e.indexOf("-", 1)) + 1 : e,
+  if (!('-' === e[1])) {
+    const t = '-' === e[0] ? e.slice(e.indexOf('-', 1)) + 1 : e,
       n = h.exec(t);
     r = (n ? +!!n[1] || -!!n[2] : 0) + 1;
     let s = 1;
-    for (; (s = t.indexOf("-", s) + 1); ) ++r;
+    for (; (s = t.indexOf('-', s) + 1); ) ++r;
   }
   return (r *= 2 * ((t && m.get(t.slice(3, 8))) || 10)), (r += +n), r;
 }
 function y(e) {
-  return "-" + e.toLowerCase();
+  return '-' + e.toLowerCase();
 }
 function b() {
   let a, h, m, b;
   function w() {
     if (!a || !h || !m)
       throw new Error(
-        "On a custom otion instance, `setup()` must be called before usage."
+        'On a custom otion instance, `setup()` must be called before usage.'
       );
   }
   function $(e) {
@@ -123,15 +123,15 @@ function b() {
     } else x(e.cssRules[0], !0);
   }
   function A(e, t) {
-    const n = "number" != typeof t || p.test(e) ? d("" + t) : t + "px";
+    const n = 'number' != typeof t || p.test(e) ? d('' + t) : t + 'px';
     return h(e, n);
   }
   function k(e, t) {
-    if ("object" != typeof t) return A(e, t);
-    let n = "";
+    if ('object' != typeof t) return A(e, t);
+    let n = '';
     return (
       t.forEach((t) => {
-        t && (n += ";" + A(e, t));
+        t && (n += ';' + A(e, t));
       }),
       n.slice(1)
     );
@@ -144,7 +144,7 @@ function b() {
           ((e, c) => {
             const i = `${e}:${(function (e, t) {
               return s.test(e)
-                ? t.replace(/(sticky|text)/, "-webkit-$1, $1")
+                ? t.replace(/(sticky|text)/, '-webkit-$1, $1')
                 : t;
             })(e, c)}`;
             let a = i;
@@ -154,9 +154,9 @@ function b() {
                 : (o[e] = (1 * t.test(e)) | (2 * n.test(e)) | (4 * r.test(e)));
             })(e);
             return (
-              1 & l && (a += ";-ms-" + i),
-              2 & l && (a += ";-moz-" + i),
-              4 & l && (a += ";-webkit-" + i),
+              1 & l && (a += ';-ms-' + i),
+              2 & l && (a += ';-moz-' + i),
+              4 & l && (a += ';-webkit-' + i),
               a
             );
           })),
@@ -174,25 +174,25 @@ function b() {
     css: (t) => (
       i && w(),
       (function t(n, r, s, o, c) {
-        let i = "";
+        let i = '';
         for (var l in n) {
           const u = n[l];
           if (null != u)
-            if ("object" != typeof u || Array.isArray(u)) {
+            if ('object' != typeof u || Array.isArray(u)) {
               const t = l.replace(/^ms|[A-Z]/g, y),
                 n = k(t, u),
-                f = "_" + e(r + n),
+                f = '_' + e(r + n),
                 d = s;
               let p = m.get(f);
               if (null == p || d) {
-                const e = g(t, null == c ? "" : r.slice(c), !!d);
+                const e = g(t, null == c ? '' : r.slice(c), !!d);
                 if (null == p || o[e] > p) {
-                  const t = "." + f;
+                  const t = '.' + f;
                   a.insert(
                     `${
                       r.slice(0, c) +
                       t +
-                      (null != c ? r.slice(c).replace(/&/g, t) + "{" : "{")
+                      (null != c ? r.slice(c).replace(/&/g, t) + '{' : '{')
                     }${n}}${s}`,
                     b[e]
                   ),
@@ -202,31 +202,31 @@ function b() {
                     d && (o[e] = Math.max(o[e], p));
                 }
               }
-              i += " " + f;
+              i += ' ' + f;
             } else {
               let e,
                 n =
-                  ":" === l[0] || "@" === l[0] || "&" === l[0]
+                  ':' === l[0] || '@' === l[0] || '&' === l[0]
                     ? l
-                    : d(l).replace(/([([]) | ([)\]])| ?(:) ?/g, "$1$2$3"),
-                a = "",
+                    : d(l).replace(/([([]) | ([)\]])| ?(:) ?/g, '$1$2$3'),
+                a = '',
                 f = c;
               null == f &&
-                (":" === n[0] || "&" === n[0]
+                (':' === n[0] || '&' === n[0]
                   ? ((f = r.length),
                     (e = n
                       .split(/,(?![^[]*?[^\\]["']\s*?\])/)
-                      .map((e) => d(e).replace("&", ""))))
-                  : "selectors" === n
-                  ? (n = "")
-                  : "@" !== n[0] && ((n += "{"), (a = "}"))),
+                      .map((e) => d(e).replace('&', ''))))
+                  : 'selectors' === n
+                  ? (n = '')
+                  : '@' !== n[0] && ((n += '{'), (a = '}'))),
                 (e || [n]).forEach((e) => {
                   i += t(u, r + e, a + s, o, f);
                 });
             }
         }
         return i;
-      })(t, "", "", new Uint16Array(72)).slice(1)
+      })(t, '', '', new Uint16Array(72)).slice(1)
     ),
     keyframes(t) {
       let n;
@@ -235,17 +235,17 @@ function b() {
         {
           toString() {
             if (!n) {
-              let o = "";
+              let o = '';
               for (var r in t) {
-                o += r + "{";
+                o += r + '{';
                 const e = t[r];
                 for (var s in e) {
                   const t = e[s];
                   null != t && (o += k(s, t));
                 }
-                o += "}";
+                o += '}';
               }
-              (n = "_" + e(o)),
+              (n = '_' + e(o)),
                 m.has(n) ||
                   (a.insert(`@keyframes ${n}{${o}}`, m.size), m.set(n, m.size));
             }

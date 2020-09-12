@@ -1,25 +1,25 @@
-import translate from "./core/translate.mjs";
-import defaultTheme from "./core/theme.mjs";
-import merge from "./util/merge.mjs";
-import { css } from "./util/otion.mjs";
+import translate from './core/translate.mjs';
+import defaultTheme from './core/theme.mjs';
+import merge from './util/merge.mjs';
+import { css } from './util/otion.mjs';
 
-export { setup, hydrate } from "./util/otion.mjs";
+export { setup, hydrate } from './util/otion.mjs';
 
 export const process = (theme) => ([rules]) => {
   // Keep track of processed rules
   const seen = {};
   // Go through each rule in the array and translate to css
   const styles = rules
-    .replace(/\s\s+/g, " ")
+    .replace(/\s\s+/g, ' ')
     .trim()
-    .split(" ")
+    .split(' ')
     .map((rule) => {
       // Warn about any duplicate rule declarations
       if (seen[rule]) console.warn(`Duplicate delclaration of ${rule}`);
       // Mark rule as seen
       seen[rule] = true;
       // Split the rule into parts
-      rule = rule.split(":");
+      rule = rule.split(':');
       // Seperate out directive from variants
       let directive = rule.pop();
       let variants = rule;
@@ -34,7 +34,7 @@ export const process = (theme) => ([rules]) => {
         let size = theme.screen[variant];
         if (size) {
           translation = {
-            "@media": { [`(min-width: ${size})`]: translation },
+            '@media': { [`(min-width: ${size})`]: translation },
           };
         } else translation = { [`:${variant}`]: translation };
       });
