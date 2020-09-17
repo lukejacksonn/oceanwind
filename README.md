@@ -99,11 +99,7 @@ Oceanwind supports SSR through Otion. Consider the following example:
 import { h } from 'preact';
 import render from 'preact-render-to-string';
 import htm from 'htm';
-import {
-  filterOutUnusedRules,
-  getStyleTag,
-  VirtualInjector
-} from "otion/server";
+import { getStyleTag, VirtualInjector } from 'otion/server';
 import { setup, themed } from 'oceanwind';
 
 const injector = VirtualInjector();
@@ -115,14 +111,14 @@ const style = {
   main: ow`clearfix`,
 };
 
-const app = html`<main className=${style.main}>hello oceanwind</main>`
-const appHtml = render(app)
-const styleTag = getStyleTag(filterOutUnusedRules(injector, appHtml))
+const app = html`<main className=${style.main}>hello oceanwind</main>`;
+const appHtml = render(app);
+const styleTag = getStyleTag(injector);
 
-// Inject styleTag to your HTML now. 
+// Inject styleTag to your HTML now.
 ```
 
-Oceanwind exposes `hydrate` from Otion for the client-side.
+Oceanwind also exposes `hydrate` from Otion for client-side hydration.
 
 [See Otion documentation](https://www.npmjs.com/package/otion#server-side-rendering) for further configuration options and usage instructions.
 
