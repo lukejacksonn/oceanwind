@@ -58,8 +58,11 @@ const style = {
     cursor-pointer`,
 };
 
+// I have to prettier ignore this because for some reason
+// adding a space before the html call prevents syntax highlighting
+// in my editor https://github.com/mjbvz/vscode-lit-html/issues/82
 // prettier-ignore
-const app = html`
+const app =html`
 <main className=${style.main}>
   <div className=${style.card}>
     <img
@@ -82,8 +85,7 @@ const app = html`
       </div>
       <form className=${ow`flex flex-row space-x-4`}>
         <input
-          className=${ow
-  `w-full py-3 px-4 bg-gray-100 border-1 border-gray-300 rounded sm:focus:bg-gray-100 sm:focus:placeholder-current`}
+          className=${ow`w-full py-3 px-4 bg-gray-100 border-1 border-gray-300 rounded sm:focus:bg-gray-100 sm:focus:placeholder-current`}
           placeholder="Enter a value"
         />
         <button className=${ow`px-6 rounded bg-current font-bold`}>
@@ -92,8 +94,7 @@ const app = html`
       </form>
     </div>
     <div
-      className=${ow
-  `px-6 py-4 bg-gray-100 border-t-1 border-gray-300 border-solid space-x-2`}
+      className=${ow`px-6 py-4 bg-gray-100 border-t-1 border-gray-300 border-solid space-x-2`}
     >
       <div className=${style.tag}>
         <span>#photography</span>
@@ -108,8 +109,7 @@ const app = html`
   </div>
 </main>
 <main className=${ow`mx-auto px-10 py-10 sm:py-16 md:py-24 lg:py-32 xl:py-48`}>
-  <article className="prose prose-sm sm:prose lg:prose-lg xl:prose-2xl ${ow
-  `mx-auto`}">
+  <article className="prose prose-sm sm:prose lg:prose-lg xl:prose-2xl ${ow`mx-auto`}">
     <p class="lead">
       Until now, trying to style an article, document, or blog post with
       Tailwind has been a tedious task that required a keen eye for
