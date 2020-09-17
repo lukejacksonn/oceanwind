@@ -281,7 +281,7 @@ export default (theme) => (str) => {
             default:
               (x = theme.text[i[1]])
                 ? (out['font-size'] = x)
-                : (out['color'] = i[1]);
+                : (out['color'] = theme.colors[i[1]] || i[1]);
               break;
           }
           break;
@@ -349,7 +349,7 @@ export default (theme) => (str) => {
               out['background-color'] = 'currentColor';
               break;
             default:
-              out['background-color'] = i[1];
+              out['background-color'] = theme.colors[i[1]] || i[1];
               break;
           }
           break;
@@ -374,7 +374,7 @@ export default (theme) => (str) => {
             default:
               (x = theme.border[i[1]])
                 ? (out[i[0] + '-width'] = x)
-                : (out[i[0] + '-color'] = i[1]);
+                : (out[i[0] + '-color'] = theme.colors[i[1]] || i[1]);
               break;
           }
           break;

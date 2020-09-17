@@ -7,4 +7,6 @@ setup({ injector });
 const ow = themed({});
 ow`clearfix`;
 
-console.log('Generated a style tag', getStyleTag(injector));
+getStyleTag(injector).match('clear:both')
+  ? console.log('✅ Working with SSR')
+  : console.error('❌ Not Working with SSR');

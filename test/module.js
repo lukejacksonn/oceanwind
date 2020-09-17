@@ -1,4 +1,5 @@
 import theme from '../theme.js';
+import merge from '../util/merge.js';
 import { process } from '../index.js';
 
 const cases = {
@@ -62,9 +63,7 @@ const cases = {
       'background-color, border-color, color, fill, stroke, opacity, box-shadow, transform',
   },
 
-  resize: {
-    resize: 'both',
-  },
+  resize: { resize: 'both' },
 
   'table-auto': { 'table-layout': 'auto' },
   'table-fixed': { 'table-layout': 'fixed' },
@@ -131,7 +130,8 @@ const cases = {
 
   'text-xs': { 'font-size': theme.text['xs'] },
 
-  'text-orange': { color: 'orange' },
+  'text-rebeccapurple': { color: 'rebeccapurple' },
+  'text-primary': { color: 'orange' },
 
   'subpixel-antialiased': {
     '-webkit-font-smoothing': 'auto',
@@ -161,6 +161,8 @@ const cases = {
   'bg-auto': { 'background-size': 'auto' },
   'bg-current': { 'background-color': 'currentColor' },
   'bg-rebeccapurple': { 'background-color': 'rebeccapurple' },
+  'bg-primary': { 'background-color': 'orange' },
+  'bg-red-999': { 'background-color': 'hotpink' },
 
   'border-solid': { 'border-style': 'solid' },
   'border-collapse': { 'border-collapse': 'collapse' },
@@ -255,21 +257,10 @@ const cases = {
     'padding-bottom': theme.unit['0'],
   },
 
-  'pt-0': {
-    'padding-top': theme.unit['0'],
-  },
-
-  'pr-0': {
-    'padding-right': theme.unit['0'],
-  },
-
-  'pb-0': {
-    'padding-bottom': theme.unit['0'],
-  },
-
-  'pl-0': {
-    'padding-left': theme.unit['0'],
-  },
+  'pt-0': { 'padding-top': theme.unit['0'] },
+  'pr-0': { 'padding-right': theme.unit['0'] },
+  'pb-0': { 'padding-bottom': theme.unit['0'] },
+  'pl-0': { 'padding-left': theme.unit['0'] },
 
   'm-0': { margin: theme.unit['0'] },
   'm-1': { margin: theme.unit['1'] },
@@ -285,21 +276,10 @@ const cases = {
     'margin-bottom': theme.unit['0'],
   },
 
-  'mt-0': {
-    'margin-top': theme.unit['0'],
-  },
-
-  'mr-0': {
-    'margin-right': theme.unit['0'],
-  },
-
-  'mb-0': {
-    'margin-bottom': theme.unit['0'],
-  },
-
-  'ml-0': {
-    'margin-left': theme.unit['0'],
-  },
+  'mt-0': { 'margin-top': theme.unit['0'] },
+  'mr-0': { 'margin-right': theme.unit['0'] },
+  'mb-0': { 'margin-bottom': theme.unit['0'] },
+  'ml-0': { 'margin-left': theme.unit['0'] },
 
   'font-sans': { 'font-family': theme.font['sans'] },
   'font-hairline': { 'font-weight': theme.weight['hairline'] },
@@ -479,6 +459,8 @@ const cases = {
   'border-l-1': { 'border-left-width': theme.border['1'] },
 
   'border-red-500': { 'border-color': theme.colors['red']['500'] },
+  'border-primary': { 'border-color': 'orange' },
+  'border-red-999': { 'border-color': 'hotpink' },
 
   'scale-x-50': { transform: `scaleX(${theme.scale['50']})` },
   'scale-y-50': { transform: `scaleY(${theme.scale['50']})` },
@@ -545,6 +527,12 @@ const cases = {
   'placeholder-red-500': {
     '::placeholder': { color: theme.colors['red']['500'] },
   },
+  'placeholder-primary': {
+    '::placeholder': { color: 'orange' },
+  },
+  'placeholder-red-999': {
+    '::placeholder': { color: 'hotpink' },
+  },
 
   'divide-x': { selectors: { '& > * + *': { 'border-left-width': '1px' } } },
   'divide-x-0': { selectors: { '& > * + *': { 'border-left-width': '0' } } },
@@ -565,34 +553,33 @@ const cases = {
   },
 };
 
+const themed = process(
+  merge(theme, {
+    colors: {
+      primary: 'orange',
+      red: {
+        999: 'hotpink',
+      },
+    },
+  })
+);
+
 const test = Object.entries(cases).reduce(
   (a, [i, o]) => ({
     ...a,
     [i]: {
       input: i,
       expected: o,
-      actual: process(theme)([i]),
-      passed: JSON.stringify(process(theme)([i])) === JSON.stringify(o),
+      actual: themed([i]),
+      passed: JSON.stringify(themed([i])) === JSON.stringify(o),
     },
   }),
   {}
 );
 
-console.log({
-  failed: Object.values(test).filter((x) => !x.passed),
-  passed: Object.values(test).filter((x) => x.passed),
-});
+const failed = Object.values(test).filter((x) => !x.passed);
+const passed = Object.values(test).filter((x) => x.passed);
 
-const themed = process({
-  colors: {
-    red: {
-      500: 'hotpink',
-    },
-  },
-});
-
-console.log({
-  themed:
-    JSON.stringify(themed`bg-red-500`) ===
-    JSON.stringify({ 'background-color': 'hotpink' }),
-});
+failed.length > 0
+  ? console.error('❌ Tests Failing', failed)
+  : console.log('✅ Tests Passing', passed.length);
