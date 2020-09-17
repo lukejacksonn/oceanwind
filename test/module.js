@@ -1,4 +1,4 @@
-import theme from '../core/theme.js';
+import theme from '../theme.js';
 import { process } from '../index.js';
 
 const cases = {

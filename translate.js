@@ -1,5 +1,5 @@
-import capsize from '../util/capsize.mjs';
-import dfont from '../util/dfont.mjs';
+import capsize from './util/capsize.js';
+import dfont from './util/dfont.js';
 
 export default (theme) => (str) => {
   let x;
