@@ -20,7 +20,7 @@ The aim here was to create an interpretter and compiler that:
 - Has desirable perf characteristics at runtime (requires no build step or bundling)
 - Warns developers when unrecognized or duplicate shorthands are used
 
-The library currently weighs 7.8KB gzipped (7.2KB compressed using brotli) and supports the vast majority of Tailwind directives and variants.
+The library currently weighs 8KB gzipped (7.7KB compressed using brotli) and supports the vast majority of Tailwind directives and variants.
 
 It also extends the API slightly in some cases; one example of this is an experimental shorthand `cap-<fontSize>-<lineGap>` which aims to replicate the behaviour exhibited by the library [capsize](https://github.com/seek-oss/capsize) on text elements.
 
