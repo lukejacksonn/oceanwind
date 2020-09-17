@@ -58,6 +58,9 @@ const style = {
     cursor-pointer`,
 };
 
+// I have to prettier ignore this because for some reason
+// adding a space before the html call prevents syntax highlighting
+// in my editor https://github.com/mjbvz/vscode-lit-html/issues/82
 // prettier-ignore
 const app =html`
 <main className=${style.main}>
@@ -165,7 +168,7 @@ const app =html`
 </code></pre>
     <p>
       For more information about how to use the plugin and the features it
-      includes,${' '}
+      includes,${" "}
       <a
         href="https://github.com/tailwindcss/typography/blob/master/README.md"
         >read the documentation</a
@@ -414,7 +417,7 @@ plugins: [],
     <p>And finally a sentence to close off this section.</p>
     <h2>There are other elements we need to style</h2>
     <p>
-      I almost forgot to mention links, like${' '}
+      I almost forgot to mention links, like${" "}
       <a href="https://tailwindcss.com"
         >this link to the Tailwind CSS website</a
       >. We almost made them blue but that's so yesterday, so we went with

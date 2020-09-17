@@ -91,6 +91,37 @@ render(
 
 > ⚡️ Check out the [live and interactive demo](https://esm.codes/#Ly8gT2NlYW53aW5kIGRlbW8gYnkgQGx1a2VqYWNrc29ubgovLyAtLS0tLS0tLS0tLS0tLS0tCiAgICAKaW1wb3J0IHsgcmVuZGVyLCBoIH0gZnJvbSAnaHR0cHM6Ly91bnBrZy5jb20vcHJlYWN0P21vZHVsZSc7CmltcG9ydCBodG0gZnJvbSAnaHR0cHM6Ly91bnBrZy5jb20vaHRtP21vZHVsZSc7CmltcG9ydCBvdyBmcm9tICdodHRwczovL3VucGtnLmNvbS9vY2VhbndpbmQnOwoKY29uc3QgaHRtbCA9IGh0bS5iaW5kKGgpOwoKcmVuZGVyKAogIGh0bWxgCiAgICA8ZGl2IGNsYXNzTmFtZT0ke293YAogICAgICBoLWZ1bGwKICAgICAgYmctcHVycGxlLTUwMAogICAgICBmbGV4CiAgICAgIGl0ZW1zLWNlbnRlcgogICAgICBqdXN0aWZ5LWNlbnRlcgogICAgYH0+CiAgICAgIDxoMSBjbGFzc05hbWU9JHtvd2AKICAgICAgICB0ZXh0LXdoaXRlCiAgICAgICAgZm9udC1ib2xkCiAgICAgICAgZm9udC1zYW5zCiAgICAgICAgaG92ZXI6cm90YXRlLTMKICAgICAgICBob3ZlcjpzY2FsZS0xNTAKICAgICAgICBob3ZlcjpjdXJzb3ItcG9pbnRlcgogICAgICBgfT5IZWxsbyBXb3JsZDwvaDE+CiAgICA8L2Rpdj4KICBgLAogIGRvY3VtZW50LmJvZHkKKTs=)
 
+## Server-side rendering (SSR)
+
+Oceanwind supports SSR through Otion. Consider the following example:
+
+```js
+import { h } from 'preact';
+import render from 'preact-render-to-string';
+import htm from 'htm';
+import { getStyleTag, VirtualInjector } from 'otion/server';
+import { setup, themed } from 'oceanwind';
+
+const injector = VirtualInjector();
+setup({ injector });
+
+const html = htm.bind(h);
+const ow = themed({});
+const style = {
+  main: ow`clearfix`,
+};
+
+const app = html`<main className=${style.main}>hello oceanwind</main>`;
+const appHtml = render(app);
+const styleTag = getStyleTag(injector);
+
+// Inject styleTag to your HTML now.
+```
+
+Oceanwind also exposes `hydrate` from Otion for client-side hydration.
+
+[See Otion documentation](https://www.npmjs.com/package/otion#server-side-rendering) for further configuration options and usage instructions.
+
 ## Acknowledgements
 
 I'd like to thank both [Adam Wathan](https://github.com/adamwathan) and [Kristóf Poduszló](https://github.com/kripod) for their amazing work with Tailwind and Otion respectively, which made making this library somewhat a breeze. Also [Phil Pluckthun](https://github.com/kitten) who helped me deduce the initial grammar.

@@ -1,0 +1,7 @@
+{
+  "name": "oceanwind-ssr",
+  "type": "module",
+  "dependencies": {
+    "otion": "^0.6.2"
+  }
+}

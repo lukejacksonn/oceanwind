@@ -1,7 +1,9 @@
-import translate from './core/translate.js';
-import defaultTheme from './core/theme.js';
+import translate from './translate.js';
+import defaultTheme from './theme.js';
 import merge from './util/merge.js';
 import { css } from './util/otion.js';
+
+export { setup, hydrate } from './util/otion.js';
 
 export const process = (theme) => ([rules]) => {
   // Keep track of processed rules
@@ -24,14 +26,17 @@ export const process = (theme) => ([rules]) => {
       // Lookup translation for directive
       let translation = translate(theme)(directive);
       // Warn if there was no translation for the given directive
-      if (!Object.keys(translation)[0])
+      if (!Object.keys(translation)[0]) {
         console.warn(`No translation for ${directive}`);
+      }
       // Apply variants to the translation
       variants.reverse().forEach((variant) => {
         let size = theme.screen[variant];
-        if (size)
-          translation = { '@media': { [`(min-width: ${size})`]: translation } };
-        else translation = { [`:${variant}`]: translation };
+        if (size) {
+          translation = {
+            '@media': { [`(min-width: ${size})`]: translation },
+          };
+        } else translation = { [`:${variant}`]: translation };
       });
       // Return translation with variants applied
       return translation;
