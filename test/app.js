@@ -11,6 +11,9 @@ const ow = themed({
       800: 'hotpink',
     },
   },
+  borderRadius: {
+    '2xl': '2rem',
+  },
 });
 
 const style = {
@@ -94,7 +97,7 @@ const app =html`
       </form>
     </div>
     <div
-      className=${ow`px-6 py-4 bg-gray-100 border-t-1 border-gray-300 border-solid space-x-2`}
+      className=${ow`px-6 py-4 bg-gray-100 border-t border-gray-300 border-solid space-x-2`}
     >
       <div className=${style.tag}>
         <span>#photography</span>

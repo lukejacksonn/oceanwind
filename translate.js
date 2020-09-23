@@ -69,7 +69,7 @@ export default (theme) => (str) => {
           out[i[0]] = 'both';
           break;
         case 'rounded':
-          out['border-radius'] = theme.rounded[''];
+          out['border-radius'] = theme.borderRadius[''];
           break;
         case 'clearfix':
           out['::after'] = {
@@ -77,6 +77,9 @@ export default (theme) => (str) => {
             display: 'table',
             clear: 'both',
           };
+          break;
+        case 'border':
+          out['border-width'] = theme.borderWidth['default'];
           break;
       }
       break;
@@ -151,21 +154,17 @@ export default (theme) => (str) => {
             case 'wrap':
               out[`${i[0]}-${i[1]}`] = i[1];
               break;
-            case 'initial':
-              out[i[0]] = '0 1 auto';
-              break;
             case '1':
-              out[i[0]] = '1 1 0%';
-              break;
             case 'auto':
-              out[i[0]] = `1 1 ${i[1]}`;
-              break;
+            case 'initial':
             case 'none':
-              out[i[0]] = i[1];
+              out[i[0]] = theme.flex[i[1]];
               break;
             case 'grow':
+              out[`${i[0]}-${i[1]}`] = theme.flexGrow['default'];
+              break;
             case 'shrink':
-              out[`${i[0]}-${i[1]}`] = '1';
+              out[`${i[0]}-${i[1]}`] = theme.flexShrink['default'];
               break;
           }
           break;
@@ -244,28 +243,10 @@ export default (theme) => (str) => {
           i[1] === 'auto' && (out['grid-row'] = i[1]);
           break;
         case 'w':
-          switch (i[1]) {
-            case 'screen':
-              out['width'] = '100vw';
-              break;
-            default:
-              (x = theme.unit[i[1]])
-                ? (out['width'] = x)
-                : (out['width'] = `calc(${i[1]} * 100%)`);
-              break;
-          }
+          (x = theme.width[i[1]]) && (out['width'] = x);
           break;
         case 'h':
-          switch (i[1]) {
-            case 'screen':
-              out['height'] = '100vh';
-              break;
-            default:
-              (x = theme.unit[i[1]])
-                ? (out['height'] = x)
-                : (out['height'] = `calc(${i[1]} * 100%)`);
-              break;
-          }
+          (x = theme.height[i[1]]) && (out['height'] = x);
           break;
         case 'text':
           switch (i[1]) {
@@ -279,9 +260,9 @@ export default (theme) => (str) => {
               out['color'] = 'currentColor';
               break;
             default:
-              (x = theme.text[i[1]])
+              (x = theme.fontSize[i[1]])
                 ? (out['font-size'] = x)
-                : (out['color'] = theme.colors[i[1]] || i[1]);
+                : (out['color'] = theme.colors[i[1]]);
               break;
           }
           break;
@@ -349,12 +330,24 @@ export default (theme) => (str) => {
               out['background-color'] = 'currentColor';
               break;
             default:
-              out['background-color'] = theme.colors[i[1]] || i[1];
+              out['background-color'] = theme.colors[i[1]];
               break;
           }
           break;
         case 'border':
           switch (i[1]) {
+            case 't':
+              out[i[0] + '-top-width'] = theme.borderWidth['default'];
+              break;
+            case 'r':
+              out[i[0] + '-right-width'] = theme.borderWidth['default'];
+              break;
+            case 'b':
+              out[i[0] + '-bottom-width'] = theme.borderWidth['default'];
+              break;
+            case 'l':
+              out[i[0] + '-left-width'] = theme.borderWidth['default'];
+              break;
             case 'solid':
             case 'dashed':
             case 'dotted':
@@ -372,51 +365,24 @@ export default (theme) => (str) => {
               out[`${i[0]}-color`] = 'currentColor';
               break;
             default:
-              (x = theme.border[i[1]])
+              (x = theme.borderWidth[i[1]])
                 ? (out[i[0] + '-width'] = x)
-                : (out[i[0] + '-color'] = theme.colors[i[1]] || i[1]);
+                : (out[i[0] + '-color'] = theme.colors[i[1]]);
               break;
           }
           break;
         case 'shadow':
-          switch (i[1]) {
-            case 'none':
-              out[`box-${i[0]}`] = 'none';
-              break;
-            default:
-              out['box-shadow'] = theme.shadow[i[1]] || i[1];
-              break;
-          }
+          (x = theme.boxShadow[i[1]]) && (out['box-shadow'] = x);
           break;
         case 'opacity':
-          out[i[0]] = '100' === i[1] ? '1' : `0.${i[1]}`;
+          (x = theme.opacity[i[1]]) && (out['opacity'] = x);
           break;
         case 'transition':
-          switch (i[1]) {
-            case 'colors':
-              out[`${i[0]}-property`] =
-                'background-color, border-color, color, fill, stroke';
-              break;
-            case 'shadow':
-              out[`${i[0]}-property`] = 'box-shadow';
-              break;
-            default:
-              out[`${i[0]}-property`] = i[1];
-              break;
-          }
+          out[`${i[0]}-property`] = theme.transitionProperty[i[1]];
           break;
         case 'ease':
-          switch (i[1]) {
-            case 'linear':
-              out['transition-timing-function'] = 'linear';
-              break;
-            case 'in':
-              out['transition-timing-function'] = 'cubic-bezier(0.4, 0, 1, 1)';
-              break;
-            case 'out':
-              out['transition-timing-function'] = 'cubic-bezier(0, 0, 0.2, 1)';
-              break;
-          }
+          (x = theme.transitionTimingFunction[i[1]]) &&
+            (out['transition-timing-function'] = x);
           break;
         case 'appearance':
           'none' === i[1] && (out[i[0]] = i[1]);
@@ -438,12 +404,12 @@ export default (theme) => (str) => {
           }
           break;
         case 'fill':
-          'current' === i[1] && (out['fill'] = 'currentColor');
+          'current' === i[1] && (out['fill'] = theme.fill[i[1]]);
           break;
         case 'stroke':
           'current' === i[1]
-            ? (out['stroke'] = 'currentColor')
-            : (out['stroke-width'] = i[1]);
+            ? (out['stroke'] = theme.stroke['current'])
+            : (out['stroke-width'] = theme.strokeWidth[i[1]]);
           break;
         case 'sr':
           'only' === i[1] &&
@@ -469,68 +435,68 @@ export default (theme) => (str) => {
           out[`-webkit-overflow-${i[0]}`] = i[1];
           break;
         case 'z':
-          out['z-index'] = i[1];
+          out['z-index'] = theme.zIndex[i[1]];
           break;
         case 'gap':
-          (x = theme.unit[i[1]]) && (out['gap'] = x);
+          (x = theme.gap[i[1]]) && (out['gap'] = x);
           break;
         case 'p':
-          (x = theme.unit[i[1]]) && (out['padding'] = x);
+          (x = theme.padding[i[1]]) && (out['padding'] = x);
           break;
         case 'py':
-          (x = theme.unit[i[1]]) &&
+          (x = theme.padding[i[1]]) &&
             ((out['padding-top'] = x), (out['padding-bottom'] = x));
           break;
         case 'px':
-          (x = theme.unit[i[1]]) &&
+          (x = theme.padding[i[1]]) &&
             ((out['padding-left'] = x), (out['padding-right'] = x));
           break;
         case 'pt':
-          (x = theme.unit[i[1]]) && (out['padding-top'] = x);
+          (x = theme.padding[i[1]]) && (out['padding-top'] = x);
           break;
         case 'pr':
-          (x = theme.unit[i[1]]) && (out['padding-right'] = x);
+          (x = theme.padding[i[1]]) && (out['padding-right'] = x);
           break;
         case 'pb':
-          (x = theme.unit[i[1]]) && (out['padding-bottom'] = x);
+          (x = theme.padding[i[1]]) && (out['padding-bottom'] = x);
           break;
         case 'pl':
-          (x = theme.unit[i[1]]) && (out['padding-left'] = x);
+          (x = theme.padding[i[1]]) && (out['padding-left'] = x);
           break;
         case 'm':
-          (x = theme.unit[i[1]]) && (out['margin'] = `${n}${x}`);
+          (x = theme.margin[i[1]]) && (out['margin'] = `${n}${x}`);
           break;
         case 'my':
-          (x = theme.unit[i[1]]) &&
+          (x = theme.margin[i[1]]) &&
             ((out['margin-top'] = `${n}${x}`),
             (out['margin-bottom'] = `${n}${x}`));
           break;
         case 'mx':
-          (x = theme.unit[i[1]]) &&
+          (x = theme.margin[i[1]]) &&
             ((out['margin-left'] = `${n}${x}`),
             (out['margin-right'] = `${n}${x}`));
           break;
         case 'mt':
-          (x = theme.unit[i[1]]) && (out['margin-top'] = `${n}${x}`);
+          (x = theme.margin[i[1]]) && (out['margin-top'] = `${n}${x}`);
           break;
         case 'mr':
-          (x = theme.unit[i[1]]) && (out['margin-right'] = `${n}${x}`);
+          (x = theme.margin[i[1]]) && (out['margin-right'] = `${n}${x}`);
           break;
         case 'mb':
-          (x = theme.unit[i[1]]) && (out['margin-bottom'] = `${n}${x}`);
+          (x = theme.margin[i[1]]) && (out['margin-bottom'] = `${n}${x}`);
           break;
         case 'ml':
-          (x = theme.unit[i[1]]) && (out['margin-left'] = `${n}${x}`);
+          (x = theme.margin[i[1]]) && (out['margin-left'] = `${n}${x}`);
           break;
         case 'font':
-          if ((x = theme.font[i[1]])) out['font-family'] = x;
-          if ((x = theme.weight[i[1]])) out['font-weight'] = x;
+          if ((x = theme.fontFamily[i[1]])) out['font-family'] = x;
+          if ((x = theme.fontWeight[i[1]])) out['font-weight'] = x;
           break;
         case 'tracking':
-          (x = theme.tracking[i[1]]) && (out['letter-spacing'] = x);
+          (x = theme.letterSpacing[i[1]]) && (out['letter-spacing'] = x);
           break;
         case 'leading':
-          (x = theme.leading[i[1]]) && (out['line-height'] = x);
+          (x = theme.lineHeight[i[1]]) && (out['line-height'] = x);
           break;
         case 'align':
           out[`vertical-${i[0]}`] = i[1];
@@ -539,13 +505,13 @@ export default (theme) => (str) => {
           out['white-space'] = i[1];
           break;
         case 'rounded':
-          (x = theme.rounded[i[1]]) && (out['border-radius'] = x);
+          (x = theme.borderRadius[i[1]]) && (out['border-radius'] = x);
           break;
         case 'duration':
-          out[`transition-${i[0]}`] = `${theme.duration[i[1]]}ms`;
+          out[`transition-${i[0]}`] = `${theme.transitionDuration[i[1]]}`;
           break;
         case 'delay':
-          out['transition-delay'] = `${theme.duration[i[1]]}ms`;
+          out['transition-delay'] = `${theme.transitionDelay[i[1]]}`;
           break;
         case 'scale':
           out['transform'] = `scale(${theme.scale[i[1]]})`;
@@ -572,7 +538,7 @@ export default (theme) => (str) => {
               out['selectors'] = {
                 '& > * + *': {
                   [`border-${i[1] === 'x' ? 'left' : 'top'}-width`]: theme
-                    .border[''],
+                    .divideWidth['default'],
                 },
               };
               break;
@@ -601,7 +567,7 @@ export default (theme) => (str) => {
           out = capsize({
             capHeight: +i[1],
             lineGap: +i[2],
-            fontMetrics: theme.fontMetrics[dfont(theme.font.sans)],
+            fontMetrics: theme.fontMetrics[dfont(theme.fontFamily.sans)],
           });
           break;
         case 'divide':
@@ -611,7 +577,7 @@ export default (theme) => (str) => {
               out['selectors'] = {
                 '& > * + *': {
                   [`border-${i[1] === 'x' ? 'left' : 'top'}-width`]: theme
-                    .border[i[2]],
+                    .divideWidth[i[2]],
                 },
               };
               break;
@@ -625,7 +591,7 @@ export default (theme) => (str) => {
           }
           break;
         case 'placeholder':
-          out[`::${i[0]}`] = { color: theme.colors[i[1]][i[2]] };
+          out[`::${i[0]}`] = { color: theme.placeholderColor[i[1]][i[2]] };
           break;
         case 'table':
           out['display'] = `${i[0]}-${i[1]}-${i[2]}`;
@@ -714,27 +680,10 @@ export default (theme) => (str) => {
         case 'max':
           switch (i[1]) {
             case 'w':
-              switch (i[2]) {
-                case 'full':
-                  out['max-width'] = '100%';
-                  break;
-                case 'none':
-                  out['max-width'] = i[2];
-                  break;
-                default:
-                  (x = theme.width[i[2]]) && (out['max-width'] = x);
-                  break;
-              }
+              (x = theme.maxWidth[i[2]]) && (out['max-width'] = x);
               break;
             case 'h':
-              switch (i[2]) {
-                case 'full':
-                  out['max-height'] = '100%';
-                  break;
-                case 'screen':
-                  out['max-height'] = '100vh';
-                  break;
-              }
+              (x = theme.maxHeight[i[2]]) && (out['max-height'] = x);
               break;
           }
           break;
@@ -804,7 +753,7 @@ export default (theme) => (str) => {
               out[`grid-column-${i[1]}`] = i[2];
               break;
             case 'gap':
-              (x = theme.unit[i[2]]) && (out['column-gap'] = x);
+              (x = theme.spacing[i[2]]) && (out['column-gap'] = x);
               break;
           }
           break;
@@ -822,41 +771,43 @@ export default (theme) => (str) => {
         case 'rounded':
           switch (i[1]) {
             case 't':
-              if ((x = theme.rounded[i[2]])) {
+              if ((x = theme.borderRadius[i[2]])) {
                 out['border-top-left-radius'] = x;
                 out['border-top-right-radius'] = x;
               }
               break;
             case 'r':
-              if ((x = theme.rounded[i[2]])) {
+              if ((x = theme.borderRadius[i[2]])) {
                 out['border-top-right-radius'] = x;
                 out['border-bottom-right-radius'] = x;
               }
               break;
             case 'b':
-              if ((x = theme.rounded[i[2]])) {
+              if ((x = theme.borderRadius[i[2]])) {
                 out['border-bottom-left-radius'] = x;
                 out['border-bottom-right-radius'] = x;
               }
               break;
             case 'l':
-              if ((x = theme.rounded[i[2]])) {
+              if ((x = theme.borderRadius[i[2]])) {
                 out['border-top-left-radius'] = x;
                 out['border-bottom-left-radius'] = x;
               }
               break;
             case 'tl':
-              (x = theme.rounded[i[2]]) && (out['border-top-left-radius'] = x);
+              (x = theme.borderRadius[i[2]]) &&
+                (out['border-top-left-radius'] = x);
               break;
             case 'tr':
-              (x = theme.rounded[i[2]]) && (out['border-top-right-radius'] = x);
+              (x = theme.borderRadius[i[2]]) &&
+                (out['border-top-right-radius'] = x);
               break;
             case 'bl':
-              (x = theme.rounded[i[2]]) &&
+              (x = theme.borderRadius[i[2]]) &&
                 (out['border-bottom-left-radius'] = x);
               break;
             case 'br':
-              (x = theme.rounded[i[2]]) &&
+              (x = theme.borderRadius[i[2]]) &&
                 (out['border-bottom-right-radius'] = x);
               break;
           }
@@ -864,16 +815,17 @@ export default (theme) => (str) => {
         case 'border':
           switch (i[1]) {
             case 't':
-              (x = theme.border[i[2]]) && (out[`${i[0]}-top-width`] = x);
+              (x = theme.borderWidth[i[2]]) && (out[`${i[0]}-top-width`] = x);
               break;
             case 'r':
-              (x = theme.border[i[2]]) && (out[`${i[0]}-right-width`] = x);
+              (x = theme.borderWidth[i[2]]) && (out[`${i[0]}-right-width`] = x);
               break;
             case 'b':
-              (x = theme.border[i[2]]) && (out[`${i[0]}-bottom-width`] = x);
+              (x = theme.borderWidth[i[2]]) &&
+                (out[`${i[0]}-bottom-width`] = x);
               break;
             case 'l':
-              (x = theme.border[i[2]]) && (out[`${i[0]}-left-width`] = x);
+              (x = theme.borderWidth[i[2]]) && (out[`${i[0]}-left-width`] = x);
               break;
             default:
               theme.colors[i[1]] &&
@@ -886,7 +838,7 @@ export default (theme) => (str) => {
           out['transform'] = `scale${i[1].toUpperCase()}(${theme.scale[i[2]]})`;
           break;
         case 'translate':
-          (x = theme.unit[i[2]]) &&
+          (x = theme.spacing[i[2]]) &&
             (out['transform'] = `${i[0]}${i[1].toUpperCase()}(${n}${x})`);
           break;
         case 'skew':
@@ -914,7 +866,7 @@ export default (theme) => (str) => {
           out['selectors'] = {
             '& > * + *': {
               [`margin-${i[1] === 'x' ? 'left' : 'top'}`]: `${n}${
-                theme.unit[i[2]]
+                theme.margin[i[2]]
               }`,
             },
           };
@@ -931,7 +883,7 @@ export default (theme) => (str) => {
         case 'max':
           'w' === i[1] &&
             'screen' === i[2] &&
-            (x = theme.screen[i[3]]) &&
+            (x = theme.maxWidth[`screen-${i[3]}`]) &&
             (out['max-width'] = x);
           break;
       }
