@@ -69,7 +69,7 @@ export default (theme) => (str) => {
           out[i[0]] = 'both';
           break;
         case 'rounded':
-          out['border-radius'] = theme.borderRadius[''];
+          out['border-radius'] = theme.borderRadius['default'];
           break;
         case 'clearfix':
           out['::after'] = {
@@ -653,27 +653,10 @@ export default (theme) => (str) => {
         case 'min':
           switch (i[1]) {
             case 'w':
-              switch (i[2]) {
-                case '0':
-                  out['min-width'] = '0';
-                  break;
-                case 'full':
-                  out['min-width'] = '100%';
-                  break;
-              }
+              (x = theme.minWidth[i[2]]) && (out['min-width'] = x);
               break;
             case 'h':
-              switch (i[2]) {
-                case '0':
-                  out['min-height'] = '0';
-                  break;
-                case 'full':
-                  out['min-height'] = '100%';
-                  break;
-                case 'screen':
-                  out['min-height'] = '100vh';
-                  break;
-              }
+              (x = theme.minHeight[i[2]]) && (out['min-height'] = x);
               break;
           }
           break;

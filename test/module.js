@@ -126,11 +126,11 @@ const cases = {
 
   'w-full': { width: '100%' },
   'w-screen': { width: '100vw' },
-  'w-1': { width: theme.spacing['1'] },
+  'w-1': { width: theme.width['1'] },
 
   'h-full': { height: '100%' },
   'h-screen': { height: '100vh' },
-  'h-1': { height: theme.spacing['1'] },
+  'h-1': { height: theme.height['1'] },
 
   'text-left': { 'text-align': 'left' },
   'text-right': { 'text-align': 'right' },
@@ -300,7 +300,7 @@ const cases = {
 
   'align-baseline': { 'vertical-align': 'baseline' },
 
-  rounded: { 'border-radius': theme.borderRadius[''] },
+  rounded: { 'border-radius': theme.borderRadius['default'] },
   'rounded-none': { 'border-radius': theme.borderRadius['none'] },
   'rounded-full': { 'border-radius': theme.borderRadius['full'] },
 
