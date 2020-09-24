@@ -21,7 +21,7 @@ const ow = themed({
 
 const style = {
   main: ow`
-    text-green-500
+    ${true ? 'text-green-500' : ''}
     sm:text-red-500
     md:text-purple-800
     bg-current
@@ -72,11 +72,15 @@ const app =html`
 <main className=${style.main}>
   <div className=${style.card}>
     <img
-      className=${ow`w-full`}
+      className=${ow('w-full')}
       src="https://source.unsplash.com/WLUHO9A_xik/1600x900"
       alt="Sunset in the mountains"
     />
+<<<<<<< HEAD
     <div className=${_ow`px-6 py-6 space-y-6`}>
+=======
+    <div className=${ow({ 'px-6': true, 'py-6': true, 'space-y-6': true })}>
+>>>>>>> Accept input as string, literal or object
       <div className=${ow`font-bold`}>
         <h1 className=${ow`cap-24-20`}>
           The Coldest Sunset In The World

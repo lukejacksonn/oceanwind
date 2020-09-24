@@ -590,9 +590,36 @@ const test = Object.entries(cases).reduce((a, [i, o]) => {
   };
 }, {});
 
-const failed = Object.values(test).filter((x) => !x.passed);
-const passed = Object.values(test).filter((x) => x.passed);
+let failed = Object.values(test).filter((x) => !x.passed);
+let passed = Object.values(test).filter((x) => x.passed);
 
 failed.length > 0
-  ? console.error('❌ Tests Failing', failed)
-  : console.log('✅ Tests Passing', passed.length);
+  ? console.error('❌ Translations Failing', failed)
+  : console.log('✅ Translations Passing', passed.length);
+
+const expectedOutput = JSON.stringify({
+  padding: theme.padding['1'],
+  margin: theme.margin['1'],
+});
+
+const processString = process(theme)(['m-1 p-1']);
+const processLiteral = process(theme)`m-1 ${'p-1'}`;
+const processObject = process(theme)([
+  {
+    'm-1': true,
+    'p-1': false,
+  },
+]);
+
+const inputs = {
+  processString: JSON.stringify(processString) === expectedOutput,
+  processLiteral: JSON.stringify(processLiteral) === expectedOutput,
+  processObject: JSON.stringify(processObject) === expectedOutput,
+};
+
+failed = Object.values(inputs).filter((x) => false);
+passed = Object.values(inputs).filter((x) => true);
+
+failed.length > 0
+  ? console.error('❌ Inputs Failing', failed)
+  : console.log('✅ Inputs Passing', passed.length);
