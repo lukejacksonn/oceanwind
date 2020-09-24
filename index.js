@@ -1,5 +1,5 @@
 import translate from './translate.js';
-import defaultTheme from './theme.js';
+import defaultTheme, { globals } from './theme.js';
 import merge from './util/merge.js';
 import { css } from './util/otion.js';
 
@@ -31,7 +31,7 @@ export const process = (theme) => ([rules]) => {
       }
       // Apply variants to the translation
       variants.reverse().forEach((variant) => {
-        let size = theme.screen[variant];
+        let size = theme.screens[variant];
         if (size) {
           translation = {
             '@media': { [`(min-width: ${size})`]: translation },
@@ -45,9 +45,12 @@ export const process = (theme) => ([rules]) => {
   return merge(...styles);
 };
 
+export const configure = (input) =>
+  merge(defaultTheme(merge(globals, input)), input);
+
 // If passed a theme then return process primed with merged themes
 export const themed = (input) => {
-  const theme = merge(defaultTheme, input);
+  const theme = configure(input);
   return (input) => css(process(theme)(input));
 };
 

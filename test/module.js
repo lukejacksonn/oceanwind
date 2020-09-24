@@ -1,6 +1,19 @@
-import theme from '../theme.js';
-import merge from '../util/merge.js';
-import { process } from '../index.js';
+import { configure, process } from '../index.js';
+
+const theme = configure({
+  spacing: {
+    999: '999ex',
+  },
+  colors: {
+    primary: 'orange',
+    red: {
+      999: 'hotpink',
+    },
+  },
+  borderRadius: {
+    '2xl': '2rem',
+  },
+});
 
 const cases = {
   hidden: { display: 'none' },
@@ -113,13 +126,11 @@ const cases = {
 
   'w-full': { width: '100%' },
   'w-screen': { width: '100vw' },
-  'w-1': { width: theme.unit['1'] },
-  'w-99': { width: 'calc(99 * 100%)' },
+  'w-1': { width: theme.width['1'] },
 
   'h-full': { height: '100%' },
   'h-screen': { height: '100vh' },
-  'h-1': { height: theme.unit['1'] },
-  'h-99': { height: 'calc(99 * 100%)' },
+  'h-1': { height: theme.height['1'] },
 
   'text-left': { 'text-align': 'left' },
   'text-right': { 'text-align': 'right' },
@@ -128,9 +139,8 @@ const cases = {
 
   'text-current': { color: 'currentColor' },
 
-  'text-xs': { 'font-size': theme.text['xs'] },
+  'text-xs': { 'font-size': theme.fontSize['xs'] },
 
-  'text-rebeccapurple': { color: 'rebeccapurple' },
   'text-primary': { color: 'orange' },
 
   'subpixel-antialiased': {
@@ -160,7 +170,6 @@ const cases = {
   'bg-repeat': { 'background-repeat': 'repeat' },
   'bg-auto': { 'background-size': 'auto' },
   'bg-current': { 'background-color': 'currentColor' },
-  'bg-rebeccapurple': { 'background-color': 'rebeccapurple' },
   'bg-primary': { 'background-color': 'orange' },
   'bg-red-999': { 'background-color': 'hotpink' },
 
@@ -168,17 +177,14 @@ const cases = {
   'border-collapse': { 'border-collapse': 'collapse' },
   'border-separate': { 'border-collapse': 'separate' },
   'border-current': { 'border-color': 'currentColor' },
-  'border-1': { 'border-width': theme.border['1'] },
-  'border-hotpink': { 'border-color': 'hotpink' },
+  border: { 'border-width': theme.borderWidth['default'] },
 
   'shadow-none': { 'box-shadow': 'none' },
-  'shadow-xs': { 'box-shadow': theme.shadow['xs'] },
+  'shadow-xs': { 'box-shadow': theme.boxShadow['xs'] },
 
   'opacity-100': { opacity: '1' },
-  'opacity-50': { opacity: '0.50' },
-  'opacity-0': { opacity: '0.0' },
-
-  'opacity-69': { opacity: '0.69' },
+  'opacity-50': { opacity: '0.5' },
+  'opacity-0': { opacity: '0' },
 
   'transition-colors': {
     'transition-property':
@@ -239,66 +245,75 @@ const cases = {
   'z-auto': { 'z-index': 'auto' },
   'z-10': { 'z-index': '10' },
 
-  'gap-0': { gap: theme.unit['0'] },
-  'gap-1': { gap: theme.unit['1'] },
-  'gap-10': { gap: theme.unit['10'] },
+  'gap-0': { gap: theme.gap['0'] },
+  'gap-1': { gap: theme.gap['1'] },
+  'gap-10': { gap: theme.gap['10'] },
 
-  'p-0': { padding: theme.unit['0'] },
-  'p-1': { padding: theme.unit['1'] },
-  'p-10': { padding: theme.unit['10'] },
+  'p-0': { padding: theme.padding['0'] },
+  'p-1': { padding: theme.padding['1'] },
+  'p-10': { padding: theme.padding['10'] },
 
   'px-0': {
-    'padding-left': theme.unit['0'],
-    'padding-right': theme.unit['0'],
+    'padding-left': theme.padding['0'],
+    'padding-right': theme.padding['0'],
   },
 
   'py-0': {
-    'padding-top': theme.unit['0'],
-    'padding-bottom': theme.unit['0'],
+    'padding-top': theme.padding['0'],
+    'padding-bottom': theme.padding['0'],
   },
 
-  'pt-0': { 'padding-top': theme.unit['0'] },
-  'pr-0': { 'padding-right': theme.unit['0'] },
-  'pb-0': { 'padding-bottom': theme.unit['0'] },
-  'pl-0': { 'padding-left': theme.unit['0'] },
+  'pt-0': { 'padding-top': theme.padding['0'] },
+  'pr-0': { 'padding-right': theme.padding['0'] },
+  'pb-0': { 'padding-bottom': theme.padding['0'] },
+  'pl-0': { 'padding-left': theme.padding['0'] },
 
-  'm-0': { margin: theme.unit['0'] },
-  'm-1': { margin: theme.unit['1'] },
-  'm-10': { margin: theme.unit['10'] },
+  'm-0': { margin: theme.margin['0'] },
+  'm-1': { margin: theme.margin['1'] },
+  'm-10': { margin: theme.margin['10'] },
+
+  'm-auto': { margin: 'auto' },
 
   'mx-0': {
-    'margin-left': theme.unit['0'],
-    'margin-right': theme.unit['0'],
+    'margin-left': theme.margin['0'],
+    'margin-right': theme.margin['0'],
   },
 
   'my-0': {
-    'margin-top': theme.unit['0'],
-    'margin-bottom': theme.unit['0'],
+    'margin-top': theme.margin['0'],
+    'margin-bottom': theme.margin['0'],
   },
 
-  'mt-0': { 'margin-top': theme.unit['0'] },
-  'mr-0': { 'margin-right': theme.unit['0'] },
-  'mb-0': { 'margin-bottom': theme.unit['0'] },
-  'ml-0': { 'margin-left': theme.unit['0'] },
+  'mt-0': { 'margin-top': theme.margin['0'] },
+  'mr-0': { 'margin-right': theme.margin['0'] },
+  'mb-0': { 'margin-bottom': theme.margin['0'] },
+  'ml-0': { 'margin-left': theme.margin['0'] },
 
-  'font-sans': { 'font-family': theme.font['sans'] },
-  'font-hairline': { 'font-weight': theme.weight['hairline'] },
+  'font-sans': { 'font-family': theme.fontFamily['sans'] },
+  'font-hairline': { 'font-weight': theme.fontWeight['hairline'] },
 
-  'tracking-tighter': { 'letter-spacing': theme.tracking['tighter'] },
-  'tracking-widest': { 'letter-spacing': theme.tracking['widest'] },
+  'tracking-tighter': { 'letter-spacing': theme.letterSpacing['tighter'] },
+  'tracking-widest': { 'letter-spacing': theme.letterSpacing['widest'] },
 
-  'leading-3': { 'line-height': theme.leading['3'] },
-  'leading-tight': { 'line-height': theme.leading['tight'] },
+  'leading-3': { 'line-height': theme.lineHeight['3'] },
+  'leading-tight': { 'line-height': theme.lineHeight['tight'] },
 
   'align-baseline': { 'vertical-align': 'baseline' },
 
-  rounded: { 'border-radius': theme.rounded[''] },
-  'rounded-none': { 'border-radius': theme.rounded['none'] },
-  'rounded-full': { 'border-radius': theme.rounded['full'] },
+  rounded: { 'border-radius': theme.borderRadius['default'] },
+  'rounded-none': { 'border-radius': theme.borderRadius['none'] },
+  'rounded-full': { 'border-radius': theme.borderRadius['full'] },
 
-  'duration-75': { 'transition-duration': `${theme.duration['75']}ms` },
+  // 'rounded-b': {
+  //   'border-bottom-right-radius': theme.borderRadius['default'],
+  //   'border-bottom-left-radius': theme.borderRadius['default'],
+  // },
 
-  'delay-75': { 'transition-delay': `${theme.duration['75']}ms` },
+  'duration-75': {
+    'transition-duration': `${theme.transitionDuration['75']}`,
+  },
+
+  'delay-75': { 'transition-delay': `${theme.transitionDelay['75']}` },
 
   'scale-0': { transform: `scale(${theme.scale['0']})` },
   'scale-50': { transform: `scale(${theme.scale['50']})` },
@@ -354,7 +369,8 @@ const cases = {
 
   'max-w-none': { 'max-width': 'none' },
   'max-w-full': { 'max-width': '100%' },
-  'max-w-xs': { 'max-width': theme.width['xs'] },
+  'max-w-xs': { 'max-width': theme.maxWidth['xs'] },
+  'max-w-screen-sm': { 'max-width': theme.maxWidth['screen-sm'] },
 
   'max-h-full': { 'max-height': '100%' },
   'max-h-screen': { 'max-height': '100vh' },
@@ -401,8 +417,8 @@ const cases = {
   'col-end-1': { 'grid-column-end': '1' },
   'col-end-12': { 'grid-column-end': '12' },
 
-  'col-gap-1': { 'column-gap': theme.unit['1'] },
-  'col-gap-px': { 'column-gap': theme.unit['px'] },
+  'col-gap-1': { 'column-gap': theme.spacing['1'] },
+  'col-gap-px': { 'column-gap': theme.spacing['px'] },
 
   'row-span-1': { 'grid-row': 'span 1 / span 1' },
   'row-span-12': { 'grid-row': 'span 12 / span 12' },
@@ -413,50 +429,55 @@ const cases = {
   'row-end-1': { 'grid-row-end': '1' },
   'row-end-7': { 'grid-row-end': '7' },
 
-  '-m-0': { margin: `-${theme.unit['0']}` },
-  '-m-10': { margin: `-${theme.unit['10']}` },
-  '-m-px': { margin: `-${theme.unit['px']}` },
+  '-m-0': { margin: `-${theme.spacing['0']}` },
+  '-m-10': { margin: `-${theme.spacing['10']}` },
+  '-m-px': { margin: `-${theme.spacing['px']}` },
 
   'rounded-t-sm': {
-    'border-top-left-radius': theme.rounded['sm'],
-    'border-top-right-radius': theme.rounded['sm'],
+    'border-top-left-radius': theme.borderRadius['sm'],
+    'border-top-right-radius': theme.borderRadius['sm'],
   },
 
   'rounded-r-sm': {
-    'border-top-right-radius': theme.rounded['sm'],
-    'border-bottom-right-radius': theme.rounded['sm'],
+    'border-top-right-radius': theme.borderRadius['sm'],
+    'border-bottom-right-radius': theme.borderRadius['sm'],
   },
 
   'rounded-b-sm': {
-    'border-bottom-left-radius': theme.rounded['sm'],
-    'border-bottom-right-radius': theme.rounded['sm'],
+    'border-bottom-left-radius': theme.borderRadius['sm'],
+    'border-bottom-right-radius': theme.borderRadius['sm'],
   },
 
   'rounded-l-sm': {
-    'border-top-left-radius': theme.rounded['sm'],
-    'border-bottom-left-radius': theme.rounded['sm'],
+    'border-top-left-radius': theme.borderRadius['sm'],
+    'border-bottom-left-radius': theme.borderRadius['sm'],
   },
 
   'rounded-tl-sm': {
-    'border-top-left-radius': theme.rounded['sm'],
+    'border-top-left-radius': theme.borderRadius['sm'],
   },
 
   'rounded-tr-sm': {
-    'border-top-right-radius': theme.rounded['sm'],
+    'border-top-right-radius': theme.borderRadius['sm'],
   },
 
   'rounded-bl-sm': {
-    'border-bottom-left-radius': theme.rounded['sm'],
+    'border-bottom-left-radius': theme.borderRadius['sm'],
   },
 
   'rounded-br-sm': {
-    'border-bottom-right-radius': theme.rounded['sm'],
+    'border-bottom-right-radius': theme.borderRadius['sm'],
   },
 
-  'border-t-1': { 'border-top-width': theme.border['1'] },
-  'border-r-1': { 'border-right-width': theme.border['1'] },
-  'border-b-1': { 'border-bottom-width': theme.border['1'] },
-  'border-l-1': { 'border-left-width': theme.border['1'] },
+  'border-t': { 'border-top-width': theme.borderWidth['default'] },
+  'border-r': { 'border-right-width': theme.borderWidth['default'] },
+  'border-b': { 'border-bottom-width': theme.borderWidth['default'] },
+  'border-l': { 'border-left-width': theme.borderWidth['default'] },
+
+  'border-t-2': { 'border-top-width': theme.borderWidth['2'] },
+  'border-r-2': { 'border-right-width': theme.borderWidth['2'] },
+  'border-b-2': { 'border-bottom-width': theme.borderWidth['2'] },
+  'border-l-2': { 'border-left-width': theme.borderWidth['2'] },
 
   'border-red-500': { 'border-color': theme.colors['red']['500'] },
   'border-primary': { 'border-color': 'orange' },
@@ -465,11 +486,11 @@ const cases = {
   'scale-x-50': { transform: `scaleX(${theme.scale['50']})` },
   'scale-y-50': { transform: `scaleY(${theme.scale['50']})` },
 
-  'translate-x-1': { transform: `translateX(${theme.unit['1']})` },
-  'translate-y-1': { transform: `translateY(${theme.unit['1']})` },
+  'translate-x-1': { transform: `translateX(${theme.spacing['1']})` },
+  'translate-y-1': { transform: `translateY(${theme.spacing['1']})` },
 
-  '-translate-x-1': { transform: `translateX(-${theme.unit['1']})` },
-  '-translate-y-1': { transform: `translateY(-${theme.unit['1']})` },
+  '-translate-x-1': { transform: `translateX(-${theme.spacing['1']})` },
+  '-translate-y-1': { transform: `translateY(-${theme.spacing['1']})` },
 
   'skew-x-3': { transform: `skewX(${theme.skew['3']})` },
   'skew-y-3': { transform: `skewY(${theme.skew['3']})` },
@@ -490,7 +511,7 @@ const cases = {
   'grid-flow-row-dense': { 'grid-auto-flow': 'row dense' },
   'grid-flow-col-dense': { 'grid-auto-flow': 'column dense' },
 
-  'max-w-screen-xs': { 'max-width': theme.screen['xs'] },
+  'max-w-screen-sm': { 'max-width': theme.screens['sm'] },
 
   clearfix: {
     '::after': {
@@ -502,22 +523,22 @@ const cases = {
 
   'space-x-0': {
     selectors: {
-      '& > * + *': { 'margin-left': theme.unit['0'] },
+      '& > * + *': { 'margin-left': theme.spacing['0'] },
     },
   },
   '-space-x-0': {
     selectors: {
-      '& > * + *': { 'margin-left': '-' + theme.unit['0'] },
+      '& > * + *': { 'margin-left': '-' + theme.spacing['0'] },
     },
   },
   'space-y-0': {
     selectors: {
-      '& > * + *': { 'margin-top': theme.unit['0'] },
+      '& > * + *': { 'margin-top': theme.spacing['0'] },
     },
   },
   '-space-y-0': {
     selectors: {
-      '& > * + *': { 'margin-top': '-' + theme.unit['0'] },
+      '& > * + *': { 'margin-top': '-' + theme.spacing['0'] },
     },
   },
 
@@ -551,31 +572,23 @@ const cases = {
   'divide-red-500': {
     selectors: { '& > * + *': { 'border-color': theme.colors['red']['500'] } },
   },
+
+  'p-999': { padding: '999ex' },
+  'rounded-2xl': { 'border-radius': '2rem' },
 };
 
-const themed = process(
-  merge(theme, {
-    colors: {
-      primary: 'orange',
-      red: {
-        999: 'hotpink',
-      },
-    },
-  })
-);
-
-const test = Object.entries(cases).reduce(
-  (a, [i, o]) => ({
+const test = Object.entries(cases).reduce((a, [i, o]) => {
+  const result = process(theme)([i]);
+  return {
     ...a,
     [i]: {
       input: i,
       expected: o,
-      actual: themed([i]),
-      passed: JSON.stringify(themed([i])) === JSON.stringify(o),
+      actual: result,
+      passed: result && JSON.stringify(result) === JSON.stringify(o),
     },
-  }),
-  {}
-);
+  };
+}, {});
 
 const failed = Object.values(test).filter((x) => !x.passed);
 const passed = Object.values(test).filter((x) => x.passed);
