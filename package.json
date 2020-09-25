@@ -1,6 +1,6 @@
 {
   "name": "oceanwind",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "compile tailwind like shorthand syntax into css at runtime",
   "module": "index.js",
   "main": "index.js",
