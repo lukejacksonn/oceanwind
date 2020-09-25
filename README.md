@@ -42,7 +42,7 @@ Running the above code will result in the following happening:
 3. Each style will be assigned a unique class and appended to a stylesheet
 4. A string is returned representing all the classes that were created
 
-It is reccomended to import the following css files which help normalize styles across browsers:
+It is recommended to import the following css files which help normalize styles across browsers:
 
 - The Tailwind reset [available here](https://unpkg.com/tailwindcss@1.7.5/dist/base.min.css)
 - The Tailwind prose helper [available here](https://unpkg.com/@tailwindcss/typography@0.2.0/dist/typography.min.css)
