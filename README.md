@@ -35,14 +35,14 @@ import ow from 'https://unpkg.com/oceanwind';
 document.body.className = ow`h-full bg-purple-500 rotate-3 scale-95`;
 ```
 
-The code above will result in the following happening:
+Running the above code will result in the following happening:
 
 1. Shorthand syntax will be translated into CSS (e.g. `h-full => { height: 100vh }`).
 2. All resultant CSS will be merged into a single CSS-in-JS object
 3. Each style will be assigned a unique class and appended to a stylesheet
 4. A string is returned representing all the classes that were created
 
-In addition to importing oceanwind to generate class names for given shorthand. It is reccomended to import two static css files which help normalize styles across browsers. These are:
+It is reccomended to import the following css files which help normalize styles across browsers:
 
 - The Tailwind reset [available here](https://unpkg.com/tailwindcss@1.7.5/dist/base.min.css)
 - The Tailwind prose helper [available here](https://unpkg.com/@tailwindcss/typography@0.2.0/dist/typography.min.css)
@@ -66,6 +66,36 @@ ow`bg-red-500`; // will result in a hotpink background-color
 ```
 
 Any custom theme provided to the `themed` function will be deep merged with the default theme.
+
+### Function Signature
+
+It is possible to invoke oceanwind in a multitude of different ways. For example:
+
+#### Tag Template Literal
+
+```js
+ow`bg-red-500 rounded`;
+ow`bg-red-500 ${false && 'rounded'}`; // falsey interpolations will be omitted
+```
+
+#### Function call passing a string
+
+```js
+ow('bg-red-500 rounded');
+```
+
+#### Function call passing an array
+
+```js
+ow(['bg-red-500', 'rounded']);
+ow(['bg-red-500', false && 'rounded']); // falsey items will be omitted
+```
+
+#### Function call passing an object
+
+```js
+ow({ 'bg-red-500': true, rounded: false }); // keys with falsey values will be omitted
+```
 
 ## Example
 
