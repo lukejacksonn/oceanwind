@@ -577,6 +577,9 @@ const cases = {
   'rounded-2xl': { 'border-radius': '2rem' },
 };
 
+let failed;
+let passed;
+
 const test = Object.entries(cases).reduce((a, [i, o]) => {
   const result = process(theme)([i]);
   return {
@@ -590,9 +593,39 @@ const test = Object.entries(cases).reduce((a, [i, o]) => {
   };
 }, {});
 
-const failed = Object.values(test).filter((x) => !x.passed);
-const passed = Object.values(test).filter((x) => x.passed);
+failed = Object.values(test).filter((x) => !x.passed);
+passed = Object.values(test).filter((x) => x.passed);
 
 failed.length > 0
-  ? console.error('❌ Tests Failing', failed)
-  : console.log('✅ Tests Passing', passed.length);
+  ? console.error('❌ Translations Failing', failed)
+  : console.log('✅ Translations Passing', passed.length);
+
+const expectedOutput = JSON.stringify({
+  margin: theme.margin['1'],
+  padding: theme.padding['1'],
+});
+
+const processArray = process(theme)(['m-1', 'p-1']);
+const processString = process(theme)('m-1 p-1');
+const processLiteral = process(theme)`m-1 p-1`;
+const processLiteralWithParts = process(theme)`m-1 ${'p-1'}`;
+const processObject = process(theme)({
+  'm-1': true,
+  'p-1': true,
+});
+
+const inputs = {
+  processArray: JSON.stringify(processArray) === expectedOutput,
+  processString: JSON.stringify(processString) === expectedOutput,
+  processLiteral: JSON.stringify(processLiteral) === expectedOutput,
+  processLiteralWithParts:
+    JSON.stringify(processLiteralWithParts) === expectedOutput,
+  processObject: JSON.stringify(processObject) === expectedOutput,
+};
+
+failed = Object.values(inputs).filter((x) => !x);
+passed = Object.values(inputs).filter((x) => x);
+
+failed.length > 0
+  ? console.error('❌ Inputs Failing', failed)
+  : console.log('✅ Inputs Passing', passed.length);
