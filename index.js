@@ -10,10 +10,12 @@ import { css } from './vendor/otion.js';
 export { setup, hydrate } from './vendor/otion.js';
 
 export const process = (theme) => (strings, values) => {
-  // Keep track of processed rules
+  // Normalize rules into an array
+  const rules = normalize(strings, values);
+  // Keep track of processed rules this rule set
   const seen = {};
   // Go through each rule in the array and translate to css
-  const styles = normalize(strings, values).map((rule) => {
+  const styles = rules.map((rule) => {
     // Warn about any duplicate rule declarations
     if (seen[rule]) console.warn(`Duplicate delclaration of ${rule}`);
     // Mark rule as seen
