@@ -12,15 +12,15 @@ This library takes inspiration from [Tailwind](https://github.com/tailwindlabs/t
 
 <br>
 
-The aim here was to create an interpretter and compiler that:
+The aim here was to create a runtime compiler that:
 
-- Supports all existing Tailwind shorthand syntax outlined [here](https://tailwindcss.com/docs)
-- Generates only the styles required for given class names
+- Aims to supports all existing Tailwind shorthand syntax outlined [in the documentation](https://tailwindcss.com/docs)
+- Generates only the styles required with no need for purging
 - Is smaller than the average purged css file output from the Tailwind compiler
 - Has desirable perf characteristics at runtime (requires no build step or bundling)
-- Warns developers when unrecognized or duplicate shorthands are used
+- Warns when unrecognized or duplicate shorthands are used
 
-The library currently weighs 8KB gzipped (7.7KB compressed using brotli) and supports the vast majority of Tailwind directives and variants.
+The library currently weighs under 10kb and supports the vast majority of Tailwind directives and variants.
 
 It also extends the API slightly in some cases; one example of this is an experimental shorthand `cap-<fontSize>-<lineGap>` which aims to replicate the behaviour exhibited by the library [capsize](https://github.com/seek-oss/capsize) on text elements.
 
