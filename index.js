@@ -9,11 +9,11 @@ import { css } from './vendor/otion.js';
 // For server side rendering with client hydration
 export { setup, hydrate } from './vendor/otion.js';
 
-export const process = (theme) => ([rules, ...values]) => {
+export const process = (theme) => (strings, values) => {
   // Keep track of processed rules
   const seen = {};
   // Go through each rule in the array and translate to css
-  const styles = normalize(rules, values).map((rule) => {
+  const styles = normalize(strings, values).map((rule) => {
     // Warn about any duplicate rule declarations
     if (seen[rule]) console.warn(`Duplicate delclaration of ${rule}`);
     // Mark rule as seen
@@ -52,9 +52,10 @@ export const configure = (input) =>
 // If passed a theme then return process primed with merged themes
 export const themed = (input) => {
   const theme = configure(input);
-  return (...input) => css(process(theme)(input));
+  return (strings, ...values) => css(process(theme)(strings, values));
 };
 
 // If passed a tagged template then process with the default theme
 const defaultThemeApplied = defaultTheme(globals);
-export default (...input) => css(process(defaultThemeApplied)(input));
+export default (strings, ...values) =>
+  css(process(defaultThemeApplied)(strings, values));

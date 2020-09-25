@@ -1,16 +1,13 @@
-export default (rules, values) =>
-  (typeof rules === 'string'
-    ? rules
-    : Array.isArray(rules)
-    ? // Compile template literals with dynamic values
-      rules.reduce(
-        (acc, string, i) =>
-          (acc += string + (values[i] == null ? '' : values[i])),
+export default (strings, ...values) =>
+  (typeof strings === 'string'
+    ? strings
+    : Array.isArray(strings)
+    ? strings.reduce(
+        (str, rule, i) => (str += [rule || '', values[i] || ''].join(' ')),
         ''
       )
-    : // Construct class names conditionally from an object
-      Object.entries(rules).reduce(
-        (string, [k, v]) => (v ? [string, k].join(' ') : string),
+    : Object.entries(strings).reduce(
+        (str, [rule, val]) => (str = [str, val ? rule : ''].join(' ')),
         ''
       )
   )
