@@ -45,17 +45,15 @@ export const process = (theme) => (strings, values) => {
   return merge(...styles);
 };
 
-// Utility for merging overrides with the default theme
-export const configure = (input) =>
-  merge(defaultTheme(merge(globals, input)), input);
+// Utility for merging provided theme with the default theme
+export const configure = (theme) =>
+  merge(defaultTheme(merge(globals, theme)), theme);
 
-// If passed a theme then return process primed with merged themes
-export const themed = (input) => {
-  const theme = configure(input);
-  return (strings, ...values) => css(process(theme)(strings, values));
+// Return process primed with a configured theme
+export const themed = (theme = {}) => {
+  const processWithTheme = process(configure(theme));
+  return (strings, ...values) => css(processWithTheme(strings, values));
 };
 
-// If passed a tagged template then process with the default theme
-const defaultThemeApplied = defaultTheme(globals);
-export default (strings, ...values) =>
-  css(process(defaultThemeApplied)(strings, values));
+// Return process primed with the default theme
+export default themed();

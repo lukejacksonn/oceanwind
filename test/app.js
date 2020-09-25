@@ -76,7 +76,7 @@ const app =html`
       src="https://source.unsplash.com/WLUHO9A_xik/1600x900"
       alt="Sunset in the mountains"
     />
-    <div className=${ow({ 'px-6': true, 'py-6': true, 'space-y-6': true })}>
+    <div className=${_ow({ 'px-6': true, 'py-8': true, 'space-y-6': true })}>
       <div className=${ow`font-bold`}>
         <h1 className=${ow`cap-24-20`}>
           The Coldest Sunset In The World
