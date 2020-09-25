@@ -55,4 +55,5 @@ export const themed = (input) => {
 };
 
 // If passed a tagged template then process with the default theme
-export default (input) => css(process(defaultTheme)(input));
+const defaultThemeApplied = defaultTheme(globals);
+export default (input) => css(process(defaultThemeApplied)(input));

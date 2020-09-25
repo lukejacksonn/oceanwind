@@ -1,7 +1,7 @@
 import { render, h } from 'https://unpkg.com/preact?module';
 import htm from 'https://unpkg.com/htm?module';
 
-import { themed } from '../index.js';
+import _ow, { themed } from '../index.js';
 
 const html = htm.bind(h);
 
@@ -13,6 +13,9 @@ const ow = themed({
   },
   borderRadius: {
     '2xl': '2rem',
+  },
+  borderWidth: {
+    16: '1rem',
   },
 });
 
@@ -73,7 +76,7 @@ const app =html`
       src="https://source.unsplash.com/WLUHO9A_xik/1600x900"
       alt="Sunset in the mountains"
     />
-    <div className=${ow`px-6 py-6 space-y-6`}>
+    <div className=${_ow`px-6 py-6 space-y-6`}>
       <div className=${ow`font-bold`}>
         <h1 className=${ow`cap-24-20`}>
           The Coldest Sunset In The World
