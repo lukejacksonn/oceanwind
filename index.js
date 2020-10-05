@@ -9,6 +9,9 @@ import { css } from './vendor/otion.js';
 // For server side rendering with client hydration
 export { setup, hydrate } from './vendor/otion.js';
 
+const warn = (message) =>
+  console.warn(message, new Error().stack.split('at ').pop());
+
 export const process = (theme) => (strings, values) => {
   // Normalize rules into an array
   const rules = normalize(strings, values);
@@ -17,7 +20,7 @@ export const process = (theme) => (strings, values) => {
   // Go through each rule in the array and translate to css
   const styles = rules.map((rule) => {
     // Warn about any duplicate rule declarations
-    if (seen[rule]) console.warn(`Duplicate delclaration of ${rule}`);
+    if (seen[rule]) warn(`Duplicate declaration of "${rule}"`);
     // Mark rule as seen
     seen[rule] = true;
     // Split the rule into parts
@@ -29,7 +32,7 @@ export const process = (theme) => (strings, values) => {
     let translation = translate(theme)(directive);
     // Warn if there was no translation for the given directive
     if (!Object.keys(translation)[0]) {
-      console.warn(`No translation for ${directive}`);
+      warn(`No translation for "${directive}" at`);
     }
     // Apply variants to the translation
     variants.reverse().forEach((variant) => {
@@ -47,11 +50,11 @@ export const process = (theme) => (strings, values) => {
   return merge(...styles);
 };
 
-// Utility for merging provided theme with the default theme
+// Utility for merging a provided theme with the default theme
 export const configure = (theme) =>
   merge(defaultTheme(merge(globals, theme)), theme);
 
-// Return process primed with a configured theme
+// Return process primed with a provided theme
 export const themed = (theme = {}) => {
   const processWithTheme = process(configure(theme));
   return (strings, ...values) => css(processWithTheme(strings, values));
