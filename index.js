@@ -9,6 +9,7 @@ import { css } from './vendor/otion.js';
 // For server side rendering with client hydration
 export { setup, hydrate } from './vendor/otion.js';
 
+// Provide link to file and line number with warnings
 const warn = (message) =>
   console.warn(message, new Error().stack.split('at ').pop());
 
