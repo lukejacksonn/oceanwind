@@ -304,11 +304,6 @@ const cases = {
   'rounded-none': { 'border-radius': theme.borderRadius['none'] },
   'rounded-full': { 'border-radius': theme.borderRadius['full'] },
 
-  // 'rounded-b': {
-  //   'border-bottom-right-radius': theme.borderRadius['default'],
-  //   'border-bottom-left-radius': theme.borderRadius['default'],
-  // },
-
   'duration-75': {
     'transition-duration': `${theme.transitionDuration['75']}`,
   },
@@ -433,6 +428,42 @@ const cases = {
   '-m-10': { margin: `-${theme.spacing['10']}` },
   '-m-px': { margin: `-${theme.spacing['px']}` },
 
+  'rounded-t': {
+    'border-top-left-radius': theme.borderRadius['default'],
+    'border-top-right-radius': theme.borderRadius['default'],
+  },
+
+  'rounded-r': {
+    'border-top-right-radius': theme.borderRadius['default'],
+    'border-bottom-right-radius': theme.borderRadius['default'],
+  },
+
+  'rounded-b': {
+    'border-bottom-left-radius': theme.borderRadius['default'],
+    'border-bottom-right-radius': theme.borderRadius['default'],
+  },
+
+  'rounded-l': {
+    'border-bottom-left-radius': theme.borderRadius['default'],
+    'border-top-left-radius': theme.borderRadius['default'],
+  },
+
+  'rounded-tl': {
+    'border-top-left-radius': theme.borderRadius['default'],
+  },
+
+  'rounded-tr': {
+    'border-top-right-radius': theme.borderRadius['default'],
+  },
+
+  'rounded-bl': {
+    'border-bottom-left-radius': theme.borderRadius['default'],
+  },
+
+  'rounded-br': {
+    'border-bottom-right-radius': theme.borderRadius['default'],
+  },
+
   'rounded-t-sm': {
     'border-top-left-radius': theme.borderRadius['sm'],
     'border-top-right-radius': theme.borderRadius['sm'],
@@ -449,8 +480,8 @@ const cases = {
   },
 
   'rounded-l-sm': {
-    'border-top-left-radius': theme.borderRadius['sm'],
     'border-bottom-left-radius': theme.borderRadius['sm'],
+    'border-top-left-radius': theme.borderRadius['sm'],
   },
 
   'rounded-tl-sm': {
