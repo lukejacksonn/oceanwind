@@ -32,7 +32,7 @@ export const process = (theme) => (strings, values) => {
     let translation = translate(theme)(directive);
     // Warn if there was no translation for the given directive
     if (!Object.keys(translation)[0]) {
-      warn(`No translation for "${directive}" at`);
+      warn(`No translation for "${directive}"`);
     }
     // Apply variants to the translation
     variants.reverse().forEach((variant) => {
