@@ -2,29 +2,23 @@
 
 > compiles tailwind like shorthand syntax into css at runtime
 
-This library takes inspiration from [Tailwind](https://github.com/tailwindlabs/tailwindcss) and utilizes [Otion](https://github.com/kripod/otion) to provide means of efficiently generating atomic styles from shorthand syntax and appending them to the DOM at runtime.
-
-<hr>
-
-<img width="100%" src="https://user-images.githubusercontent.com/1457604/91981751-32310b00-ed21-11ea-8a89-f30f1437f9a2.gif">
+This library takes inspiration from [Tailwind](https://github.com/tailwindlabs/tailwindcss) and utilizes [Otion](https://github.com/kripod/otion) to provide means of efficiently generating atomic styles from shorthand syntax and appending them to the DOM at runtime. Static extraction is also possible with SSR.
 
 > ⚡️ Check out the [live and interactive demo](https://esm.codes/#Ly8gT2NlYW53aW5kIGRlbW8gYnkgQGx1a2VqYWNrc29ubgovLyAtLS0tLS0tLS0tLS0tLS0tCiAgICAKaW1wb3J0IHsgcmVuZGVyLCBoIH0gZnJvbSAnaHR0cHM6Ly91bnBrZy5jb20vcHJlYWN0P21vZHVsZSc7CmltcG9ydCBodG0gZnJvbSAnaHR0cHM6Ly91bnBrZy5jb20vaHRtP21vZHVsZSc7CmltcG9ydCBvdyBmcm9tICdodHRwczovL3VucGtnLmNvbS9vY2VhbndpbmQnOwoKY29uc3QgaHRtbCA9IGh0bS5iaW5kKGgpOwoKcmVuZGVyKAogIGh0bWxgCiAgICA8ZGl2IGNsYXNzTmFtZT0ke293YAogICAgICBoLWZ1bGwKICAgICAgYmctcHVycGxlLTUwMAogICAgICBmbGV4CiAgICAgIGl0ZW1zLWNlbnRlcgogICAgICBqdXN0aWZ5LWNlbnRlcgogICAgYH0+CiAgICAgIDxoMSBjbGFzc05hbWU9JHtvd2AKICAgICAgICB0ZXh0LXdoaXRlCiAgICAgICAgZm9udC1ib2xkCiAgICAgICAgZm9udC1zYW5zCiAgICAgICAgaG92ZXI6cm90YXRlLTMKICAgICAgICBob3ZlcjpzY2FsZS0xNTAKICAgICAgICBob3ZlcjpjdXJzb3ItcG9pbnRlcgogICAgICBgfT5IZWxsbyBXb3JsZDwvaDE+CiAgICA8L2Rpdj4KICBgLAogIGRvY3VtZW50LmJvZHkKKTs=)
 
+<img width="100%" src="https://user-images.githubusercontent.com/1457604/91981751-32310b00-ed21-11ea-8a89-f30f1437f9a2.gif">
+
 <br>
 
-The aim here was to create a runtime compiler that:
+The aim here was to create a compiler that:
 
 - Aims to supports all existing Tailwind shorthand syntax outlined [in the documentation](https://tailwindcss.com/docs)
-- Generates only the styles required with no need for purging
+- Generates only the styles required with no need for building or purging
 - Is smaller than the average purged css file output from the Tailwind compiler
-- Has desirable perf characteristics at runtime (requires no build step or bundling)
-- Warns when unrecognized or duplicate shorthands are used
+- Has desirable perf characteristics at runtime (requires no bundler)
+- Warns the developer when unrecognized or duplicate shorthands are used
 
 The library currently weighs under 10kb and supports the vast majority of Tailwind directives and variants.
-
-It also extends the API slightly in some cases; one example of this is an experimental shorthand `cap-<fontSize>-<lineGap>` which aims to replicate the behaviour exhibited by the library [capsize](https://github.com/seek-oss/capsize) on text elements.
-
-Full documentation of any syntax that extends the Tailwind API will come soon. If you find any directives or variants missing or not behaving correctly then please create an issue or pull request!
 
 ## Usage
 
@@ -37,7 +31,7 @@ document.body.className = ow`h-full bg-purple-500 rotate-3 scale-95`;
 
 Running the above code will result in the following happening:
 
-1. Shorthand syntax will be translated into CSS (e.g. `h-full => { height: 100vh }`).
+1. Shorthand syntax will be translated into CSS (e.g. `h-full -> { height: 100vh }`).
 2. All resultant CSS will be merged into a single CSS-in-JS object
 3. Each style will be assigned a unique class and appended to a stylesheet
 4. A string is returned representing all the classes that were created
@@ -101,6 +95,8 @@ ow({ 'bg-red-500': true, rounded: false }); // keys with falsey values will be o
 
 Most of the time developers will be using a front end framework to render DOM elements. Oceanwind is framework agnostic but here is an example of how you might use it with preact and no build step.
 
+> ⚡️ Check out the [live and interactive demo](https://esm.codes/#Ly8gT2NlYW53aW5kIGRlbW8gYnkgQGx1a2VqYWNrc29ubgovLyAtLS0tLS0tLS0tLS0tLS0tCiAgICAKaW1wb3J0IHsgcmVuZGVyLCBoIH0gZnJvbSAnaHR0cHM6Ly91bnBrZy5jb20vcHJlYWN0P21vZHVsZSc7CmltcG9ydCBodG0gZnJvbSAnaHR0cHM6Ly91bnBrZy5jb20vaHRtP21vZHVsZSc7CmltcG9ydCBvdyBmcm9tICdodHRwczovL3VucGtnLmNvbS9vY2VhbndpbmQnOwoKY29uc3QgaHRtbCA9IGh0bS5iaW5kKGgpOwoKcmVuZGVyKAogIGh0bWxgCiAgICA8ZGl2IGNsYXNzTmFtZT0ke293YAogICAgICBoLWZ1bGwKICAgICAgYmctcHVycGxlLTUwMAogICAgICBmbGV4CiAgICAgIGl0ZW1zLWNlbnRlcgogICAgICBqdXN0aWZ5LWNlbnRlcgogICAgYH0+CiAgICAgIDxoMSBjbGFzc05hbWU9JHtvd2AKICAgICAgICB0ZXh0LXdoaXRlCiAgICAgICAgZm9udC1ib2xkCiAgICAgICAgZm9udC1zYW5zCiAgICAgICAgaG92ZXI6cm90YXRlLTMKICAgICAgICBob3ZlcjpzY2FsZS0xNTAKICAgICAgICBob3ZlcjpjdXJzb3ItcG9pbnRlcgogICAgICBgfT5IZWxsbyBXb3JsZDwvaDE+CiAgICA8L2Rpdj4KICBgLAogIGRvY3VtZW50LmJvZHkKKTs=)
+
 ```js
 import { render, h } from 'https://unpkg.com/preact?module';
 
@@ -118,8 +114,6 @@ render(
   document.body
 );
 ```
-
-> ⚡️ Check out the [live and interactive demo](https://esm.codes/#Ly8gT2NlYW53aW5kIGRlbW8gYnkgQGx1a2VqYWNrc29ubgovLyAtLS0tLS0tLS0tLS0tLS0tCiAgICAKaW1wb3J0IHsgcmVuZGVyLCBoIH0gZnJvbSAnaHR0cHM6Ly91bnBrZy5jb20vcHJlYWN0P21vZHVsZSc7CmltcG9ydCBodG0gZnJvbSAnaHR0cHM6Ly91bnBrZy5jb20vaHRtP21vZHVsZSc7CmltcG9ydCBvdyBmcm9tICdodHRwczovL3VucGtnLmNvbS9vY2VhbndpbmQnOwoKY29uc3QgaHRtbCA9IGh0bS5iaW5kKGgpOwoKcmVuZGVyKAogIGh0bWxgCiAgICA8ZGl2IGNsYXNzTmFtZT0ke293YAogICAgICBoLWZ1bGwKICAgICAgYmctcHVycGxlLTUwMAogICAgICBmbGV4CiAgICAgIGl0ZW1zLWNlbnRlcgogICAgICBqdXN0aWZ5LWNlbnRlcgogICAgYH0+CiAgICAgIDxoMSBjbGFzc05hbWU9JHtvd2AKICAgICAgICB0ZXh0LXdoaXRlCiAgICAgICAgZm9udC1ib2xkCiAgICAgICAgZm9udC1zYW5zCiAgICAgICAgaG92ZXI6cm90YXRlLTMKICAgICAgICBob3ZlcjpzY2FsZS0xNTAKICAgICAgICBob3ZlcjpjdXJzb3ItcG9pbnRlcgogICAgICBgfT5IZWxsbyBXb3JsZDwvaDE+CiAgICA8L2Rpdj4KICBgLAogIGRvY3VtZW50LmJvZHkKKTs=)
 
 ## Server-side rendering (SSR)
 
@@ -148,9 +142,7 @@ const styleTag = getStyleTag(injector);
 // Inject styleTag to your HTML now.
 ```
 
-Oceanwind also exposes `hydrate` from Otion for client-side hydration.
-
-[See Otion documentation](https://www.npmjs.com/package/otion#server-side-rendering) for further configuration options and usage instructions.
+Oceanwind also exposes `hydrate` from Otion for client-side hydration. [See Otion documentation](https://www.npmjs.com/package/otion#server-side-rendering) for further configuration options and usage instructions.
 
 ## Acknowledgements
 

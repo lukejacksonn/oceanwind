@@ -1,5 +1,8 @@
-import { render, h } from 'https://unpkg.com/preact?module';
-import htm from 'https://unpkg.com/htm?module';
+import {
+  render,
+  h,
+} from 'https://unpkg.com/preact@10.5.4/dist/preact.module.js?module';
+import htm from 'https://unpkg.com/htm@3.0.4/dist/htm.module.js?module';
 
 import _ow, { themed } from '../index.js';
 
@@ -76,14 +79,14 @@ const app =html`
       src="https://source.unsplash.com/WLUHO9A_xik/1600x900"
       alt="Sunset in the mountains"
     />
-    <div className=${_ow({ 'px-6': true, 'py-8': true, 'space-y-6': true })}>
+    <div className=${_ow({ 'px-6': true, 'py-8': true, 'space-y-4': true })}>
       <div className=${ow`font-bold`}>
-        <h1 className=${ow`cap-24-20`}>
+        <h1 className=${ow`text-3xl`}>
           The Coldest Sunset In The World
         </h1>
       </div>
       <div>
-        <p className=${ow`text-gray-700 cap-12-12`}>
+        <p className=${ow`text-gray-700 text-base`}>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit.
           Voluptatibus quia, nulla! Maiores et perferendis eaque,
           exercitationem praesentium nihil.
@@ -527,15 +530,3 @@ plugins: [],
 `;
 
 render(app, document.body);
-
-const reset = document.createElement('link');
-reset.rel = 'stylesheet';
-reset.href = 'https://unpkg.com/tailwindcss@1.7.5/dist/base.min.css';
-
-const prose = document.createElement('link');
-prose.rel = 'stylesheet';
-prose.href =
-  'https://unpkg.com/@tailwindcss/typography@0.2.0/dist/typography.min.css';
-
-document.head.appendChild(prose);
-document.head.appendChild(reset);

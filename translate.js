@@ -1,6 +1,3 @@
-import capsize from './util/capsize.js';
-import dfont from './util/dfont.js';
-
 const corners = {
   t: ['top-left', 'top-right'],
   r: ['top-right', 'bottom-right'],
@@ -565,13 +562,6 @@ export default (theme) => (str) => {
       break;
     case 3:
       switch (i[0]) {
-        case 'cap':
-          out = capsize({
-            capHeight: +i[1],
-            lineGap: +i[2],
-            fontMetrics: theme.fontMetrics[dfont(theme.fontFamily.sans)],
-          });
-          break;
         case 'divide':
           switch (i[1]) {
             case 'x':
