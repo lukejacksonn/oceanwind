@@ -1,6 +1,7 @@
 import { configure, process } from '../index.js';
 
 const theme = configure({
+  strict: false,
   spacing: {
     999: '999ex',
   },
@@ -14,6 +15,15 @@ const theme = configure({
     '2xl': '2rem',
   },
 });
+
+process(theme)('testing hidden hidden');
+
+try {
+  process({ strict: true })('testing');
+  console.log('❌ Strict mode failing');
+} catch {
+  console.log('✅ Strict mode passing');
+}
 
 const cases = {
   hidden: { display: 'none' },
