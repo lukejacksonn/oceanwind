@@ -10,8 +10,11 @@ import { css } from './vendor/otion.js';
 export { setup, hydrate } from './vendor/otion.js';
 
 // Provide link to file and line number with warnings
-const warn = (message) =>
-  console.warn(message, new Error().stack.split('at ').pop());
+const warn = (theme) => (message) => {
+  const msg = [message, new Error().stack.split('at ').pop()].join(' ');
+  if (theme.strict) throw msg;
+  console.warn(msg);
+};
 
 export const process = (theme) => (strings, values) => {
   // Normalize rules into an array
@@ -21,7 +24,7 @@ export const process = (theme) => (strings, values) => {
   // Go through each rule in the array and translate to css
   const styles = rules.map((rule) => {
     // Warn about any duplicate rule declarations
-    if (seen[rule]) warn(`Duplicate declaration of "${rule}"`);
+    if (seen[rule]) warn(theme)(`Duplicate declaration of "${rule}"`);
     // Mark rule as seen
     seen[rule] = true;
     // Split the rule into parts
@@ -33,7 +36,7 @@ export const process = (theme) => (strings, values) => {
     let translation = translate(theme)(directive);
     // Warn if there was no translation for the given directive
     if (!Object.keys(translation)[0]) {
-      warn(`No translation for "${directive}"`);
+      warn(theme)(`No translation for "${directive}"`);
     }
     // Apply variants to the translation
     variants.reverse().forEach((variant) => {
