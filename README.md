@@ -2,7 +2,9 @@
 
 > compiles tailwind like shorthand syntax into css at runtime
 
-This library takes inspiration from [Tailwind](https://github.com/tailwindlabs/tailwindcss) and utilizes [Otion](https://github.com/kripod/otion) to provide means of efficiently generating atomic styles from shorthand syntax and appending them to the DOM at runtime. Static extraction is also possible with SSR.
+This library takes inspiration from [Tailwind](https://github.com/tailwindlabs/tailwindcss) and utilizes [Otion](https://github.com/kripod/otion) to provide means of efficiently generating atomic styles from shorthand syntax and appending them to the DOM at runtime.
+
+Server side rendering and static extraction is also supported.
 
 > ⚡️ Check out the [live and interactive demo](https://esm.codes/#Ly8gT2NlYW53aW5kIGRlbW8gYnkgQGx1a2VqYWNrc29ubgovLyAtLS0tLS0tLS0tLS0tLS0tCiAgICAKaW1wb3J0IHsgcmVuZGVyLCBoIH0gZnJvbSAnaHR0cHM6Ly91bnBrZy5jb20vcHJlYWN0P21vZHVsZSc7CmltcG9ydCBodG0gZnJvbSAnaHR0cHM6Ly91bnBrZy5jb20vaHRtP21vZHVsZSc7CmltcG9ydCBvdyBmcm9tICdodHRwczovL3VucGtnLmNvbS9vY2VhbndpbmQnOwoKY29uc3QgaHRtbCA9IGh0bS5iaW5kKGgpOwoKcmVuZGVyKAogIGh0bWxgCiAgICA8ZGl2IGNsYXNzTmFtZT0ke293YAogICAgICBoLWZ1bGwKICAgICAgYmctcHVycGxlLTUwMAogICAgICBmbGV4CiAgICAgIGl0ZW1zLWNlbnRlcgogICAgICBqdXN0aWZ5LWNlbnRlcgogICAgYH0+CiAgICAgIDxoMSBjbGFzc05hbWU9JHtvd2AKICAgICAgICB0ZXh0LXdoaXRlCiAgICAgICAgZm9udC1ib2xkCiAgICAgICAgZm9udC1zYW5zCiAgICAgICAgaG92ZXI6cm90YXRlLTMKICAgICAgICBob3ZlcjpzY2FsZS0xNTAKICAgICAgICBob3ZlcjpjdXJzb3ItcG9pbnRlcgogICAgICBgfT5IZWxsbyBXb3JsZDwvaDE+CiAgICA8L2Rpdj4KICBgLAogIGRvY3VtZW50LmJvZHkKKTs=)
 
@@ -12,11 +14,11 @@ This library takes inspiration from [Tailwind](https://github.com/tailwindlabs/t
 
 The aim here was to create a compiler that:
 
-- Aims to supports all existing Tailwind shorthand syntax outlined [in the documentation](https://tailwindcss.com/docs)
-- Generates only the styles required with no need for building or purging
-- Is smaller than the average purged css file output from the Tailwind compiler
-- Has desirable perf characteristics at runtime (requires no bundler)
-- Warns the developer when unrecognized or duplicate shorthands are used
+- 📖 Supports all existing Tailwind shorthand syntax outlined [in the docs](https://tailwindcss.com/docs)
+- 💡 Generates only the styles required without building or purging
+- 🗜 Is smaller than the average purged css file output from the Tailwind compiler
+- ⏱ Has desirable perf characteristics at runtime
+- ⚠️ Warns the developer when unrecognized or duplicate shorthand is used
 
 The library currently weighs under 10kb and supports the vast majority of Tailwind directives and variants.
 
@@ -43,7 +45,7 @@ It is recommended to import the following css files which help normalize styles 
 
 ### Extending the default theme
 
-Importing and invoking oceanwind directly will cause it to refer to the [default theme](https://github.com/lukejacksonn/oceanwind/blob/master/core/theme.js) for directives that require themed values (like `bg-red-500` for example). If you would like to customize the theme then used the `themed` export instead of the default export.
+Importing and invoking oceanwind directly will cause it to use [default theme](https://github.com/lukejacksonn/oceanwind/blob/master/core/theme.js) for directives that require themed values (like `bg-red-500` for example). To customize the theme, use the `themed` export instead of the default export.
 
 ```js
 import { themed } from 'https://unpkg.com/oceanwind';
@@ -65,31 +67,38 @@ Any custom theme provided to the `themed` function will be deep merged with the 
 
 It is possible to invoke oceanwind in a multitude of different ways. For example:
 
-#### Tag Template Literal
-
 ```js
-ow`bg-red-500 rounded`;
-ow`bg-red-500 ${false && 'rounded'}`; // falsey interpolations will be omitted
-```
-
-#### Function call passing a string
-
-```js
+// Function call passing a string
 ow('bg-red-500 rounded');
-```
 
-#### Function call passing an array
+// Tag Template Literal (falsey interpolations will be omitted)
+ow`bg-red-500 rounded`;
+ow`bg-red-500 ${false && 'rounded'}`;
 
-```js
+// Function call passing an array (falsey items will be omitted)
 ow(['bg-red-500', 'rounded']);
-ow(['bg-red-500', false && 'rounded']); // falsey items will be omitted
+ow(['bg-red-500', false && 'rounded']);
+
+// Function call passing an object (keys with falsey values will be omitted)
+ow({ 'bg-red-500': true, rounded: true });
+ow({ 'bg-red-500': true, rounded: false });
 ```
 
-#### Function call passing an object
+### Catching Errors
+
+By default warnings about missing or duplicate translations will be written to the console:
+
+![image](https://user-images.githubusercontent.com/1457604/95141411-04e4dc00-0769-11eb-9245-d4cc37c8b58f.png)
+
+Clicking on the file path in dev tools will _jump to_ the line in the file in the sources panel.
+
+It is possible to make oceanwind throw an error rather just warning by opting into _strict_ mode:
 
 ```js
-ow({ 'bg-red-500': true, rounded: false }); // keys with falsey values will be omitted
+themed({ strict: true });
 ```
+
+![image](https://user-images.githubusercontent.com/1457604/95245344-e9caa880-080a-11eb-9741-576f7b2ff6b0.png)
 
 ## Example
 
