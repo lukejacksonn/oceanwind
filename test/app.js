@@ -25,8 +25,6 @@ const ow = themed({
 const style = {
   main: ow`
     ${true ? 'text-green-500' : ''}
-    sm:text-red-500
-    md:text-purple-800
     bg-current
     font-sans
     w-full
@@ -35,6 +33,13 @@ const style = {
     items-center
     justify-center
     clearfix
+    transition
+    duration-1000
+    sm:(
+      hover:bg-blue-600
+      text-blue-500
+    )
+    md:hover:(text-purple-700 bg-purple-500)
   `,
   card: ow`
     bg-white
