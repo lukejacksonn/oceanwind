@@ -36,8 +36,7 @@ const style = {
     transition
     duration-1000
     sm:(
-      hover:bg-blue-600
-      text-blue-500
+      hover:(bg-blue-600 text-blue-500)
     )
     md:hover:(text-purple-700 bg-purple-500)
   `,
