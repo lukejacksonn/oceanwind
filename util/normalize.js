@@ -7,7 +7,6 @@ const handleVariantGrouping = (arr) => {
     if (start) {
       prefix = prefix.concat(start[1].split('('));
       x = start.input.replace(start[0], '');
-      console.log(prefix, x);
     }
 
     x = prefix.join('') + x;
