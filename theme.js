@@ -481,10 +481,10 @@ export default ({
     150: '1.5',
   },
   rotate: {
-    0: 0,
-    45: 45,
-    90: 90,
-    180: 180,
+    0: '0deg',
+    45: '45deg',
+    90: '90deg',
+    180: '180deg',
   },
   translate: {
     ...spacing,

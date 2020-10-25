@@ -40,8 +40,8 @@ Running the above code will result in the following happening:
 
 It is recommended to import the following css files which help normalize styles across browsers:
 
-- The Tailwind reset [available here](https://unpkg.com/tailwindcss@1.7.5/dist/base.min.css)
-- The Tailwind prose helper [available here](https://unpkg.com/@tailwindcss/typography@0.2.0/dist/typography.min.css)
+- The Tailwind reset [available here](https://unpkg.com/tailwindcss/dist/base.min.css)
+- The Tailwind prose helper [available here](https://unpkg.com/@tailwindcss/typography/dist/typography.min.css)
 
 ### Extending the default theme
 
@@ -83,6 +83,36 @@ ow(['bg-red-500', false && 'rounded']);
 ow({ 'bg-red-500': true, rounded: true });
 ow({ 'bg-red-500': true, rounded: false });
 ```
+
+### Variant Grouping
+
+Directives with the same variants can be grouped using parenthesis. Oceanwind will expand the nested directives; applying the variant to each directive in the group before translation. For example:
+
+> Notice any directives within tagged template literals can span multiple lines
+
+```js
+ow`
+  sm:hover:(
+    bg-black
+    text-white
+  )
+  md:(bg-white hover:text-black)
+`;
+```
+
+It is possible to nest groupings too, for example:
+
+```js
+ow`
+  sm:(
+    bg-black
+    text-white
+    hover:(bg-white text-black)
+  )
+`;
+```
+
+Two things to note here is that the outermost variant should always be a responsive variant (just like in tailwind `hover:sm:` is not supported) and that nesting responsive variants doesn't make sense either, for example `sm:md:` is not supported.
 
 ### Catching Errors
 

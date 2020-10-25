@@ -324,10 +324,10 @@ const cases = {
   'scale-50': { transform: `scale(${theme.scale['50']})` },
   'scale-100': { transform: `scale(${theme.scale['100']})` },
 
-  'rotate-0': { transform: `rotate(${theme.rotate['0']}deg)` },
-  'rotate-45': { transform: `rotate(${theme.rotate['45']}deg)` },
-  'rotate-180': { transform: `rotate(${theme.rotate['180']}deg)` },
-  '-rotate-90': { transform: `rotate(-${theme.rotate['90']}deg)` },
+  'rotate-0': { transform: `rotate(${theme.rotate['0']})` },
+  'rotate-45': { transform: `rotate(${theme.rotate['45']})` },
+  'rotate-180': { transform: `rotate(${theme.rotate['180']})` },
+  '-rotate-90': { transform: `rotate(-${theme.rotate['90']})` },
 
   'origin-center': { 'transform-origin': 'center' },
 
@@ -616,6 +616,146 @@ const cases = {
 
   'p-999': { padding: '999ex' },
   'rounded-2xl': { 'border-radius': '2rem' },
+
+  'rotate-45 hover:(bg-red-500)': {
+    transform: `rotate(${theme.rotate['45']})`,
+    ':hover': { 'background-color': theme.colors['red']['500'] },
+  },
+
+  'rotate-45 hover:(bg-red-500 text-blue-500)': {
+    transform: `rotate(${theme.rotate['45']})`,
+    ':hover': {
+      'background-color': theme.colors['red']['500'],
+      color: theme.colors['blue']['500'],
+    },
+  },
+
+  'rotate-45 sm:hover:(bg-red-500)': {
+    transform: `rotate(${theme.rotate['45']})`,
+    '@media': {
+      [`(min-width: ${theme.screens['sm']})`]: {
+        ':hover': {
+          'background-color': theme.colors['red']['500'],
+        },
+      },
+    },
+  },
+
+  'rotate-45 sm:hover:(bg-red-500 text-blue-500)': {
+    transform: `rotate(${theme.rotate['45']})`,
+    '@media': {
+      [`(min-width: ${theme.screens['sm']})`]: {
+        ':hover': {
+          'background-color': theme.colors['red']['500'],
+          color: theme.colors['blue']['500'],
+        },
+      },
+    },
+  },
+
+  [`sm:(rotate-45 hover:(bg-red-500))`]: {
+    '@media': {
+      [`(min-width: ${theme.screens['sm']})`]: {
+        transform: `rotate(${theme.rotate['45']})`,
+        ':hover': {
+          'background-color': theme.colors['red']['500'],
+        },
+      },
+    },
+  },
+
+  [`sm:(rotate-45 hover:(bg-red-500 text-blue-500))`]: {
+    '@media': {
+      [`(min-width: ${theme.screens['sm']})`]: {
+        transform: `rotate(${theme.rotate['45']})`,
+        ':hover': {
+          'background-color': theme.colors['red']['500'],
+          color: theme.colors['blue']['500'],
+        },
+      },
+    },
+  },
+
+  [`sm:(
+      rotate-45
+      hover:(bg-red-500)
+    )`]: {
+    '@media': {
+      [`(min-width: ${theme.screens['sm']})`]: {
+        transform: `rotate(${theme.rotate['45']})`,
+        ':hover': {
+          'background-color': theme.colors['red']['500'],
+        },
+      },
+    },
+  },
+
+  [`sm:(
+      rotate-45
+      hover:(bg-red-500 text-blue-500)
+    )`]: {
+    '@media': {
+      [`(min-width: ${theme.screens['sm']})`]: {
+        transform: `rotate(${theme.rotate['45']})`,
+        ':hover': {
+          'background-color': theme.colors['red']['500'],
+          color: theme.colors['blue']['500'],
+        },
+      },
+    },
+  },
+
+  [`sm:(
+      rotate-45
+      hover:(
+        bg-red-500
+      )
+    )`]: {
+    '@media': {
+      [`(min-width: ${theme.screens['sm']})`]: {
+        transform: `rotate(${theme.rotate['45']})`,
+        ':hover': {
+          'background-color': theme.colors['red']['500'],
+        },
+      },
+    },
+  },
+
+  [`sm:(
+      rotate-45
+      hover:(
+        bg-red-500
+        text-blue-500
+      )
+    )`]: {
+    transform: `rotate(${theme.rotate['45']})`,
+    '@media': {
+      [`(min-width: ${theme.screens['sm']})`]: {
+        ':hover': {
+          'background-color': theme.colors['red']['500'],
+          color: theme.colors['blue']['500'],
+        },
+      },
+    },
+  },
+
+  [`sm:(
+      rotate-45
+      hover:(
+        bg-red-500
+        text-blue-500
+      )
+    )`]: {
+    '@media': {
+      [`(min-width: ${theme.screens['sm']})`]: {
+        transform: `rotate(${theme.rotate['45']})`,
+        ':hover': {
+          'background-color': theme.colors['red']['500'],
+          color: theme.colors['blue']['500'],
+        },
+      },
+    },
+  },
 };
 
 let failed;
