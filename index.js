@@ -35,7 +35,7 @@ export const process = (theme) => (strings, values) => {
     // Lookup translation for directive
     let translation = translate(theme)(directive);
     // Warn if there was no translation for the given directive
-    if (!Object.keys(translation)[0]) {
+    if (!Object.keys(translation)[0] || !Object.values(translation)[0]) {
       warn(theme)(`No translation for "${directive}"`);
     }
     // Apply variants to the translation

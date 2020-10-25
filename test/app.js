@@ -59,7 +59,7 @@ const style = {
     hover:bg-gray-100
     hover:text-gray-800
     hover:shadow-lg
-    border-1
+    border
     border-solid
     border-gray-400
     rounded-full
@@ -98,7 +98,7 @@ const app =html`
       </div>
       <form className=${ow`flex flex-row space-x-4`}>
         <input
-          className=${ow`w-full py-3 px-4 bg-gray-100 border-1 border-gray-300 rounded sm:focus:bg-gray-100 sm:focus:placeholder-current`}
+          className=${ow`w-full py-3 px-4 bg-gray-100 border border-gray-300 rounded sm:focus:bg-gray-100 sm:focus:placeholder-current`}
           placeholder="Enter a value"
         />
         <button className=${ow`px-6 rounded bg-current font-bold`}>
