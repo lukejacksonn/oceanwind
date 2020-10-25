@@ -516,7 +516,7 @@ export default (theme) => (str) => {
           out['transform'] = `scale(${theme.scale[i[1]]})`;
           break;
         case 'rotate':
-          out['transform'] = `rotate(${n ? i[1] * -1 : i[1]}deg)`;
+          out['transform'] = `rotate(${n ? '-' : ''}${theme.rotate[i[1]]})`;
           break;
         case 'origin':
           out[`transform-${i[0]}`] = i[1];
