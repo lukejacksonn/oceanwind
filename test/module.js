@@ -189,6 +189,7 @@ const cases = {
   'border-current': { 'border-color': 'currentColor' },
   border: { 'border-width': theme.borderWidth['default'] },
 
+  shadow: { 'box-shadow': theme.boxShadow['default'] },
   'shadow-none': { 'box-shadow': 'none' },
   'shadow-xs': { 'box-shadow': theme.boxShadow['xs'] },
 

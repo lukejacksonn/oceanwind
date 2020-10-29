@@ -112,6 +112,9 @@ export default (theme) => (str) => {
         case 'border':
           out['border-width'] = theme.borderWidth['default'];
           break;
+        case 'shadow':
+          out['box-shadow'] = theme.boxShadow['default'];
+          break;
       }
       break;
     case 2:
