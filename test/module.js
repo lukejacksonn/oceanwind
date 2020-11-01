@@ -9,6 +9,7 @@ const theme = configure({
     primary: 'orange',
     red: {
       999: 'hotpink',
+      default: 'red',
     },
   },
   borderRadius: {
@@ -151,7 +152,9 @@ const cases = {
 
   'text-xs': { 'font-size': theme.fontSize['xs'] },
 
-  'text-primary': { color: 'orange' },
+  'text-primary': { color: theme.colors['primary'] },
+  'text-red': { color: theme.colors['red']['default'] },
+  'text-red-500': { color: theme.colors['red']['500'] },
 
   'subpixel-antialiased': {
     '-webkit-font-smoothing': 'auto',
@@ -179,9 +182,11 @@ const cases = {
   'bg-bottom': { 'background-position': 'bottom' },
   'bg-repeat': { 'background-repeat': 'repeat' },
   'bg-auto': { 'background-size': 'auto' },
+
   'bg-current': { 'background-color': 'currentColor' },
-  'bg-primary': { 'background-color': 'orange' },
-  'bg-red-999': { 'background-color': 'hotpink' },
+  'bg-primary': { 'background-color': theme.colors['primary'] },
+  'bg-red-999': { 'background-color': theme.colors['red']['999'] },
+  'bg-red-500': { 'background-color': theme.colors['red']['500'] },
 
   'border-solid': { 'border-style': 'solid' },
   'border-collapse': { 'border-collapse': 'collapse' },
@@ -393,6 +398,8 @@ const cases = {
   'bg-left-bottom': { 'background-position': 'left bottom' },
   'bg-right-bottom': { 'background-position': 'right bottom' },
 
+  'bg-primary': { 'background-color': theme.colors['primary'] },
+  'bg-red': { 'background-color': theme.colors['red']['default'] },
   'bg-red-100': { 'background-color': theme.colors['red']['100'] },
   'bg-gray-500': { 'background-color': theme.colors['gray']['500'] },
 
@@ -522,6 +529,7 @@ const cases = {
   'border-l-2': { 'border-left-width': theme.borderWidth['2'] },
 
   'border-red-500': { 'border-color': theme.colors['red']['500'] },
+  'border-red': { 'border-color': theme.colors['red']['default'] },
   'border-primary': { 'border-color': 'orange' },
   'border-red-999': { 'border-color': 'hotpink' },
 
@@ -587,6 +595,9 @@ const cases = {
   'placeholder-transparent': {
     '::placeholder': { color: theme.colors['transparent'] },
   },
+  'placeholder-red': {
+    '::placeholder': { color: theme.colors['red']['default'] },
+  },
   'placeholder-red-500': {
     '::placeholder': { color: theme.colors['red']['500'] },
   },
@@ -610,7 +621,11 @@ const cases = {
   'divide-transparent': {
     selectors: { '& > * + *': { 'border-color': theme.colors['transparent'] } },
   },
-
+  'divide-red': {
+    selectors: {
+      '& > * + *': { 'border-color': theme.colors['red']['default'] },
+    },
+  },
   'divide-red-500': {
     selectors: { '& > * + *': { 'border-color': theme.colors['red']['500'] } },
   },

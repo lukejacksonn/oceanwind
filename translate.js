@@ -30,6 +30,14 @@ const helper = (xs) => ([x, position, y], val) =>
 const cornersHelper = helper(corners);
 const edgesHelper = helper(edges);
 
+const colorHelper = (colors, color, shade) => {
+  const base = colors[color];
+  return (
+    base &&
+    (typeof base === 'string' ? base : shade ? base[shade] : base['default'])
+  );
+};
+
 export default (theme) => (str) => {
   let x;
   let n = '';
@@ -93,11 +101,11 @@ export default (theme) => (str) => {
           };
           break;
         case 'transition':
-          out[`${i[0]}-property`] =
+          out['transition-property'] =
             'background-color, border-color, color, fill, stroke, opacity, box-shadow, transform';
           break;
         case 'resize':
-          out[i[0]] = 'both';
+          out['resize'] = 'both';
           break;
         case 'rounded':
           out['border-radius'] = theme.borderRadius['default'];
@@ -247,7 +255,7 @@ export default (theme) => (str) => {
           }
           break;
         case 'order':
-          out[i[0]] = theme.order[i[1]];
+          out['order'] = theme.order[i[1]];
           break;
         case 'col':
           if (i[1] === 'auto') out['grid-column'] = i[1];
@@ -274,7 +282,7 @@ export default (theme) => (str) => {
               break;
             default:
               if ((x = theme.fontSize[i[1]])) out['font-size'] = x;
-              else out['color'] = theme.colors[i[1]];
+              else out['color'] = colorHelper(theme.colors, i[1]);
               break;
           }
           break;
@@ -344,7 +352,7 @@ export default (theme) => (str) => {
               out['background-color'] = 'currentColor';
               break;
             default:
-              out['background-color'] = theme.colors[i[1]];
+              out['background-color'] = colorHelper(theme.colors, i[1]);
               break;
           }
           break;
@@ -367,7 +375,7 @@ export default (theme) => (str) => {
               out[`border-style`] = i[1];
               break;
             case 'collapse':
-              out[`border-${i[1]}`] = i[1];
+              out[`border-collapse`] = i[1];
               break;
             case 'separate':
               out[`border-collapse`] = i[1];
@@ -376,8 +384,8 @@ export default (theme) => (str) => {
               out[`border-color`] = 'currentColor';
               break;
             default:
-              if ((x = theme.borderWidth[i[1]])) out[i[0] + '-width'] = x;
-              else out[i[0] + '-color'] = theme.colors[i[1]];
+              if ((x = theme.borderWidth[i[1]])) out['border-width'] = x;
+              else out['border-color'] = colorHelper(theme.colors, i[1]);
               break;
           }
           break;
@@ -403,18 +411,18 @@ export default (theme) => (str) => {
         case 'resize':
           switch (i[1]) {
             case 'x':
-              out[i[0]] = 'vertical';
+              out['resize'] = 'vertical';
               break;
             case 'y':
-              out[i[0]] = 'horizontal';
+              out['resize'] = 'horizontal';
               break;
             case 'none':
-              out[i[0]] = i[1];
+              out['resize'] = i[1];
               break;
           }
           break;
         case 'fill':
-          'current' === i[1] && (out['fill'] = theme.fill[i[1]]);
+          if ('current' === i[1]) out['fill'] = theme.fill[i[1]];
           break;
         case 'stroke':
           'current' === i[1]
@@ -422,8 +430,8 @@ export default (theme) => (str) => {
             : (out['stroke-width'] = theme.strokeWidth[i[1]]);
           break;
         case 'sr':
-          'only' === i[1] &&
-            (out = {
+          if ('only' === i[1])
+            out = {
               width: '1px',
               height: '1px',
               padding: '0',
@@ -431,7 +439,7 @@ export default (theme) => (str) => {
               overflow: 'hidden',
               clip: 'rect(0,0,0,0)',
               'border-width': '0',
-            });
+            };
           break;
         case 'box':
           out['box-sizing'] = `${i[1]}-box`;
@@ -483,7 +491,7 @@ export default (theme) => (str) => {
           out['line-height'] = theme.lineHeight[i[1]];
           break;
         case 'align':
-          out[`vertical-${i[0]}`] = i[1];
+          out[`vertical-align`] = i[1];
           break;
         case 'whitespace':
           out['white-space'] = i[1];
@@ -509,7 +517,7 @@ export default (theme) => (str) => {
           }
           break;
         case 'duration':
-          out[`transition-${i[0]}`] = `${theme.transitionDuration[i[1]]}`;
+          out['transition-duration'] = `${theme.transitionDuration[i[1]]}`;
           break;
         case 'delay':
           out['transition-delay'] = `${theme.transitionDelay[i[1]]}`;
@@ -521,16 +529,18 @@ export default (theme) => (str) => {
           out['transform'] = `rotate(${n ? '-' : ''}${theme.rotate[i[1]]})`;
           break;
         case 'origin':
-          out[`transform-${i[0]}`] = i[1];
+          out['transform-origin'] = i[1];
           break;
         case 'cursor':
-          out[i[0]] = i[1];
+          out['cursor'] = i[1];
           break;
         case 'select':
           out['user-select'] = i[1];
           break;
         case 'placeholder':
-          out[`::${i[0]}`] = { color: theme.colors[i[1]] };
+          out['::placeholder'] = {
+            color: colorHelper(theme.placeholderColor, i[1]),
+          };
           break;
         case 'divide':
           switch (i[1]) {
@@ -545,10 +555,8 @@ export default (theme) => (str) => {
               break;
             default:
               out['selectors'] = {
-                '& > * + *': (x = theme.colors[i[1]])
-                  ? {
-                      [`border-color`]: theme.colors[i[1]],
-                    }
+                '& > * + *': (x = colorHelper(theme.colors, i[1]))
+                  ? { [`border-color`]: x }
                   : { 'border-style': i[1] },
               };
               break;
@@ -578,14 +586,16 @@ export default (theme) => (str) => {
             default:
               out['selectors'] = {
                 '& > * + *': {
-                  [`border-color`]: theme.colors[i[1]][i[2]],
+                  [`border-color`]: colorHelper(theme.colors, i[1], i[2]),
                 },
               };
               break;
           }
           break;
         case 'placeholder':
-          out[`::${i[0]}`] = { color: theme.placeholderColor[i[1]][i[2]] };
+          out['::placeholder'] = {
+            color: colorHelper(theme.placeholderColor, i[1], i[2]),
+          };
           break;
         case 'table':
           out['display'] = `${i[0]}-${i[1]}-${i[2]}`;
@@ -688,9 +698,7 @@ export default (theme) => (str) => {
               out['background-position'] = `${i[1]} ${i[2]}`;
               break;
             default:
-              theme.colors[i[1]] &&
-                (x = theme.colors[i[1]][i[2]]) &&
-                (out['background-color'] = x);
+              out['background-color'] = colorHelper(theme.colors, i[1], i[2]);
               break;
           }
           break;
@@ -768,9 +776,7 @@ export default (theme) => (str) => {
               );
               break;
             default:
-              theme.colors[i[1]] &&
-                (x = theme.colors[i[1]][i[2]]) &&
-                (out[`border-color`] = x);
+              out[`border-color`] = colorHelper(theme.colors, i[1], i[2]);
               break;
           }
           break;
@@ -791,9 +797,7 @@ export default (theme) => (str) => {
           if ('events' === i[1]) out[`pointer-events`] = i[2];
           break;
         case 'text':
-          theme.colors[i[1]] &&
-            (x = theme.colors[i[1]][i[2]]) &&
-            (out['color'] = x);
+          out['color'] = colorHelper(theme.colors, i[1], i[2]);
           break;
         case 'align':
           out[`vertical-align`] = `${i[1]}-${i[2]}`;
@@ -802,7 +806,7 @@ export default (theme) => (str) => {
           out[`transform-origin`] = `${i[1]} ${i[2]}`;
           break;
         case 'cursor':
-          out[i[0]] = `${i[1]}-${i[2]}`;
+          out['cursor'] = `${i[1]}-${i[2]}`;
           break;
         case 'space':
           out['selectors'] = {
