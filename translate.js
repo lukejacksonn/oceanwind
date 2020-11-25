@@ -710,10 +710,10 @@ export default (theme) => (str) => {
               out['background-position'] = `${i[1]} ${i[2]}`;
               break;
             case 'opacity':
-              out['--bg-opacity'] = i[2] / 100;
+              out['--ow-bg-opacity'] = i[2] / 100;
               break;
             default:
-              out['background-color'] = `rgba(${hexToRgb(colorHelper(theme.colors, i[1], i[2]))}, var(--bg-opacity, 1))`;
+              out['background-color'] = `rgba(${hexToRgb(colorHelper(theme.colors, i[1], i[2]))}, var(--ow-bg-opacity, 1))`;
               break;
           }
           break;
@@ -791,10 +791,10 @@ export default (theme) => (str) => {
               );
               break;
             case 'opacity':
-              out['--border-opacity'] = i[2] / 100;
+              out['--ow-border-opacity'] = i[2] / 100;
               break;
             default:
-              out[`border-color`] = `rgba(${hexToRgb(colorHelper(theme.colors, i[1], i[2]))}, var(--border-opacity, 1))`;
+              out[`border-color`] = `rgba(${hexToRgb(colorHelper(theme.colors, i[1], i[2]))}, var(--ow-border-opacity, 1))`;
               break;
           }
           break;

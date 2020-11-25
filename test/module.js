@@ -186,7 +186,7 @@ const cases = {
   'bg-current': { 'background-color': 'currentColor' },
   'bg-primary': { 'background-color': theme.colors['primary'] },
   // 'bg-red-999': { 'background-color': theme.colors['red']['999'] },
-  'bg-red-500': { 'background-color': 'rgba(245,101,101, var(--bg-opacity, 1))' },
+  'bg-red-500': { 'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))' },
 
   'border-solid': { 'border-style': 'solid' },
   'border-collapse': { 'border-collapse': 'collapse' },
@@ -400,8 +400,8 @@ const cases = {
 
   'bg-primary': { 'background-color': theme.colors['primary'] },
   'bg-red': { 'background-color': theme.colors['red']['default'] },
-  'bg-red-100': { 'background-color': 'rgba(255,245,245, var(--bg-opacity, 1))' },
-  'bg-gray-500': { 'background-color': 'rgba(160,174,192, var(--bg-opacity, 1))' },
+  'bg-red-100': { 'background-color': 'rgba(255,245,245, var(--ow-bg-opacity, 1))' },
+  'bg-gray-500': { 'background-color': 'rgba(160,174,192, var(--ow-bg-opacity, 1))' },
 
   'ease-in-out': {
     'transition-timing-function': 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -528,7 +528,7 @@ const cases = {
   'border-b-2': { 'border-bottom-width': theme.borderWidth['2'] },
   'border-l-2': { 'border-left-width': theme.borderWidth['2'] },
 
-  'border-red-500': { 'border-color': 'rgba(245,101,101, var(--border-opacity, 1))' },
+  'border-red-500': { 'border-color': 'rgba(245,101,101, var(--ow-border-opacity, 1))' },
   'border-red': { 'border-color': theme.colors['red']['default'] },
   'border-primary': { 'border-color': 'orange' },
   // 'border-red-999': { 'border-color': 'hotpink' },
@@ -635,13 +635,13 @@ const cases = {
 
   'rotate-45 hover:(bg-red-500)': {
     transform: `rotate(${theme.rotate['45']})`,
-    ':hover': { 'background-color': 'rgba(245,101,101, var(--bg-opacity, 1))' },
+    ':hover': { 'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))' },
   },
 
   'rotate-45 hover:(bg-red-500 text-blue-500)': {
     transform: `rotate(${theme.rotate['45']})`,
     ':hover': {
-      'background-color': 'rgba(245,101,101, var(--bg-opacity, 1))',
+      'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
       color: theme.colors['blue']['500'],
     },
   },
@@ -651,7 +651,7 @@ const cases = {
     '@media': {
       [`(min-width: ${theme.screens['sm']})`]: {
         ':hover': {
-          'background-color': 'rgba(245,101,101, var(--bg-opacity, 1))',
+          'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
         },
       },
     },
@@ -662,7 +662,7 @@ const cases = {
     '@media': {
       [`(min-width: ${theme.screens['sm']})`]: {
         ':hover': {
-          'background-color': 'rgba(245,101,101, var(--bg-opacity, 1))',
+          'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
           color: theme.colors['blue']['500'],
         },
       },
@@ -674,7 +674,7 @@ const cases = {
       [`(min-width: ${theme.screens['sm']})`]: {
         transform: `rotate(${theme.rotate['45']})`,
         ':hover': {
-          'background-color': 'rgba(245,101,101, var(--bg-opacity, 1))',
+          'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
         },
       },
     },
@@ -685,7 +685,7 @@ const cases = {
       [`(min-width: ${theme.screens['sm']})`]: {
         transform: `rotate(${theme.rotate['45']})`,
         ':hover': {
-          'background-color': 'rgba(245,101,101, var(--bg-opacity, 1))',
+          'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
           color: theme.colors['blue']['500'],
         },
       },
@@ -700,7 +700,7 @@ const cases = {
       [`(min-width: ${theme.screens['sm']})`]: {
         transform: `rotate(${theme.rotate['45']})`,
         ':hover': {
-          'background-color': 'rgba(245,101,101, var(--bg-opacity, 1))',
+          'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
         },
       },
     },
@@ -714,7 +714,7 @@ const cases = {
       [`(min-width: ${theme.screens['sm']})`]: {
         transform: `rotate(${theme.rotate['45']})`,
         ':hover': {
-          'background-color': 'rgba(245,101,101, var(--bg-opacity, 1))',
+          'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
           color: theme.colors['blue']['500'],
         },
       },
@@ -731,7 +731,7 @@ const cases = {
       [`(min-width: ${theme.screens['sm']})`]: {
         transform: `rotate(${theme.rotate['45']})`,
         ':hover': {
-          'background-color': 'rgba(245,101,101, var(--bg-opacity, 1))',
+          'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
         },
       },
     },
@@ -748,7 +748,7 @@ const cases = {
     '@media': {
       [`(min-width: ${theme.screens['sm']})`]: {
         ':hover': {
-          'background-color': 'rgba(245,101,101, var(--bg-opacity, 1))',
+          'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
           color: theme.colors['blue']['500'],
         },
       },
@@ -766,7 +766,7 @@ const cases = {
       [`(min-width: ${theme.screens['sm']})`]: {
         transform: `rotate(${theme.rotate['45']})`,
         ':hover': {
-          'background-color': 'rgba(245,101,101, var(--bg-opacity, 1))',
+          'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
           color: theme.colors['blue']['500'],
         },
       },
