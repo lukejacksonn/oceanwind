@@ -398,7 +398,6 @@ const cases = {
   'bg-left-bottom': { 'background-position': 'left bottom' },
   'bg-right-bottom': { 'background-position': 'right bottom' },
 
-  'bg-primary': { 'background-color': theme.colors['primary'] },
   'bg-red': { 'background-color': theme.colors['red']['default'] },
   'bg-red-100': { 'background-color': 'rgba(255,245,245, var(--ow-bg-opacity, 1))' },
   'bg-gray-500': { 'background-color': 'rgba(160,174,192, var(--ow-bg-opacity, 1))' },
