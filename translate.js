@@ -38,6 +38,17 @@ const colorHelper = (colors, color, shade) => {
   );
 };
 
+// Adopted from `react-colorful` here: https://github.com/omgovich/react-colorful/blob/master/src/utils/convert.ts
+const hexToRgb = (hex) => {
+  if (hex[0] === "#") hex = hex.substr(1);
+
+  if (hex.length < 6) {
+    return `${parseInt(hex[0] + hex[0], 16)},${parseInt(hex[1] + hex[1], 16)},${parseInt(hex[2] + hex[2], 16)}`;
+  }
+
+  return `${parseInt(hex.substr(0, 2), 16)},${parseInt(hex.substr(2, 2), 16)},${parseInt(hex.substr(4, 2), 16)}`
+}
+
 export default (theme) => (str) => {
   let x;
   let n = '';
@@ -306,6 +317,7 @@ export default (theme) => (str) => {
               out[`list-style-type`] = i[1];
               break;
           }
+          break;
         case 'no':
           if ('underline' === i[1]) out['text-decoration'] = 'none';
           break;
@@ -697,8 +709,11 @@ export default (theme) => (str) => {
             case 'right':
               out['background-position'] = `${i[1]} ${i[2]}`;
               break;
+            case 'opacity':
+              out['--bg-opacity'] = i[2] / 100;
+              break;
             default:
-              out['background-color'] = colorHelper(theme.colors, i[1], i[2]);
+              out['background-color'] = `rgba(${hexToRgb(colorHelper(theme.colors, i[1], i[2]))}, var(--bg-opacity, 1))`;
               break;
           }
           break;
@@ -775,8 +790,11 @@ export default (theme) => (str) => {
                 theme.borderWidth[i[2]]
               );
               break;
+            case 'opacity':
+              out['--border-opacity'] = i[2] / 100;
+              break;
             default:
-              out[`border-color`] = colorHelper(theme.colors, i[1], i[2]);
+              out[`border-color`] = `rgba(${hexToRgb(colorHelper(theme.colors, i[1], i[2]))}, var(--border-opacity, 1))`;
               break;
           }
           break;
