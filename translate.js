@@ -77,6 +77,10 @@ const keywordMap = {"aliceblue":"#f0f8ff","antiquewhite":"#faebd7","aqua":"#00ff
 const toRgb = (color) => {
   if (!color) return color;
   if (color[0] === '#') return hexToRgb(color);
+  if (color.substr(0, 3) === 'rgb') {
+    const match = color.match(/rgba?\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3})\)?(?:, ?(\d(?:\.\d?))\))?/);
+    return match ? `${match[1]},${match[2]},${match[3]}` : undefined;
+  }
   return hexToRgb(keywordMap[color]);
 }
 
