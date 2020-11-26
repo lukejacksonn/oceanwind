@@ -184,9 +184,11 @@ const cases = {
   'bg-auto': { 'background-size': 'auto' },
 
   'bg-current': { 'background-color': 'currentColor' },
-  'bg-primary': { 'background-color': theme.colors['primary'] },
-  // 'bg-red-999': { 'background-color': theme.colors['red']['999'] },
-  'bg-red-500': { 'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))' },
+  'bg-primary': { 'background-color': 'rgba(255,165,0,var(--ow-bg-opacity,1))' },
+  'bg-red-999': { 'background-color': 'rgba(255,105,180,var(--ow-bg-opacity,1))' },
+  'bg-red-500': { 'background-color': 'rgba(245,101,101,var(--ow-bg-opacity,1))' },
+  'bg-undefined': { 'background-color': 'rgba(undefined,var(--ow-bg-opacity,1))' },
+  'bg-undefined-color': { 'background-color': 'rgba(undefined,var(--ow-bg-opacity,1))' },
 
   'border-solid': { 'border-style': 'solid' },
   'border-collapse': { 'border-collapse': 'collapse' },
@@ -382,6 +384,7 @@ const cases = {
   'max-w-full': { 'max-width': '100%' },
   'max-w-xs': { 'max-width': theme.maxWidth['xs'] },
   'max-w-screen-sm': { 'max-width': theme.maxWidth['screen-sm'] },
+  'max-w-screen-sm': { 'max-width': theme.screens['sm'] },
 
   'max-h-full': { 'max-height': '100%' },
   'max-h-screen': { 'max-height': '100vh' },
@@ -398,9 +401,9 @@ const cases = {
   'bg-left-bottom': { 'background-position': 'left bottom' },
   'bg-right-bottom': { 'background-position': 'right bottom' },
 
-  'bg-red': { 'background-color': theme.colors['red']['default'] },
-  'bg-red-100': { 'background-color': 'rgba(255,245,245, var(--ow-bg-opacity, 1))' },
-  'bg-gray-500': { 'background-color': 'rgba(160,174,192, var(--ow-bg-opacity, 1))' },
+  'bg-red': { 'background-color': 'rgba(255,0,0,var(--ow-bg-opacity,1))' },
+  'bg-red-100': { 'background-color': 'rgba(255,245,245,var(--ow-bg-opacity,1))' },
+  'bg-gray-500': { 'background-color': 'rgba(160,174,192,var(--ow-bg-opacity,1))' },
 
   'ease-in-out': {
     'transition-timing-function': 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -527,10 +530,12 @@ const cases = {
   'border-b-2': { 'border-bottom-width': theme.borderWidth['2'] },
   'border-l-2': { 'border-left-width': theme.borderWidth['2'] },
 
-  'border-red-500': { 'border-color': 'rgba(245,101,101, var(--ow-border-opacity, 1))' },
-  'border-red': { 'border-color': theme.colors['red']['default'] },
-  'border-primary': { 'border-color': 'orange' },
-  // 'border-red-999': { 'border-color': 'hotpink' },
+  'border-red-500': { 'border-color': 'rgba(245,101,101,var(--ow-border-opacity,1))' },
+  'border-red': { 'border-color': 'rgba(255,0,0,var(--ow-border-opacity,1))' },
+  'border-primary': { 'border-color': 'rgba(255,165,0,var(--ow-border-opacity,1))' },
+  'border-red-999': { 'border-color': 'rgba(255,105,180,var(--ow-border-opacity,1))' },
+  'border-undefined': { 'border-color': 'rgba(undefined,var(--ow-border-opacity,1))' },
+  'border-undefined-color': { 'border-color': 'rgba(undefined,var(--ow-border-opacity,1))' },
 
   'scale-x-50': { transform: `scaleX(${theme.scale['50']})` },
   'scale-y-50': { transform: `scaleY(${theme.scale['50']})` },
@@ -559,8 +564,6 @@ const cases = {
 
   'grid-flow-row-dense': { 'grid-auto-flow': 'row dense' },
   'grid-flow-col-dense': { 'grid-auto-flow': 'column dense' },
-
-  'max-w-screen-sm': { 'max-width': theme.screens['sm'] },
 
   clearfix: {
     '::after': {
@@ -634,13 +637,13 @@ const cases = {
 
   'rotate-45 hover:(bg-red-500)': {
     transform: `rotate(${theme.rotate['45']})`,
-    ':hover': { 'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))' },
+    ':hover': { 'background-color': 'rgba(245,101,101,var(--ow-bg-opacity,1))' },
   },
 
   'rotate-45 hover:(bg-red-500 text-blue-500)': {
     transform: `rotate(${theme.rotate['45']})`,
     ':hover': {
-      'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
+      'background-color': 'rgba(245,101,101,var(--ow-bg-opacity,1))',
       color: theme.colors['blue']['500'],
     },
   },
@@ -650,7 +653,7 @@ const cases = {
     '@media': {
       [`(min-width: ${theme.screens['sm']})`]: {
         ':hover': {
-          'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
+          'background-color': 'rgba(245,101,101,var(--ow-bg-opacity,1))',
         },
       },
     },
@@ -661,7 +664,7 @@ const cases = {
     '@media': {
       [`(min-width: ${theme.screens['sm']})`]: {
         ':hover': {
-          'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
+          'background-color': 'rgba(245,101,101,var(--ow-bg-opacity,1))',
           color: theme.colors['blue']['500'],
         },
       },
@@ -673,7 +676,7 @@ const cases = {
       [`(min-width: ${theme.screens['sm']})`]: {
         transform: `rotate(${theme.rotate['45']})`,
         ':hover': {
-          'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
+          'background-color': 'rgba(245,101,101,var(--ow-bg-opacity,1))',
         },
       },
     },
@@ -684,7 +687,7 @@ const cases = {
       [`(min-width: ${theme.screens['sm']})`]: {
         transform: `rotate(${theme.rotate['45']})`,
         ':hover': {
-          'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
+          'background-color': 'rgba(245,101,101,var(--ow-bg-opacity,1))',
           color: theme.colors['blue']['500'],
         },
       },
@@ -699,7 +702,7 @@ const cases = {
       [`(min-width: ${theme.screens['sm']})`]: {
         transform: `rotate(${theme.rotate['45']})`,
         ':hover': {
-          'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
+          'background-color': 'rgba(245,101,101,var(--ow-bg-opacity,1))',
         },
       },
     },
@@ -713,7 +716,7 @@ const cases = {
       [`(min-width: ${theme.screens['sm']})`]: {
         transform: `rotate(${theme.rotate['45']})`,
         ':hover': {
-          'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
+          'background-color': 'rgba(245,101,101,var(--ow-bg-opacity,1))',
           color: theme.colors['blue']['500'],
         },
       },
@@ -730,7 +733,7 @@ const cases = {
       [`(min-width: ${theme.screens['sm']})`]: {
         transform: `rotate(${theme.rotate['45']})`,
         ':hover': {
-          'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
+          'background-color': 'rgba(245,101,101,var(--ow-bg-opacity,1))',
         },
       },
     },
@@ -747,7 +750,7 @@ const cases = {
     '@media': {
       [`(min-width: ${theme.screens['sm']})`]: {
         ':hover': {
-          'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
+          'background-color': 'rgba(245,101,101,var(--ow-bg-opacity,1))',
           color: theme.colors['blue']['500'],
         },
       },
@@ -765,7 +768,7 @@ const cases = {
       [`(min-width: ${theme.screens['sm']})`]: {
         transform: `rotate(${theme.rotate['45']})`,
         ':hover': {
-          'background-color': 'rgba(245,101,101, var(--ow-bg-opacity, 1))',
+          'background-color': 'rgba(245,101,101,var(--ow-bg-opacity,1))',
           color: theme.colors['blue']['500'],
         },
       },
