@@ -11,11 +11,14 @@ const theme = configure({
       999: 'hotpink',
       default: 'red',
       rgb: 'rgb(255,0,0)',
-      rgba: 'rgba(255,0,0,1)'
+      rgba: 'rgba(255,0,0,1)',
+      hsl: 'hsl(360, 100, 50)',
+      hsla: 'hsla(0, 100%, 50%)',
     },
     invalid: {
       hex: '#ff',
-      rgb: 'rgb(0,0)'
+      rgb: 'rgb(0,0)',
+      hsl: 'hsl(360,0)',
     }
   },
   borderRadius: {
@@ -195,10 +198,13 @@ const cases = {
   'bg-red-500': { 'background-color': 'rgba(245,101,101,var(--ow-bg-opacity,1))' },
   'bg-red-rgb': { 'background-color': 'rgba(255,0,0,var(--ow-bg-opacity,1))' },
   'bg-red-rgba': { 'background-color': 'rgba(255,0,0,var(--ow-bg-opacity,1))' },
+  'bg-red-hsl': { 'background-color': 'rgba(255,0,0,var(--ow-bg-opacity,1))' },
+  'bg-red-hsla': { 'background-color': 'rgba(255,0,0,var(--ow-bg-opacity,1))' },
   'bg-undefined': { 'background-color': 'rgba(undefined,var(--ow-bg-opacity,1))' },
   'bg-undefined-color': { 'background-color': 'rgba(undefined,var(--ow-bg-opacity,1))' },
   'bg-invalid-hex': { 'background-color': 'rgba(undefined,var(--ow-bg-opacity,1))' },
   'bg-invalid-rgb': { 'background-color': 'rgba(undefined,var(--ow-bg-opacity,1))' },
+  'bg-invalid-hsl': { 'background-color': 'rgba(undefined,var(--ow-bg-opacity,1))' },
 
   'border-solid': { 'border-style': 'solid' },
   'border-collapse': { 'border-collapse': 'collapse' },
@@ -546,10 +552,13 @@ const cases = {
   'border-red-999': { 'border-color': 'rgba(255,105,180,var(--ow-border-opacity,1))' },
   'border-red-rgb': { 'border-color': 'rgba(255,0,0,var(--ow-border-opacity,1))' },
   'border-red-rgba': { 'border-color': 'rgba(255,0,0,var(--ow-border-opacity,1))' },
+  'border-red-hsl': { 'border-color': 'rgba(255,0,0,var(--ow-border-opacity,1))' },
+  'border-red-hsla': { 'border-color': 'rgba(255,0,0,var(--ow-border-opacity,1))' },
   'border-undefined': { 'border-color': 'rgba(undefined,var(--ow-border-opacity,1))' },
   'border-undefined-color': { 'border-color': 'rgba(undefined,var(--ow-border-opacity,1))' },
   'border-invalid-hex': { 'border-color': 'rgba(undefined,var(--ow-border-opacity,1))' },
   'border-invalid-rgb': { 'border-color': 'rgba(undefined,var(--ow-border-opacity,1))' },
+  'border-invalid-hsl': { 'border-color': 'rgba(undefined,var(--ow-border-opacity,1))' },
 
   'scale-x-50': { transform: `scaleX(${theme.scale['50']})` },
   'scale-y-50': { transform: `scaleY(${theme.scale['50']})` },

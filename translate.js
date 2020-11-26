@@ -74,6 +74,35 @@ const keywordMap = {"aliceblue":"#f0f8ff","antiquewhite":"#faebd7","aqua":"#00ff
   "wheat":"#f5deb3","white":"#ffffff","whitesmoke":"#f5f5f5",
   "yellow":"#ffff00","yellowgreen":"#9acd32"}
 
+// Adapted from: https://gist.github.com/mjackson/5311256#file-color-conversion-algorithms-js-L36-L71
+const hslToRgb = (hsl) => {
+  const match = hsl.match(/hsla?\((\d{1,3}), ?(\d{1,3})%?, ?(\d{1,3})%?\)?(?:, ?(\d(?:\.\d?))\))?/);
+  if (!match) return undefined;
+  const h = match[1] / 360, s = match[2] / 100, l = match[3] / 100;
+  let r, g, b;
+
+  if (s === 0) r = g = b = l;
+  else {
+    function hueToRgb(p, q, t) {
+      if (t < 0) t += 1;
+      if (t > 1) t -= 1;
+      if (t < 1/6) return p + (q - p) * 6 * t;
+      if (t < 1/2) return q;
+      if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+      return p;
+    }
+
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const p = 2 * l - q;
+
+    r = hueToRgb(p, q, h + 1/3);
+    g = hueToRgb(p, q, h);
+    b = hueToRgb(p, q, h - 1/3);
+  }
+
+  return `${r * 255},${g * 255},${b * 255}`;
+}
+
 const toRgb = (color) => {
   if (!color) return color;
   if (color[0] === '#') return hexToRgb(color);
@@ -81,6 +110,7 @@ const toRgb = (color) => {
     const match = color.match(/rgba?\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3})\)?(?:, ?(\d(?:\.\d?))\))?/);
     return match ? `${match[1]},${match[2]},${match[3]}` : undefined;
   }
+  if (color.substr(0, 3) === 'hsl') return hslToRgb(color);
   return hexToRgb(keywordMap[color]);
 }
 
