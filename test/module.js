@@ -10,6 +10,7 @@ const theme = configure({
     red: {
       999: 'hotpink',
       default: 'red',
+      invalid: '#ff'
     },
   },
   borderRadius: {
@@ -189,6 +190,7 @@ const cases = {
   'bg-red-500': { 'background-color': 'rgba(245,101,101,var(--ow-bg-opacity,1))' },
   'bg-undefined': { 'background-color': 'rgba(undefined,var(--ow-bg-opacity,1))' },
   'bg-undefined-color': { 'background-color': 'rgba(undefined,var(--ow-bg-opacity,1))' },
+  'bg-red-invalid': { 'background-color': 'rgba(undefined,var(--ow-bg-opacity,1))' },
 
   'border-solid': { 'border-style': 'solid' },
   'border-collapse': { 'border-collapse': 'collapse' },

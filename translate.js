@@ -40,13 +40,13 @@ const colorHelper = (colors, color, shade) => {
 
 // Adopted from `react-colorful` here: https://github.com/omgovich/react-colorful/blob/master/src/utils/convert.ts
 const hexToRgb = (hex) => {
-  if (hex[0] === "#") hex = hex.substr(1);
+  if (!/^#[0-9a-fA-F]{8}$|#[0-9a-fA-F]{6}$|#[0-9a-fA-F]{4}$|#[0-9a-fA-F]{3}$/i.test(hex)) return undefined;
 
-  if (hex.length < 6) {
-    return `${parseInt(hex[0] + hex[0], 16)},${parseInt(hex[1] + hex[1], 16)},${parseInt(hex[2] + hex[2], 16)}`;
+  if (hex.length <= 4) {
+    return `${parseInt(hex[1] + hex[1], 16)},${parseInt(hex[2] + hex[2], 16)},${parseInt(hex[3] + hex[3], 16)}`;
   }
 
-  return `${parseInt(hex.substr(0, 2), 16)},${parseInt(hex.substr(2, 2), 16)},${parseInt(hex.substr(4, 2), 16)}`
+  return `${parseInt(hex.substr(1, 2), 16)},${parseInt(hex.substr(3, 2), 16)},${parseInt(hex.substr(5, 2), 16)}`
 }
 
 const keywordMap = {"aliceblue":"#f0f8ff","antiquewhite":"#faebd7","aqua":"#00ffff","aquamarine":"#7fffd4","azure":"#f0ffff",
