@@ -54,10 +54,8 @@ export const process = (theme, cache = {}) => (strings, values) => {
         if (seen[rule]) warn(theme)(`Duplicate declaration of "${rule}"`);
         // Mark rule as seen
         seen[rule] = true;
-        // Lookup translation for directive
-        let translation = (cache[rule] = cache[rule] || translate(theme, rule));
         // Return translation with variants applied
-        return translation;
+        return (cache[rule] = cache[rule] || translate(theme, rule));
       })
     ));
 };
