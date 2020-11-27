@@ -54,7 +54,7 @@ const hexToRgb = (color, opacityHelper) => {
     b = parseInt(color.substr(5, 2), 16);
   }
 
-  return opacityHelper ? `rgba(${r},${g},${b},var(${opacityHelper},1))` : `rgb(${r},${g},${b})`;
+  return `rgba(${r},${g},${b},var(${opacityHelper},1))`;
 }
 
 export default (theme) => (str) => {
