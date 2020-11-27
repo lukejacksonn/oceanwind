@@ -592,7 +592,10 @@ const cases = {
   },
 
   'placeholder-transparent': {
-    '::placeholder': { color: theme.colors['transparent'] },
+    '::placeholder': {
+      '--ow-placeholder-opacity': 1,
+      color: 'rgba(0,0,0,var(--ow-placeholder-opacity))',
+    },
   },
   'placeholder-red': {
     '::placeholder': { color: theme.colors['red']['default'] },
