@@ -1,4 +1,4 @@
-import dictionary from './translate.js';
+import dictionary from './dictionary.js';
 import defaultTheme, { globals } from './theme.js';
 
 import merge from './util/merge.js';
