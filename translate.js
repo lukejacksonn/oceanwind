@@ -30,17 +30,17 @@ const helper = (xs) => ([x, position, y], val) =>
 const cornersHelper = helper(corners);
 const edgesHelper = helper(edges);
 
-const colorHelper = (colors, color, shade, opacityHelper) => {
+const colorHelper = (colors, color, shade, opacity) => {
   const base = colors[color];
   const colorValue = (
     base &&
     (typeof base === 'string' ? base : shade ? base[shade] : base['default'])
   );
-  return opacityHelper ? hexToRgb(colorValue, opacityHelper) : colorValue;
+  return `rgba(${hexToRgb(colorValue)},var(${opacity}))`
 };
 
 // Adopted from `react-colorful` here: https://github.com/omgovich/react-colorful/blob/master/src/utils/convert.ts
-const hexToRgb = (color, opacityHelper) => {
+const hexToRgb = (color) => {
   if (!/^#[0-9a-fA-F]{8}$|#[0-9a-fA-F]{6}$|#[0-9a-fA-F]{4}$|#[0-9a-fA-F]{3}$/i.test(color)) return undefined;
   let r, g, b;
 
@@ -54,7 +54,7 @@ const hexToRgb = (color, opacityHelper) => {
     b = parseInt(color.substr(5, 2), 16);
   }
 
-  return `rgba(${r},${g},${b},var(${opacityHelper},1))`;
+  return `${r},${g},${b}`;
 }
 
 export default (theme) => (str) => {
@@ -301,7 +301,10 @@ export default (theme) => (str) => {
               break;
             default:
               if ((x = theme.fontSize[i[1]])) out['font-size'] = x;
-              else out['color'] = colorHelper(theme.colors, i[1]);
+              else out = {
+                '--ow-text-opacity': 1,
+                color: colorHelper(theme.colors, i[1], undefined, '--ow-text-opacity')
+              };
               break;
           }
           break;
@@ -372,7 +375,10 @@ export default (theme) => (str) => {
               out['background-color'] = 'currentColor';
               break;
             default:
-              out['background-color'] = colorHelper(theme.colors, i[1], undefined, '--ow-bg-opacity');
+              out = {
+                '--ow-bg-opacity': 1,
+                'background-color': colorHelper(theme.colors, i[1], undefined, '--ow-bg-opacity'),
+              };
               break;
           }
           break;
@@ -405,7 +411,10 @@ export default (theme) => (str) => {
               break;
             default:
               if ((x = theme.borderWidth[i[1]])) out['border-width'] = x;
-              else out['border-color'] = colorHelper(theme.colors, i[1], undefined, '--ow-border-opacity');
+              else out = {
+                '--ow-border-opacity': 1,
+                'border-color': colorHelper(theme.colors, i[1], undefined, '--ow-border-opacity'),
+              };
               break;
           }
           break;
@@ -559,7 +568,8 @@ export default (theme) => (str) => {
           break;
         case 'placeholder':
           out['::placeholder'] = {
-            color: colorHelper(theme.placeholderColor, i[1]),
+            '--ow-placeholder-opacity': 1,
+            color: colorHelper(theme.placeholderColor, i[1], undefined, '--ow-placeholder-opacity'),
           };
           break;
         case 'divide':
@@ -573,11 +583,23 @@ export default (theme) => (str) => {
                 },
               };
               break;
+            case 'solid':
+            case 'dashed':
+            case 'dotted':
+            case 'double':
+            case 'none':
+              out['selectors'] = {
+                '& > * + *': {
+                  'border-style': i[1]
+                },
+              };
+              break;
             default:
               out['selectors'] = {
-                '& > * + *': (x = colorHelper(theme.colors, i[1]))
-                  ? { [`border-color`]: x }
-                  : { 'border-style': i[1] },
+                '& > * + *': {
+                  '--ow-divide-opacity': 1,
+                  'border-color': colorHelper(theme.colors, i[1], undefined, '--ow-divide-opacity'),
+                }
               };
               break;
           }
@@ -606,16 +628,26 @@ export default (theme) => (str) => {
             default:
               out['selectors'] = {
                 '& > * + *': {
-                  [`border-color`]: colorHelper(theme.colors, i[1], i[2]),
+                  '--ow-divide-opacity': 1,
+                  'border-color': colorHelper(theme.colors, i[1], i[2], '--ow-divide-opacity'),
                 },
               };
               break;
           }
           break;
         case 'placeholder':
-          out['::placeholder'] = {
-            color: colorHelper(theme.placeholderColor, i[1], i[2]),
-          };
+          switch (i[1]) {
+            case 'opacity':
+              out['::placeholder'] = {
+                '--ow-placeholder-opacity': theme.opacity[i[2]],
+              };
+              break;
+            default:
+              out['::placeholder'] = {
+                '--ow-placeholder-opacity': 1,
+                color: colorHelper(theme.placeholderColor, i[1], i[2], '--ow-placeholder-opacity'),
+              };
+          }
           break;
         case 'table':
           out['display'] = `${i[0]}-${i[1]}-${i[2]}`;
@@ -721,7 +753,10 @@ export default (theme) => (str) => {
               out['--ow-bg-opacity'] = theme.opacity[i[2]];
               break;
             default:
-              out['background-color'] = colorHelper(theme.colors, i[1], i[2], '--ow-bg-opacity');
+              out = {
+                '--ow-bg-opacity': 1,
+                'background-color': colorHelper(theme.colors, i[1], i[2], '--ow-bg-opacity'),
+              };
               break;
           }
           break;
@@ -802,7 +837,10 @@ export default (theme) => (str) => {
               out['--ow-border-opacity'] = theme.opacity[i[2]];
               break;
             default:
-              out[`border-color`] = colorHelper(theme.colors, i[1], i[2], '--ow-border-opacity');
+              out = {
+                '--ow-border-opacity': 1,
+                'border-color': colorHelper(theme.colors, i[1], i[2], '--ow-border-opacity'),
+              };
               break;
           }
           break;
@@ -823,7 +861,17 @@ export default (theme) => (str) => {
           if ('events' === i[1]) out[`pointer-events`] = i[2];
           break;
         case 'text':
-          out['color'] = colorHelper(theme.colors, i[1], i[2]);
+          switch (i[1]) {
+            case 'opacity':
+              out['--ow-text-opacity'] = theme.opacity[i[2]];
+              break;
+            default:
+              out = {
+                '--ow-text-opacity': 1,
+                color: colorHelper(theme.colors, i[1], i[2], '--ow-text-opacity'),
+              };
+              break;
+          }
           break;
         case 'align':
           out[`vertical-align`] = `${i[1]}-${i[2]}`;

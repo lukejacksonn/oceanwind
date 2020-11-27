@@ -7,7 +7,7 @@ export const globals = {
   },
 
   colors: {
-    transparent: 'transparent',
+    transparent: '#00000000',
     current: 'currentColor',
 
     black: '#000',
