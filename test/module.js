@@ -6,10 +6,10 @@ const theme = configure({
     999: '999ex',
   },
   colors: {
-    primary: 'orange',
+    primary: '#FFA500',
     red: {
-      999: 'hotpink',
-      default: 'red',
+      999: '#FF69B4',
+      default: '#FF0000',
     },
   },
   borderRadius: {
@@ -152,9 +152,29 @@ const cases = {
 
   'text-xs': { 'font-size': theme.fontSize['xs'] },
 
-  'text-primary': { color: theme.colors['primary'] },
-  'text-red': { color: theme.colors['red']['default'] },
-  'text-red-500': { color: theme.colors['red']['500'] },
+  'text-primary': {
+    '--ow-text-opacity': 1,
+    color: 'rgba(255,165,0,var(--ow-text-opacity))',
+  },
+  'text-red': {
+    '--ow-text-opacity': 1,
+    color: 'rgba(255,0,0,var(--ow-text-opacity))',
+  },
+  'text-red-500': {
+    '--ow-text-opacity': 1,
+    color: 'rgba(245,101,101,var(--ow-text-opacity))',
+  },
+  'text-opacity-50': { '--ow-text-opacity': '0.5' },
+
+
+  'text-red text-opacity-50': {
+    '--ow-text-opacity': '0.5',
+    color: 'rgba(255,0,0,var(--ow-text-opacity))',
+  },
+  'text-red-500 text-opacity-50': {
+    '--ow-text-opacity': '0.5',
+    color: 'rgba(245,101,101,var(--ow-text-opacity))',
+  },
 
   'subpixel-antialiased': {
     '-webkit-font-smoothing': 'auto',
@@ -184,15 +204,91 @@ const cases = {
   'bg-auto': { 'background-size': 'auto' },
 
   'bg-current': { 'background-color': 'currentColor' },
-  'bg-primary': { 'background-color': theme.colors['primary'] },
-  'bg-red-999': { 'background-color': theme.colors['red']['999'] },
-  'bg-red-500': { 'background-color': theme.colors['red']['500'] },
+  'bg-primary': {
+    '--ow-bg-opacity': 1,
+    'background-color': 'rgba(255,165,0,var(--ow-bg-opacity))',
+  },
+  'bg-red': {
+    '--ow-bg-opacity': 1,
+    'background-color': 'rgba(255,0,0,var(--ow-bg-opacity))',
+  },
+  'bg-red-500': {
+    '--ow-bg-opacity': 1,
+    'background-color': 'rgba(245,101,101,var(--ow-bg-opacity))',
+  },
+  'bg-red-999': {
+    '--ow-bg-opacity': 1,
+    'background-color': 'rgba(255,105,180,var(--ow-bg-opacity))',
+  },
+  'bg-invalid': {
+    '--ow-bg-opacity': 1,
+    'background-color': 'rgba(undefined,var(--ow-bg-opacity))',
+  },
+  'bg-opacity-50': { '--ow-bg-opacity': '0.5' },
+
+  'bg-red bg-opacity-50': {
+    '--ow-bg-opacity': '0.5',
+    'background-color': 'rgba(255,0,0,var(--ow-bg-opacity))',
+  },
+  'bg-red-500 bg-opacity-50': {
+    '--ow-bg-opacity': '0.5',
+    'background-color': 'rgba(245,101,101,var(--ow-bg-opacity))',
+  },
+
+  'bg-no-repeat': { 'background-repeat': 'no-repeat' },
+  'bg-repeat-x': { 'background-repeat': 'repeat-x' },
+  'bg-repeat-y': { 'background-repeat': 'repeat-y' },
+  'bg-repeat-round': { 'background-repeat': 'round' },
+  'bg-repeat-space': { 'background-repeat': 'space' },
+  'bg-left-bottom': { 'background-position': 'left bottom' },
+  'bg-right-bottom': { 'background-position': 'right bottom' },
 
   'border-solid': { 'border-style': 'solid' },
   'border-collapse': { 'border-collapse': 'collapse' },
   'border-separate': { 'border-collapse': 'separate' },
   'border-current': { 'border-color': 'currentColor' },
   border: { 'border-width': theme.borderWidth['default'] },
+
+  'border-t': { 'border-top-width': theme.borderWidth['default'] },
+  'border-r': { 'border-right-width': theme.borderWidth['default'] },
+  'border-b': { 'border-bottom-width': theme.borderWidth['default'] },
+  'border-l': { 'border-left-width': theme.borderWidth['default'] },
+
+  'border-t-2': { 'border-top-width': theme.borderWidth['2'] },
+  'border-r-2': { 'border-right-width': theme.borderWidth['2'] },
+  'border-b-2': { 'border-bottom-width': theme.borderWidth['2'] },
+  'border-l-2': { 'border-left-width': theme.borderWidth['2'] },
+
+  'border-primary': {
+    '--ow-border-opacity': 1,
+    'border-color': 'rgba(255,165,0,var(--ow-border-opacity))',
+  },
+  'border-red': {
+    '--ow-border-opacity': 1,
+    'border-color': 'rgba(255,0,0,var(--ow-border-opacity))',
+  },
+  'border-red-500': {
+    '--ow-border-opacity': 1,
+    'border-color': 'rgba(245,101,101,var(--ow-border-opacity))',
+  },
+  'border-red-999': {
+    '--ow-border-opacity': 1,
+    'border-color': 'rgba(255,105,180,var(--ow-border-opacity))',
+  },
+  'border-invalid': {
+    '--ow-border-opacity': 1,
+    'border-color': 'rgba(undefined,var(--ow-border-opacity))',
+  },
+  'border-opacity-50': { '--ow-border-opacity': '0.5' },
+
+  'border-red border-opacity-50': {
+    '--ow-border-opacity': '0.5',
+    'border-color': 'rgba(255,0,0,var(--ow-border-opacity))',
+  },
+  'border-red-500 border-opacity-50': {
+    '--ow-border-opacity': '0.5',
+    'border-color': 'rgba(245,101,101,var(--ow-border-opacity))',
+  },
 
   shadow: { 'box-shadow': theme.boxShadow['default'] },
   'shadow-none': { 'box-shadow': 'none' },
@@ -382,6 +478,7 @@ const cases = {
   'max-w-full': { 'max-width': '100%' },
   'max-w-xs': { 'max-width': theme.maxWidth['xs'] },
   'max-w-screen-sm': { 'max-width': theme.maxWidth['screen-sm'] },
+  'max-w-screen-sm': { 'max-width': theme.screens['sm'] },
 
   'max-h-full': { 'max-height': '100%' },
   'max-h-screen': { 'max-height': '100vh' },
@@ -389,19 +486,6 @@ const cases = {
   'whitespace-normal': { 'white-space': 'normal' },
   'whitespace-no-wrap': { 'white-space': 'nowrap' },
   'whitespace-pre-wrap': { 'white-space': 'pre-wrap' },
-
-  'bg-no-repeat': { 'background-repeat': 'no-repeat' },
-  'bg-repeat-x': { 'background-repeat': 'repeat-x' },
-  'bg-repeat-y': { 'background-repeat': 'repeat-y' },
-  'bg-repeat-round': { 'background-repeat': 'round' },
-  'bg-repeat-space': { 'background-repeat': 'space' },
-  'bg-left-bottom': { 'background-position': 'left bottom' },
-  'bg-right-bottom': { 'background-position': 'right bottom' },
-
-  'bg-primary': { 'background-color': theme.colors['primary'] },
-  'bg-red': { 'background-color': theme.colors['red']['default'] },
-  'bg-red-100': { 'background-color': theme.colors['red']['100'] },
-  'bg-gray-500': { 'background-color': theme.colors['gray']['500'] },
 
   'ease-in-out': {
     'transition-timing-function': 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -518,21 +602,6 @@ const cases = {
     'border-bottom-right-radius': theme.borderRadius['sm'],
   },
 
-  'border-t': { 'border-top-width': theme.borderWidth['default'] },
-  'border-r': { 'border-right-width': theme.borderWidth['default'] },
-  'border-b': { 'border-bottom-width': theme.borderWidth['default'] },
-  'border-l': { 'border-left-width': theme.borderWidth['default'] },
-
-  'border-t-2': { 'border-top-width': theme.borderWidth['2'] },
-  'border-r-2': { 'border-right-width': theme.borderWidth['2'] },
-  'border-b-2': { 'border-bottom-width': theme.borderWidth['2'] },
-  'border-l-2': { 'border-left-width': theme.borderWidth['2'] },
-
-  'border-red-500': { 'border-color': theme.colors['red']['500'] },
-  'border-red': { 'border-color': theme.colors['red']['default'] },
-  'border-primary': { 'border-color': 'orange' },
-  'border-red-999': { 'border-color': 'hotpink' },
-
   'scale-x-50': { transform: `scaleX(${theme.scale['50']})` },
   'scale-y-50': { transform: `scaleY(${theme.scale['50']})` },
 
@@ -560,8 +629,6 @@ const cases = {
 
   'grid-flow-row-dense': { 'grid-auto-flow': 'row dense' },
   'grid-flow-col-dense': { 'grid-auto-flow': 'column dense' },
-
-  'max-w-screen-sm': { 'max-width': theme.screens['sm'] },
 
   clearfix: {
     '::after': {
@@ -593,19 +660,47 @@ const cases = {
   },
 
   'placeholder-transparent': {
-    '::placeholder': { color: theme.colors['transparent'] },
-  },
-  'placeholder-red': {
-    '::placeholder': { color: theme.colors['red']['default'] },
-  },
-  'placeholder-red-500': {
-    '::placeholder': { color: theme.colors['red']['500'] },
+    '::placeholder': {
+      '--ow-placeholder-opacity': 1,
+      color: 'rgba(0,0,0,var(--ow-placeholder-opacity))',
+    },
   },
   'placeholder-primary': {
-    '::placeholder': { color: 'orange' },
+    '::placeholder': {
+      '--ow-placeholder-opacity': 1,
+      color: 'rgba(255,165,0,var(--ow-placeholder-opacity))',
+    },
+  },
+  'placeholder-red': {
+    '::placeholder': {
+      '--ow-placeholder-opacity': 1,
+      color: 'rgba(255,0,0,var(--ow-placeholder-opacity))',
+    },
+  },
+  'placeholder-red-500': {
+    '::placeholder': {
+      '--ow-placeholder-opacity': 1,
+      color: 'rgba(245,101,101,var(--ow-placeholder-opacity))',
+    },
   },
   'placeholder-red-999': {
-    '::placeholder': { color: 'hotpink' },
+    '::placeholder': {
+      '--ow-placeholder-opacity': 1,
+      color: 'rgba(255,105,180,var(--ow-placeholder-opacity))',
+    },
+  },
+
+  'placeholder-red placeholder-opacity-50': {
+    '::placeholder': {
+      '--ow-placeholder-opacity': '0.5',
+      color: 'rgba(255,0,0,var(--ow-placeholder-opacity))',
+    },
+  },
+  'placeholder-red-500 placeholder-opacity-50': {
+    '::placeholder': {
+      '--ow-placeholder-opacity': '0.5',
+      color: 'rgba(245,101,101,var(--ow-placeholder-opacity))',
+    },
   },
 
   'divide-x': { selectors: { '& > * + *': { 'border-left-width': '1px' } } },
@@ -619,15 +714,28 @@ const cases = {
   },
 
   'divide-transparent': {
-    selectors: { '& > * + *': { 'border-color': theme.colors['transparent'] } },
+    selectors: {
+      '& > * + *': {
+        '--ow-divide-opacity': 1,
+        'border-color': 'rgba(0,0,0,var(--ow-divide-opacity))',
+      }
+    },
   },
   'divide-red': {
     selectors: {
-      '& > * + *': { 'border-color': theme.colors['red']['default'] },
+      '& > * + *': {
+        '--ow-divide-opacity': 1,
+        'border-color': 'rgba(255,0,0,var(--ow-divide-opacity))'
+      },
     },
   },
   'divide-red-500': {
-    selectors: { '& > * + *': { 'border-color': theme.colors['red']['500'] } },
+    selectors: {
+      '& > * + *': {
+        '--ow-divide-opacity': 1,
+        'border-color': 'rgba(245,101,101,var(--ow-divide-opacity))',
+      }
+    },
   },
 
   'p-999': { padding: '999ex' },
@@ -635,14 +743,19 @@ const cases = {
 
   'rotate-45 hover:(bg-red-500)': {
     transform: `rotate(${theme.rotate['45']})`,
-    ':hover': { 'background-color': theme.colors['red']['500'] },
+    ':hover': {
+      '--ow-bg-opacity': 1,
+      'background-color': 'rgba(245,101,101,var(--ow-bg-opacity))',
+    },
   },
 
   'rotate-45 hover:(bg-red-500 text-blue-500)': {
     transform: `rotate(${theme.rotate['45']})`,
     ':hover': {
-      'background-color': theme.colors['red']['500'],
-      color: theme.colors['blue']['500'],
+      '--ow-bg-opacity': 1,
+      'background-color': 'rgba(245,101,101,var(--ow-bg-opacity))',
+      '--ow-text-opacity': 1,
+      color: 'rgba(66,153,225,var(--ow-text-opacity))',
     },
   },
 
@@ -651,7 +764,8 @@ const cases = {
     '@media': {
       [`(min-width: ${theme.screens['sm']})`]: {
         ':hover': {
-          'background-color': theme.colors['red']['500'],
+          '--ow-bg-opacity': 1,
+          'background-color': 'rgba(245,101,101,var(--ow-bg-opacity))',
         },
       },
     },
@@ -662,8 +776,10 @@ const cases = {
     '@media': {
       [`(min-width: ${theme.screens['sm']})`]: {
         ':hover': {
-          'background-color': theme.colors['red']['500'],
-          color: theme.colors['blue']['500'],
+          '--ow-bg-opacity': 1,
+          'background-color': 'rgba(245,101,101,var(--ow-bg-opacity))',
+          '--ow-text-opacity': 1,
+          color: 'rgba(66,153,225,var(--ow-text-opacity))',
         },
       },
     },
@@ -674,7 +790,8 @@ const cases = {
       [`(min-width: ${theme.screens['sm']})`]: {
         transform: `rotate(${theme.rotate['45']})`,
         ':hover': {
-          'background-color': theme.colors['red']['500'],
+          '--ow-bg-opacity': 1,
+          'background-color': 'rgba(245,101,101,var(--ow-bg-opacity))',
         },
       },
     },
@@ -685,8 +802,10 @@ const cases = {
       [`(min-width: ${theme.screens['sm']})`]: {
         transform: `rotate(${theme.rotate['45']})`,
         ':hover': {
-          'background-color': theme.colors['red']['500'],
-          color: theme.colors['blue']['500'],
+          '--ow-bg-opacity': 1,
+          'background-color': 'rgba(245,101,101,var(--ow-bg-opacity))',
+          '--ow-text-opacity': 1,
+          color: 'rgba(66,153,225,var(--ow-text-opacity))',
         },
       },
     },
@@ -700,7 +819,8 @@ const cases = {
       [`(min-width: ${theme.screens['sm']})`]: {
         transform: `rotate(${theme.rotate['45']})`,
         ':hover': {
-          'background-color': theme.colors['red']['500'],
+          '--ow-bg-opacity': 1,
+          'background-color': 'rgba(245,101,101,var(--ow-bg-opacity))',
         },
       },
     },
@@ -714,8 +834,10 @@ const cases = {
       [`(min-width: ${theme.screens['sm']})`]: {
         transform: `rotate(${theme.rotate['45']})`,
         ':hover': {
-          'background-color': theme.colors['red']['500'],
-          color: theme.colors['blue']['500'],
+          '--ow-bg-opacity': 1,
+          'background-color': 'rgba(245,101,101,var(--ow-bg-opacity))',
+          '--ow-text-opacity': 1,
+          color: 'rgba(66,153,225,var(--ow-text-opacity))',
         },
       },
     },
@@ -731,7 +853,8 @@ const cases = {
       [`(min-width: ${theme.screens['sm']})`]: {
         transform: `rotate(${theme.rotate['45']})`,
         ':hover': {
-          'background-color': theme.colors['red']['500'],
+          '--ow-bg-opacity': 1,
+          'background-color': 'rgba(245,101,101,var(--ow-bg-opacity))',
         },
       },
     },
@@ -748,8 +871,10 @@ const cases = {
     '@media': {
       [`(min-width: ${theme.screens['sm']})`]: {
         ':hover': {
-          'background-color': theme.colors['red']['500'],
-          color: theme.colors['blue']['500'],
+          '--ow-bg-opacity': 1,
+          'background-color': 'rgba(245,101,101,var(--ow-bg-opacity))',
+          '--ow-text-opacity': 1,
+          color: 'rgba(66,153,225,var(--ow-text-opacity))',
         },
       },
     },
@@ -766,8 +891,10 @@ const cases = {
       [`(min-width: ${theme.screens['sm']})`]: {
         transform: `rotate(${theme.rotate['45']})`,
         ':hover': {
-          'background-color': theme.colors['red']['500'],
-          color: theme.colors['blue']['500'],
+          '--ow-bg-opacity': 1,
+          'background-color': 'rgba(245,101,101,var(--ow-bg-opacity))',
+          '--ow-text-opacity': 1,
+          color: 'rgba(66,153,225,var(--ow-text-opacity))',
         },
       },
     },

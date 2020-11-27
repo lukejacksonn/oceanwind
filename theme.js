@@ -7,7 +7,7 @@ export const globals = {
   },
 
   colors: {
-    transparent: 'transparent',
+    transparent: '#00000000',
     current: 'currentColor',
 
     black: '#000',
@@ -203,7 +203,6 @@ export default ({
     'gradient-to-tl':
       'linear-gradient(to top left, var(--gradient-color-stops))',
   },
-  gradientColorStops: colors,
   backgroundOpacity: opacity,
   // backgroundPosition: position,
   backgroundSize: {
