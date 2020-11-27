@@ -203,7 +203,6 @@ export default ({
     'gradient-to-tl':
       'linear-gradient(to top left, var(--gradient-color-stops))',
   },
-  gradientColorStops: colors,
   backgroundOpacity: opacity,
   // backgroundPosition: position,
   backgroundSize: {

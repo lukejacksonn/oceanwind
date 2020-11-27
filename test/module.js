@@ -6,20 +6,11 @@ const theme = configure({
     999: '999ex',
   },
   colors: {
-    primary: 'orange',
+    primary: '#FFA500',
     red: {
-      999: 'hotpink',
-      default: 'red',
-      rgb: 'rgb(255,0,0)',
-      rgba: 'rgba(255,0,0,1)',
-      hsl: 'hsl(360, 100, 50)',
-      hsla: 'hsla(0, 100%, 50%)',
+      999: '#FF69B4',
+      default: '#FF0000',
     },
-    invalid: {
-      hex: '#ff',
-      rgb: 'rgb(0,0)',
-      hsl: 'hsl(360,0)',
-    }
   },
   borderRadius: {
     '2xl': '2rem',
@@ -194,23 +185,42 @@ const cases = {
 
   'bg-current': { 'background-color': 'currentColor' },
   'bg-primary': { 'background-color': 'rgba(255,165,0,var(--ow-bg-opacity,1))' },
+  'bg-red': { 'background-color': 'rgba(255,0,0,var(--ow-bg-opacity,1))' },
   'bg-red-999': { 'background-color': 'rgba(255,105,180,var(--ow-bg-opacity,1))' },
   'bg-red-500': { 'background-color': 'rgba(245,101,101,var(--ow-bg-opacity,1))' },
-  'bg-red-rgb': { 'background-color': 'rgba(255,0,0,var(--ow-bg-opacity,1))' },
-  'bg-red-rgba': { 'background-color': 'rgba(255,0,0,var(--ow-bg-opacity,1))' },
-  'bg-red-hsl': { 'background-color': 'rgba(255,0,0,var(--ow-bg-opacity,1))' },
-  'bg-red-hsla': { 'background-color': 'rgba(255,0,0,var(--ow-bg-opacity,1))' },
-  'bg-undefined': { 'background-color': 'rgba(undefined,var(--ow-bg-opacity,1))' },
-  'bg-undefined-color': { 'background-color': 'rgba(undefined,var(--ow-bg-opacity,1))' },
-  'bg-invalid-hex': { 'background-color': 'rgba(undefined,var(--ow-bg-opacity,1))' },
-  'bg-invalid-rgb': { 'background-color': 'rgba(undefined,var(--ow-bg-opacity,1))' },
-  'bg-invalid-hsl': { 'background-color': 'rgba(undefined,var(--ow-bg-opacity,1))' },
+  'bg-invalid': { 'background-color': undefined },
+  'bg-opacity-50': { '--ow-bg-opacity': '0.5' },
+
+  'bg-no-repeat': { 'background-repeat': 'no-repeat' },
+  'bg-repeat-x': { 'background-repeat': 'repeat-x' },
+  'bg-repeat-y': { 'background-repeat': 'repeat-y' },
+  'bg-repeat-round': { 'background-repeat': 'round' },
+  'bg-repeat-space': { 'background-repeat': 'space' },
+  'bg-left-bottom': { 'background-position': 'left bottom' },
+  'bg-right-bottom': { 'background-position': 'right bottom' },
 
   'border-solid': { 'border-style': 'solid' },
   'border-collapse': { 'border-collapse': 'collapse' },
   'border-separate': { 'border-collapse': 'separate' },
   'border-current': { 'border-color': 'currentColor' },
   border: { 'border-width': theme.borderWidth['default'] },
+
+  'border-t': { 'border-top-width': theme.borderWidth['default'] },
+  'border-r': { 'border-right-width': theme.borderWidth['default'] },
+  'border-b': { 'border-bottom-width': theme.borderWidth['default'] },
+  'border-l': { 'border-left-width': theme.borderWidth['default'] },
+
+  'border-t-2': { 'border-top-width': theme.borderWidth['2'] },
+  'border-r-2': { 'border-right-width': theme.borderWidth['2'] },
+  'border-b-2': { 'border-bottom-width': theme.borderWidth['2'] },
+  'border-l-2': { 'border-left-width': theme.borderWidth['2'] },
+
+  'border-primary': { 'border-color': 'rgba(255,165,0,var(--ow-border-opacity,1))' },
+  'border-red': { 'border-color': 'rgba(255,0,0,var(--ow-border-opacity,1))' },
+  'border-red-500': { 'border-color': 'rgba(245,101,101,var(--ow-border-opacity,1))' },
+  'border-red-999': { 'border-color': 'rgba(255,105,180,var(--ow-border-opacity,1))' },
+  'border-invalid': { 'border-color': undefined },
+  'border-opacity-50': { '--ow-border-opacity': '0.5' },
 
   shadow: { 'box-shadow': theme.boxShadow['default'] },
   'shadow-none': { 'box-shadow': 'none' },
@@ -409,18 +419,6 @@ const cases = {
   'whitespace-no-wrap': { 'white-space': 'nowrap' },
   'whitespace-pre-wrap': { 'white-space': 'pre-wrap' },
 
-  'bg-no-repeat': { 'background-repeat': 'no-repeat' },
-  'bg-repeat-x': { 'background-repeat': 'repeat-x' },
-  'bg-repeat-y': { 'background-repeat': 'repeat-y' },
-  'bg-repeat-round': { 'background-repeat': 'round' },
-  'bg-repeat-space': { 'background-repeat': 'space' },
-  'bg-left-bottom': { 'background-position': 'left bottom' },
-  'bg-right-bottom': { 'background-position': 'right bottom' },
-
-  'bg-red': { 'background-color': 'rgba(255,0,0,var(--ow-bg-opacity,1))' },
-  'bg-red-100': { 'background-color': 'rgba(255,245,245,var(--ow-bg-opacity,1))' },
-  'bg-gray-500': { 'background-color': 'rgba(160,174,192,var(--ow-bg-opacity,1))' },
-
   'ease-in-out': {
     'transition-timing-function': 'cubic-bezier(0.4, 0, 0.2, 1)',
   },
@@ -536,30 +534,6 @@ const cases = {
     'border-bottom-right-radius': theme.borderRadius['sm'],
   },
 
-  'border-t': { 'border-top-width': theme.borderWidth['default'] },
-  'border-r': { 'border-right-width': theme.borderWidth['default'] },
-  'border-b': { 'border-bottom-width': theme.borderWidth['default'] },
-  'border-l': { 'border-left-width': theme.borderWidth['default'] },
-
-  'border-t-2': { 'border-top-width': theme.borderWidth['2'] },
-  'border-r-2': { 'border-right-width': theme.borderWidth['2'] },
-  'border-b-2': { 'border-bottom-width': theme.borderWidth['2'] },
-  'border-l-2': { 'border-left-width': theme.borderWidth['2'] },
-
-  'border-red-500': { 'border-color': 'rgba(245,101,101,var(--ow-border-opacity,1))' },
-  'border-red': { 'border-color': 'rgba(255,0,0,var(--ow-border-opacity,1))' },
-  'border-primary': { 'border-color': 'rgba(255,165,0,var(--ow-border-opacity,1))' },
-  'border-red-999': { 'border-color': 'rgba(255,105,180,var(--ow-border-opacity,1))' },
-  'border-red-rgb': { 'border-color': 'rgba(255,0,0,var(--ow-border-opacity,1))' },
-  'border-red-rgba': { 'border-color': 'rgba(255,0,0,var(--ow-border-opacity,1))' },
-  'border-red-hsl': { 'border-color': 'rgba(255,0,0,var(--ow-border-opacity,1))' },
-  'border-red-hsla': { 'border-color': 'rgba(255,0,0,var(--ow-border-opacity,1))' },
-  'border-undefined': { 'border-color': 'rgba(undefined,var(--ow-border-opacity,1))' },
-  'border-undefined-color': { 'border-color': 'rgba(undefined,var(--ow-border-opacity,1))' },
-  'border-invalid-hex': { 'border-color': 'rgba(undefined,var(--ow-border-opacity,1))' },
-  'border-invalid-rgb': { 'border-color': 'rgba(undefined,var(--ow-border-opacity,1))' },
-  'border-invalid-hsl': { 'border-color': 'rgba(undefined,var(--ow-border-opacity,1))' },
-
   'scale-x-50': { transform: `scaleX(${theme.scale['50']})` },
   'scale-y-50': { transform: `scaleY(${theme.scale['50']})` },
 
@@ -627,10 +601,10 @@ const cases = {
     '::placeholder': { color: theme.colors['red']['500'] },
   },
   'placeholder-primary': {
-    '::placeholder': { color: 'orange' },
+    '::placeholder': { color: '#FFA500' },
   },
   'placeholder-red-999': {
-    '::placeholder': { color: 'hotpink' },
+    '::placeholder': { color: '#FF69B4' },
   },
 
   'divide-x': { selectors: { '& > * + *': { 'border-left-width': '1px' } } },
