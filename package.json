@@ -12,6 +12,13 @@
     "prepublish": "npm run build",
     "test": "node test/module.js && node test/ssr.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lukejacksonn/oceanwind.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lukejacksonn/oceanwind/issues"
+  },
   "keywords": [],
   "author": "Luke Jackson (@lukejacksonn)",
   "license": "MIT",
