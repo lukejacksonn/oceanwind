@@ -175,7 +175,7 @@ export const globals = {
   },
 };
 
-export default ({
+const theme = ({
   screens,
   colors,
   spacing,
@@ -545,3 +545,5 @@ export default ({
     },
   },
 });
+
+export default theme;
