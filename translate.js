@@ -57,7 +57,7 @@ const hexToRgb = (color) => {
   return `${r},${g},${b}`;
 }
 
-export default (theme) => (str) => {
+const translate = (theme) => (str) => {
   let x;
   let n = '';
 
@@ -911,3 +911,5 @@ export default (theme) => (str) => {
 
   return out;
 };
+
+export default translate;
