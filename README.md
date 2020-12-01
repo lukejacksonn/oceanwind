@@ -33,7 +33,7 @@ document.body.className = ow`h-full bg-purple-500 rotate-3 scale-95`;
 
 Running the above code will result in the following happening:
 
-1. Shorthand syntax will be translated into CSS (e.g. `h-full -> { height: 100vh }`).
+1. Shorthand syntax will be translated into CSS (e.g. `h-screen -> { height: 100vh }`).
 2. All resultant CSS will be merged into a single CSS-in-JS object
 3. Each style will be assigned a unique class and appended to a stylesheet
 4. A string is returned representing all the classes that were created
