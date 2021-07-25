@@ -1,4 +1,4 @@
-type Styles = string | TemplateStringsArray | string[] | Record<string, boolean>;
+type Styles = string | TemplateStringsArray | Array<string | boolean> | Record<string, boolean>;
 
 declare function process(theme: Record<string, unknown>): (strings: Styles) => Record<string, unknown>;
 declare function configure(theme: Record<string, unknown>): Record<string, unknown>;
